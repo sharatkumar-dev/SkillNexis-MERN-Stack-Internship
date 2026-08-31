@@ -14,12 +14,15 @@ export default function App() {
   // Cards State (Dynamic rendering via .map())
   const [cards, setCards] = useState(initialCardsData);
 
-  // Active Category Filter State
-  const [activeCategory, setActiveCategory] = useState('All');
+  // Active Category & Status Filter State ('ALL', 'COMPLETED', 'PENDING', or Category Name)
+  const [activeFilter, setActiveFilter] = useState('ALL');
 
-  // Interactive Demo States for Reusable Button Component
-  const [btnCounter, setBtnCounter] = useState(0);
+  // Interactive Demo States for Reusable Button Component Showcase
+  const [primaryCount, setPrimaryCount] = useState(0);
+  const [lastButtonClicked, setLastButtonClicked] = useState('None (Click any button below!)');
+  const [activeDemoSize, setActiveDemoSize] = useState('md');
   const [isLoadingDemo, setIsLoadingDemo] = useState(false);
+  const [totalButtonClicks, setTotalButtonClicks] = useState(0);
   const [toastMessage, setToastMessage] = useState('');
 
   // Apply theme to body dataset
@@ -34,6 +37,13 @@ export default function App() {
   const showToast = (msg) => {
     setToastMessage(msg);
     setTimeout(() => setToastMessage(''), 3000);
+  };
+
+  // Helper to record any button click interaction
+  const handleButtonClickDemo = (buttonName, actionCallback) => {
+    setTotalButtonClicks((c) => c + 1);
+    setLastButtonClicked(buttonName);
+    if (actionCallback) actionCallback();
   };
 
   // State Handler: Add new card from Form component
@@ -70,26 +80,33 @@ export default function App() {
 
   // Demo Handler: Loading button simulation
   const handleTriggerLoading = () => {
-    setIsLoadingDemo(true);
-    setTimeout(() => {
-      setIsLoadingDemo(false);
-      showToast('Async operation completed!');
-    }, 1500);
+    handleButtonClickDemo('⚡ Async Loader Button', () => {
+      setIsLoadingDemo(true);
+      setTimeout(() => {
+        setIsLoadingDemo(false);
+        setLastButtonClicked('⚡ Async Task Completed Successfully!');
+        showToast('Async operation completed!');
+      }, 1500);
+    });
   };
-
-  // Unique categories for filtering
-  const categories = ['All', ...new Set(cards.map((c) => c.category))];
-
-  // Filtered cards list based on selected category state
-  const filteredCards =
-    activeCategory === 'All'
-      ? cards
-      : cards.filter((card) => card.category === activeCategory);
 
   // Computed summary metrics
   const totalCards = cards.length;
-  const completedCount = cards.filter((c) => c.completed).length;
+  const completedCards = cards.filter((c) => c.completed);
+  const completedCount = completedCards.length;
+  const pendingCount = totalCards - completedCount;
   const totalLikes = cards.reduce((acc, curr) => acc + curr.likes, 0);
+
+  // Available unique categories
+  const categories = ['ALL', ...new Set(cards.map((c) => c.category))];
+
+  // Dynamic Filtering Logic based on activeFilter state
+  const filteredCards = cards.filter((card) => {
+    if (activeFilter === 'ALL') return true;
+    if (activeFilter === 'COMPLETED') return card.completed;
+    if (activeFilter === 'PENDING') return !card.completed;
+    return card.category === activeFilter;
+  });
 
   return (
     <div className="app-container">
@@ -101,8 +118,24 @@ export default function App() {
         theme={theme}
         onThemeToggle={toggleTheme}
         navTabs={[
-          { label: 'All Items', count: totalCards, active: activeCategory === 'All', onClick: () => setActiveCategory('All') },
-          { label: 'Completed', count: completedCount, active: false, onClick: () => setActiveCategory('Frontend') },
+          {
+            label: 'All Items',
+            count: totalCards,
+            active: activeFilter === 'ALL',
+            onClick: () => setActiveFilter('ALL'),
+          },
+          {
+            label: 'Completed',
+            count: completedCount,
+            active: activeFilter === 'COMPLETED',
+            onClick: () => setActiveFilter('COMPLETED'),
+          },
+          {
+            label: 'In Progress',
+            count: pendingCount,
+            active: activeFilter === 'PENDING',
+            onClick: () => setActiveFilter('PENDING'),
+          },
         ]}
       />
 
@@ -120,13 +153,32 @@ export default function App() {
           </div>
 
           <div className="stats-bar">
-            <div className="stat-pill">
+            <div
+              className={`stat-pill ${activeFilter === 'ALL' ? 'stat-pill--active' : ''}`}
+              onClick={() => setActiveFilter('ALL')}
+              style={{ cursor: 'pointer' }}
+              title="Click to view all cards"
+            >
               <span className="stat-pill__number">{totalCards}</span>
-              <span className="stat-pill__label">Active Cards</span>
+              <span className="stat-pill__label">Total Cards</span>
             </div>
-            <div className="stat-pill">
+            <div
+              className={`stat-pill ${activeFilter === 'COMPLETED' ? 'stat-pill--active' : ''}`}
+              onClick={() => setActiveFilter('COMPLETED')}
+              style={{ cursor: 'pointer' }}
+              title="Click to filter completed cards"
+            >
               <span className="stat-pill__number">{completedCount}</span>
-              <span className="stat-pill__label">Completed</span>
+              <span className="stat-pill__label">Completed ({completedCount})</span>
+            </div>
+            <div
+              className={`stat-pill ${activeFilter === 'PENDING' ? 'stat-pill--active' : ''}`}
+              onClick={() => setActiveFilter('PENDING')}
+              style={{ cursor: 'pointer' }}
+              title="Click to filter pending cards"
+            >
+              <span className="stat-pill__number">{pendingCount}</span>
+              <span className="stat-pill__label">In Progress</span>
             </div>
             <div className="stat-pill">
               <span className="stat-pill__number">{totalLikes}</span>
@@ -143,36 +195,124 @@ export default function App() {
                 <span>🔘</span> 3. Reusable Button Component Showcase
               </h3>
               <p className="section-subtitle">
-                Demonstrating variant props (<code>primary</code>, <code>secondary</code>, <code>outline</code>, <code>success</code>, <code>danger</code>), sizes, states, and event handling.
+                Demonstrating variant props (<code>primary</code>, <code>secondary</code>, <code>outline</code>, <code>success</code>, <code>danger</code>), sizes, loading states, and reactive click handlers.
               </p>
             </div>
           </div>
 
           <div className="button-matrix-card">
+            {/* Live Visual Feedback Display Box */}
+            <div className="button-matrix-feedback">
+              <div className="feedback-item">
+                <span className="feedback-label">Last Clicked Action:</span>
+                <strong className="feedback-value">{lastButtonClicked}</strong>
+              </div>
+              <div className="feedback-stats">
+                <span className="feedback-badge">Total Clicks: {totalButtonClicks}</span>
+                <span className="feedback-badge">Primary Count: {primaryCount}</span>
+                <span className="feedback-badge">Selected Size: {activeDemoSize.toUpperCase()}</span>
+              </div>
+            </div>
+
+            {/* Variants Group */}
             <div className="button-matrix-group">
               <span className="button-matrix-group__label">Variants:</span>
-              <Button variant="primary" onClick={() => setBtnCounter((c) => c + 1)}>
-                Primary (Count: {btnCounter})
+              <Button
+                variant="primary"
+                onClick={() =>
+                  handleButtonClickDemo('Primary Button (Incremented Count)', () =>
+                    setPrimaryCount((c) => c + 1)
+                  )
+                }
+              >
+                Primary Button (Clicks: {primaryCount})
               </Button>
-              <Button variant="secondary" onClick={() => showToast('Secondary Button Clicked')}>
-                Secondary
+
+              <Button
+                variant="secondary"
+                onClick={() =>
+                  handleButtonClickDemo('Secondary Button Clicked', () =>
+                    showToast('Secondary Button Action Triggered')
+                  )
+                }
+              >
+                Secondary Button
               </Button>
-              <Button variant="outline" onClick={() => showToast('Outline Button Clicked')}>
-                Outline
+
+              <Button
+                variant="outline"
+                onClick={() =>
+                  handleButtonClickDemo('Outline Button Clicked', () =>
+                    showToast('Outline Button Action Triggered')
+                  )
+                }
+              >
+                Outline Button
               </Button>
-              <Button variant="success" onClick={() => showToast('Success Action Triggered')}>
-                ✓ Success
+
+              <Button
+                variant="success"
+                onClick={() =>
+                  handleButtonClickDemo('Success Button (Marked Status OK)', () =>
+                    showToast('Success Status Confirmed')
+                  )
+                }
+              >
+                ✓ Success Button
               </Button>
-              <Button variant="danger" onClick={() => setBtnCounter(0)}>
+
+              <Button
+                variant="danger"
+                onClick={() =>
+                  handleButtonClickDemo('Danger Button (Reset Primary Counter)', () => {
+                    setPrimaryCount(0);
+                    showToast('Primary counter reset to 0');
+                  })
+                }
+              >
                 🗑️ Reset Count
               </Button>
             </div>
 
+            {/* Sizes & States Group */}
             <div className="button-matrix-group">
               <span className="button-matrix-group__label">Sizes & States:</span>
-              <Button size="sm" variant="primary">Small (sm)</Button>
-              <Button size="md" variant="primary">Medium (md)</Button>
-              <Button size="lg" variant="primary">Large (lg)</Button>
+              <Button
+                size="sm"
+                variant={activeDemoSize === 'sm' ? 'primary' : 'outline'}
+                onClick={() =>
+                  handleButtonClickDemo('Selected Small Size (sm)', () =>
+                    setActiveDemoSize('sm')
+                  )
+                }
+              >
+                Small (sm)
+              </Button>
+
+              <Button
+                size="md"
+                variant={activeDemoSize === 'md' ? 'primary' : 'outline'}
+                onClick={() =>
+                  handleButtonClickDemo('Selected Medium Size (md)', () =>
+                    setActiveDemoSize('md')
+                  )
+                }
+              >
+                Medium (md)
+              </Button>
+
+              <Button
+                size="lg"
+                variant={activeDemoSize === 'lg' ? 'primary' : 'outline'}
+                onClick={() =>
+                  handleButtonClickDemo('Selected Large Size (lg)', () =>
+                    setActiveDemoSize('lg')
+                  )
+                }
+              >
+                Large (lg)
+              </Button>
+
               <Button
                 variant="primary"
                 isLoading={isLoadingDemo}
@@ -180,7 +320,12 @@ export default function App() {
               >
                 {isLoadingDemo ? 'Processing...' : '⚡ Test Async Loader'}
               </Button>
-              <Button variant="secondary" disabled>
+
+              <Button
+                variant="secondary"
+                disabled
+                title="This button is disabled via props"
+              >
                 Disabled State
               </Button>
             </div>
@@ -208,19 +353,50 @@ export default function App() {
 
             {/* 4. REUSABLE CARD COMPONENTS (DYNAMIC MAP RENDERING) */}
             <div>
-              {/* Category Filter Buttons */}
+              {/* Filter Controls Bar */}
               <div className="filter-bar">
-                <span className="filter-bar__label">🔍 Filter Category:</span>
-                {categories.map((cat) => (
-                  <Button
-                    key={cat}
-                    variant={activeCategory === cat ? 'primary' : 'outline'}
-                    size="sm"
-                    onClick={() => setActiveCategory(cat)}
-                  >
-                    {cat}
-                  </Button>
-                ))}
+                <span className="filter-bar__label">🔍 Filter View:</span>
+
+                {/* Status Shortcuts */}
+                <Button
+                  variant={activeFilter === 'ALL' ? 'primary' : 'outline'}
+                  size="sm"
+                  onClick={() => setActiveFilter('ALL')}
+                >
+                  All ({totalCards})
+                </Button>
+
+                <Button
+                  variant={activeFilter === 'COMPLETED' ? 'success' : 'outline'}
+                  size="sm"
+                  onClick={() => setActiveFilter('COMPLETED')}
+                >
+                  ✓ Completed ({completedCount})
+                </Button>
+
+                <Button
+                  variant={activeFilter === 'PENDING' ? 'primary' : 'outline'}
+                  size="sm"
+                  onClick={() => setActiveFilter('PENDING')}
+                >
+                  ○ In Progress ({pendingCount})
+                </Button>
+
+                <div className="filter-bar__divider" />
+
+                {/* Category Filters */}
+                {categories
+                  .filter((cat) => cat !== 'ALL')
+                  .map((cat) => (
+                    <Button
+                      key={cat}
+                      variant={activeFilter === cat ? 'primary' : 'outline'}
+                      size="sm"
+                      onClick={() => setActiveFilter(cat)}
+                    >
+                      {cat}
+                    </Button>
+                  ))}
               </div>
 
               {/* Cards Grid */}
@@ -246,9 +422,17 @@ export default function App() {
                 ) : (
                   <div className="empty-state">
                     <span className="empty-state__icon">📭</span>
-                    <h4 className="empty-state__title">No cards found in category "{activeCategory}"</h4>
-                    <p className="empty-state__desc">Use the form on the left to add a new card or clear your filter.</p>
-                    <Button variant="outline" size="sm" onClick={() => setActiveCategory('All')}>
+                    <h4 className="empty-state__title">
+                      No cards matching filter "{activeFilter}"
+                    </h4>
+                    <p className="empty-state__desc">
+                      Try selecting another filter or adding a new card using the form.
+                    </p>
+                    <Button
+                      variant="primary"
+                      size="sm"
+                      onClick={() => setActiveFilter('ALL')}
+                    >
                       Show All Cards
                     </Button>
                   </div>
