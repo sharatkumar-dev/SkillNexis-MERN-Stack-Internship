@@ -1,4 +1,4 @@
-﻿# 🚀 Week 1: Frontend Foundations & React Introduction
+# 🚀 Week 1: Frontend Foundations & React Introduction
 
 Welcome to **Week 1** of the **SkillNexis MERN Stack Internship**. This directory contains all weekly assignment submissions focused on advanced semantic HTML5, modern CSS3 responsive styling, and modern React component foundations.
 
@@ -9,7 +9,7 @@ Welcome to **Week 1** of the **SkillNexis MERN Stack Internship**. This director
 | Project Directory | Title | Core Technologies | Status |
 | :--- | :--- | :--- | :---: |
 | **[01-portfolio](./01-portfolio/)** | **Assignment 1:** Personal Developer Portfolio | Semantic HTML5, CSS3, Flexbox/Grid, Responsive Design | ✅ **Complete** |
-| **[02-react-components](./02-react-components/)** | **Assignment 2:** React Components & State | React.js, Vite, Hooks (`useState`), Component Architecture | 🟡 **Ready for Dev** |
+| **[02-react-components](./02-react-components/)** | **Assignment 2:** React Components & State | React.js, Vite, Hooks (`useState`), Component Architecture | ✅ **Complete** |
 | **[03-react-blog-ui](./03-react-blog-ui/)** | **Assignment 3:** React Tech Blog SPA UI | React.js, Vite, Modular CSS, SPA Layout | 🟡 **Ready for Dev** |
 
 ---
@@ -41,20 +41,39 @@ npx serve .
 
 ---
 
-## ⚛️ Assignment 2 & 3: React Applications
+## ⚛️ Assignment 2: React Components Practice
 
-- **[02-react-components](./02-react-components/)**: Scaffolded React + Vite application for hands-on component modularization and reactive state management.
+A component-driven React application built strictly according to the **SkillNexis Task PDF** requirements.
+
+### Key Highlights:
+- **5 Reusable Components:** Clean implementation of `Header`, `Footer`, `Button`, `Card`, and `Form` with clear prop contracts.
+- **Dynamic Props & State:** Reactive `.map()` dynamic card rendering, multi-state `useState` management, category filters, and card interactions (likes, mark done, delete).
+- **Controlled Form with Validation:** Real-time field validation, error alerts, and live card creation dispatched directly to state.
+- **Modern Theme Switcher:** Instant Dark/Light mode toggle with CSS custom properties.
+
+### 🏃 How to Run Assignment 2:
+```bash
+# Navigate into Assignment 2 directory
+cd 02-react-components
+
+# Install dependencies & run Vite dev server
+npm install
+npm run dev
+```
+
+---
+
+## 📰 Assignment 3 (Mini Project): React Tech Blog SPA UI
+
 - **[03-react-blog-ui](./03-react-blog-ui/)**: Scaffolded React + Vite publication UI for modern single-page application development.
 
-### How to Run React Projects:
+### How to Run Assignment 3:
 ```bash
 # Navigate into project directory
-cd 02-react-components  # or 03-react-blog-ui
+cd 03-react-blog-ui
 
-# Install dependencies
+# Install dependencies & run dev server
 npm install
-
-# Start Vite dev server
 npm run dev
 ```
 
