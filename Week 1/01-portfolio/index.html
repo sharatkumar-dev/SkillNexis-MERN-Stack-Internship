@@ -1,0 +1,476 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Personal Developer Portfolio - Full Stack MERN Developer showcasing projects, education, and skills.">
+    <title>Alex Morgan | Full-Stack Developer</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body id="top">
+    <!-- Navigation Header -->
+    <header class="header">
+        <div class="container nav-container">
+            <a href="#top" class="brand-logo" aria-label="Alex Morgan Portfolio - Back to top">
+                <span class="code-bracket">&lt;</span>Alex<span class="brand-accent">.Dev</span><span class="code-bracket">/&gt;</span>
+            </a>
+
+            <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Toggle navigation menu">
+            <label for="nav-toggle" class="nav-toggle-label">
+                <i class="fa-solid fa-bars hamburger-icon"></i>
+                <i class="fa-solid fa-xmark close-icon"></i>
+            </label>
+
+            <nav class="nav-menu" aria-label="Main Navigation">
+                <ul class="nav-list">
+                    <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
+                    <li class="nav-item"><a href="#skills" class="nav-link">Skills</a></li>
+                    <li class="nav-item"><a href="#education" class="nav-link">Education</a></li>
+                    <li class="nav-item"><a href="#projects" class="nav-link">Projects</a></li>
+                    <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
+                </ul>
+                <a href="#contact" class="btn btn-primary nav-cta">Let's Connect</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero & About Section -->
+        <section class="section hero-section" id="about">
+            <div class="container hero-grid">
+                <div class="hero-content">
+                    <div class="badge-pill">
+                        <span class="status-dot"></span> Available for Full-Stack Roles
+                    </div>
+                    <h1 class="hero-title">
+                        Hi, I'm <span class="gradient-text">Alex Morgan</span>
+                    </h1>
+                    <h2 class="hero-subtitle">MERN Stack & Frontend Developer</h2>
+                    <p class="hero-description">
+                        Passionate about crafting scalable, accessible, and high-performance web applications. 
+                        I bridge the gap between elegant UI design and robust backend architectures with modern web technologies.
+                    </p>
+                    
+                    <div class="hero-actions">
+                        <a href="#projects" class="btn btn-primary">
+                            <i class="fa-solid fa-laptop-code"></i> View My Work
+                        </a>
+                        <a href="#contact" class="btn btn-outline">
+                            <i class="fa-regular fa-envelope"></i> Contact Me
+                        </a>
+                    </div>
+
+                    <div class="social-links">
+                        <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="GitHub">
+                            <i class="fa-brands fa-github"></i>
+                        </a>
+                        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="LinkedIn">
+                            <i class="fa-brands fa-linkedin-in"></i>
+                        </a>
+                        <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Twitter">
+                            <i class="fa-brands fa-x-twitter"></i>
+                        </a>
+                        <a href="mailto:alex.morgan@example.com" class="social-icon" aria-label="Email">
+                            <i class="fa-solid fa-envelope"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="hero-visual">
+                    <div class="profile-card">
+                        <div class="profile-avatar">
+                            <img src="assets/alex-hero.jpg" alt="Alex Morgan - Full Stack Developer" class="profile-img" width="200" height="200">
+                        </div>
+                        <div class="stats-card stats-exp">
+                            <i class="fa-solid fa-code icon-highlight"></i>
+                            <div>
+                                <strong>10+</strong>
+                                <span>Projects Built</span>
+                            </div>
+                        </div>
+                        <div class="stats-card stats-stack">
+                            <i class="fa-brands fa-react icon-highlight"></i>
+                            <div>
+                                <strong>MERN</strong>
+                                <span>Core Stack</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Overview Section -->
+        <section class="section skills-section" id="skills">
+            <div class="container">
+                <div class="section-header text-center">
+                    <span class="section-tag">Tech Stack</span>
+                    <h2 class="section-title">Skills & Technologies</h2>
+                    <p class="section-subtitle">Tools and frameworks I leverage to bring ideas to life.</p>
+                </div>
+
+                <div class="skills-grid">
+                    <div class="skill-category">
+                        <div class="category-header">
+                            <i class="fa-solid fa-code"></i>
+                            <h3>Frontend Development</h3>
+                        </div>
+                        <div class="skill-tags">
+                            <span class="tag">HTML5 / Semantic UI</span>
+                            <span class="tag">CSS3 / Flexbox & Grid</span>
+                            <span class="tag">JavaScript (ES6+)</span>
+                            <span class="tag">React.js</span>
+                            <span class="tag">Responsive Web Design</span>
+                            <span class="tag">Bootstrap & Tailwind</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-category">
+                        <div class="category-header">
+                            <i class="fa-solid fa-server"></i>
+                            <h3>Backend & Database</h3>
+                        </div>
+                        <div class="skill-tags">
+                            <span class="tag">Node.js</span>
+                            <span class="tag">Express.js</span>
+                            <span class="tag">MongoDB & Mongoose</span>
+                            <span class="tag">RESTful API Design</span>
+                            <span class="tag">JWT Authentication</span>
+                            <span class="tag">Postman API Testing</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-category">
+                        <div class="category-header">
+                            <i class="fa-solid fa-screwdriver-wrench"></i>
+                            <h3>Tools & Workflow</h3>
+                        </div>
+                        <div class="skill-tags">
+                            <span class="tag">Git & GitHub</span>
+                            <span class="tag">Vite & Webpack</span>
+                            <span class="tag">VS Code</span>
+                            <span class="tag">NPM / Yarn</span>
+                            <span class="tag">Chrome DevTools</span>
+                            <span class="tag">Vercel & Netlify Deployment</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Education & Timeline Section -->
+        <section class="section education-section" id="education">
+            <div class="container">
+                <div class="section-header text-center">
+                    <span class="section-tag">Background</span>
+                    <h2 class="section-title">Education & Milestones</h2>
+                    <p class="section-subtitle">My academic foundations and hands-on training journey.</p>
+                </div>
+
+                <div class="timeline">
+                    <!-- Item 1: SkillNexis Internship -->
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-card">
+                            <div class="timeline-card-header">
+                                <div class="timeline-icon-box icon-internship">
+                                    <i class="fa-solid fa-laptop-code"></i>
+                                </div>
+                                <div class="timeline-header-info">
+                                    <div class="timeline-meta">
+                                        <span class="timeline-date"><i class="fa-regular fa-calendar"></i> 2026 - Present</span>
+                                        <span class="timeline-badge badge-active"><span class="badge-pulse"></span> Ongoing Internship</span>
+                                    </div>
+                                    <h3 class="timeline-title">MERN Stack Development Intern</h3>
+                                    <h4 class="timeline-institution"><i class="fa-solid fa-building-columns"></i> SkillNexis Internship Program <span class="institution-loc">· Remote</span></h4>
+                                </div>
+                            </div>
+                            <p class="timeline-description">
+                                Actively engineering production-ready web applications utilizing MongoDB, Express.js, React, and Node.js. 
+                                Mastered semantic HTML5 architectures, advanced responsive CSS layouts, and modern React component design patterns.
+                            </p>
+                            <div class="timeline-skills">
+                                <span class="timeline-skill-pill"><i class="fa-brands fa-react"></i> React.js</span>
+                                <span class="timeline-skill-pill"><i class="fa-brands fa-node-js"></i> Node.js</span>
+                                <span class="timeline-skill-pill"><i class="fa-solid fa-server"></i> Express</span>
+                                <span class="timeline-skill-pill"><i class="fa-solid fa-database"></i> MongoDB</span>
+                                <span class="timeline-skill-pill"><i class="fa-solid fa-code"></i> RESTful APIs</span>
+                                <span class="timeline-skill-pill"><i class="fa-solid fa-layer-group"></i> Full Stack Architecture</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 2: Bachelor of Technology -->
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-card">
+                            <div class="timeline-card-header">
+                                <div class="timeline-icon-box icon-degree">
+                                    <i class="fa-solid fa-graduation-cap"></i>
+                                </div>
+                                <div class="timeline-header-info">
+                                    <div class="timeline-meta">
+                                        <span class="timeline-date"><i class="fa-regular fa-calendar"></i> 2022 - 2026</span>
+                                        <span class="timeline-badge badge-degree">B.Tech Degree · CGPA 8.9 / 10</span>
+                                    </div>
+                                    <h3 class="timeline-title">Bachelor of Technology in Computer Science</h3>
+                                    <h4 class="timeline-institution"><i class="fa-solid fa-university"></i> State Technical University <span class="institution-loc">· Bengaluru</span></h4>
+                                </div>
+                            </div>
+                            <p class="timeline-description">
+                                Specialized in Software Engineering, Data Structures & Algorithms, Database Management Systems, and Web Engineering. 
+                                Maintained an exemplary academic record with active participation in university hackathons and open-source contributions.
+                            </p>
+                            <div class="timeline-skills">
+                                <span class="timeline-skill-pill"><i class="fa-solid fa-brain"></i> Data Structures & Algorithms</span>
+                                <span class="timeline-skill-pill"><i class="fa-solid fa-database"></i> DBMS & SQL</span>
+                                <span class="timeline-skill-pill"><i class="fa-solid fa-network-wired"></i> Computer Networks</span>
+                                <span class="timeline-skill-pill"><i class="fa-solid fa-microchip"></i> Operating Systems</span>
+                                <span class="timeline-skill-pill"><i class="fa-solid fa-trophy"></i> Hackathon Finalist</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 3: Higher Secondary Education -->
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-card">
+                            <div class="timeline-card-header">
+                                <div class="timeline-icon-box icon-school">
+                                    <i class="fa-solid fa-school"></i>
+                                </div>
+                                <div class="timeline-header-info">
+                                    <div class="timeline-meta">
+                                        <span class="timeline-date"><i class="fa-regular fa-calendar"></i> 2020 - 2022</span>
+                                        <span class="timeline-badge badge-school">Distinction · 94.6%</span>
+                                    </div>
+                                    <h3 class="timeline-title">Higher Secondary Education (Science & Mathematics)</h3>
+                                    <h4 class="timeline-institution"><i class="fa-solid fa-building"></i> National Senior Secondary School <span class="institution-loc">· CBSE Board</span></h4>
+                                </div>
+                            </div>
+                            <p class="timeline-description">
+                                Completed advanced coursework in Computer Science (C++ & Python fundamentals), Physics, Chemistry, and Mathematics with top-tier distinction awards.
+                            </p>
+                            <div class="timeline-skills">
+                                <span class="timeline-skill-pill"><i class="fa-solid fa-calculator"></i> Advanced Mathematics</span>
+                                <span class="timeline-skill-pill"><i class="fa-solid fa-terminal"></i> Computer Science</span>
+                                <span class="timeline-skill-pill"><i class="fa-solid fa-atom"></i> Physics & Chemistry</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Showcase Section -->
+        <section class="section projects-section" id="projects">
+            <div class="container">
+                <div class="section-header text-center">
+                    <span class="section-tag">Portfolio</span>
+                    <h2 class="section-title">Featured Projects</h2>
+                    <p class="section-subtitle">Real-world applications showcasing modern architecture and clean code.</p>
+                </div>
+
+                <div class="projects-grid">
+                    <!-- Project 1 -->
+                    <article class="project-card">
+                        <div class="project-preview preview-gradient-1">
+                            <i class="fa-solid fa-diagram-project project-icon"></i>
+                            <span class="project-category">Full Stack MERN</span>
+                        </div>
+                        <div class="project-body">
+                            <h3 class="project-title">NexisTask - Kanban Workflow Platform</h3>
+                            <p class="project-description">
+                                Real-time task and project management suite with drag-and-drop boards, role-based access control, and RESTful API endpoints.
+                            </p>
+                            <div class="project-tags">
+                                <span>React</span>
+                                <span>Node.js</span>
+                                <span>Express</span>
+                                <span>MongoDB</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="#" class="btn-link"><i class="fa-solid fa-arrow-up-right-from-square"></i> Live Demo</a>
+                                <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="btn-link"><i class="fa-brands fa-github"></i> Code</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project 2 -->
+                    <article class="project-card">
+                        <div class="project-preview preview-gradient-2">
+                            <i class="fa-solid fa-newspaper project-icon"></i>
+                            <span class="project-category">React SPA</span>
+                        </div>
+                        <div class="project-body">
+                            <h3 class="project-title">DevInsight Tech Blog UI</h3>
+                            <p class="project-description">
+                                Responsive developer publication platform featuring category filtering, markdown post rendering, tag searches, and newsletter integration.
+                            </p>
+                            <div class="project-tags">
+                                <span>React</span>
+                                <span>Vite</span>
+                                <span>CSS Grid</span>
+                                <span>Figma</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="#" class="btn-link"><i class="fa-solid fa-arrow-up-right-from-square"></i> Live Demo</a>
+                                <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="btn-link"><i class="fa-brands fa-github"></i> Code</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project 3 -->
+                    <article class="project-card">
+                        <div class="project-preview preview-gradient-3">
+                            <i class="fa-solid fa-cart-shopping project-icon"></i>
+                            <span class="project-category">E-Commerce MERN</span>
+                        </div>
+                        <div class="project-body">
+                            <h3 class="project-title">NexisCart Storefront</h3>
+                            <p class="project-description">
+                                Full-featured shopping experience with persistent cart, dynamic price calculation, product filtering, and user authentication flow.
+                            </p>
+                            <div class="project-tags">
+                                <span>Node.js</span>
+                                <span>Express</span>
+                                <span>MongoDB</span>
+                                <span>React</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="#" class="btn-link"><i class="fa-solid fa-arrow-up-right-from-square"></i> Live Demo</a>
+                                <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="btn-link"><i class="fa-brands fa-github"></i> Code</a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="section contact-section" id="contact">
+            <div class="container">
+                <div class="section-header text-center">
+                    <span class="section-tag">Get In Touch</span>
+                    <h2 class="section-title">Let's Build Something Great</h2>
+                    <p class="section-subtitle">Have a question, collaboration idea, or opportunity? Drop me a message!</p>
+                </div>
+
+                <div class="contact-grid">
+                    <div class="contact-info">
+                        <h3 class="contact-info-title">Contact Information</h3>
+                        <p class="contact-info-text">
+                            I am open to internships, freelance projects, and full-stack software development roles.
+                        </p>
+
+                        <div class="info-list">
+                            <div class="info-item">
+                                <div class="info-icon">
+                                    <i class="fa-solid fa-location-dot"></i>
+                                </div>
+                                <div>
+                                    <span class="info-label">Location</span>
+                                    <span class="info-value">Bengaluru, India (Open to Remote)</span>
+                                </div>
+                            </div>
+
+                            <div class="info-item">
+                                <div class="info-icon">
+                                    <i class="fa-solid fa-envelope"></i>
+                                </div>
+                                <div>
+                                    <span class="info-label">Email</span>
+                                    <span class="info-value">alex.morgan.dev@example.com</span>
+                                </div>
+                            </div>
+
+                            <div class="info-item">
+                                <div class="info-icon">
+                                    <i class="fa-solid fa-phone"></i>
+                                </div>
+                                <div>
+                                    <span class="info-label">Phone</span>
+                                    <span class="info-value">+91 (555) 019-2834</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="contact-socials">
+                            <h4>Connect Online</h4>
+                            <div class="social-links">
+                                <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+                                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                                <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="contact-form-container">
+                        <form class="contact-form" action="#" method="POST" onsubmit="event.preventDefault(); alert('Thank you! Your message has been sent successfully.'); this.reset();">
+                            <div class="form-group">
+                                <label for="name" class="form-label">Your Name</label>
+                                <input type="text" id="name" name="name" class="form-input" placeholder="e.g. Jane Doe" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email" class="form-label">Email Address</label>
+                                <input type="email" id="email" name="email" class="form-input" placeholder="e.g. jane@example.com" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="subject" class="form-label">Subject</label>
+                                <input type="text" id="subject" name="subject" class="form-input" placeholder="e.g. Internship Opportunity / Project Collaboration" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="message" class="form-label">Message</label>
+                                <textarea id="message" name="message" rows="5" class="form-textarea" placeholder="Tell me about your project or inquiry..." required></textarea>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary btn-block">
+                                <i class="fa-solid fa-paper-plane"></i> Send Message
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-container">
+            <div class="footer-brand">
+                <a href="#top" class="brand-logo" aria-label="Alex Morgan Portfolio - Back to top">
+                    <span class="code-bracket">&lt;</span>Alex<span class="brand-accent">.Dev</span><span class="code-bracket">/&gt;</span>
+                </a>
+                <p class="footer-tagline">Crafting modern, responsive web experiences with precision.</p>
+            </div>
+
+            <div class="footer-links">
+                <a href="#about">About</a>
+                <a href="#skills">Skills</a>
+                <a href="#education">Education</a>
+                <a href="#projects">Projects</a>
+                <a href="#contact">Contact</a>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 Alex Morgan. Built for SkillNexis MERN Stack Internship - Week 1.</p>
+                <a href="#top" class="back-to-top" aria-label="Back to top">
+                    <i class="fa-solid fa-arrow-up"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
