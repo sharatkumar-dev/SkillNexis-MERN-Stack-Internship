@@ -1,36 +1,67 @@
-﻿# Week 1: Frontend Foundations & React Introduction 🚀
+﻿# 🚀 Week 1: Frontend Foundations & React Introduction
 
-This directory contains all submissions and assignments for **Week 1** of the SkillNexis MERN Stack Internship.
+Welcome to **Week 1** of the **SkillNexis MERN Stack Internship**. This directory contains all weekly assignment submissions focused on advanced semantic HTML5, modern CSS3 responsive styling, and modern React component foundations.
 
 ---
 
-## 📂 Submissions Directory
+## 📑 Assignment Index
 
-| Directory | Assignment Title | Tech Stack | Status |
+| Project Directory | Title | Core Technologies | Status |
 | :--- | :--- | :--- | :---: |
-| **[01-portfolio](./01-portfolio/)** | **Assignment 1:** Personal Developer Portfolio | Semantic HTML5, Modern CSS3, Flexbox & CSS Grid | ✅ Complete |
-| **[02-react-components](./02-react-components/)** | **Assignment 2:** React Components & State | React.js, Vite, JSX, State Management | 🟡 Ready for Dev |
-| **[03-react-blog-ui](./03-react-blog-ui/)** | **Assignment 3:** React Tech Blog SPA UI | React.js, Vite, Modular CSS | 🟡 Ready for Dev |
+| **[01-portfolio](./01-portfolio/)** | **Assignment 1:** Personal Developer Portfolio | Semantic HTML5, CSS3, Flexbox/Grid, Responsive Design | ✅ **Complete** |
+| **[02-react-components](./02-react-components/)** | **Assignment 2:** React Components & State | React.js, Vite, Hooks (`useState`), Component Architecture | 🟡 **Ready for Dev** |
+| **[03-react-blog-ui](./03-react-blog-ui/)** | **Assignment 3:** React Tech Blog SPA UI | React.js, Vite, Modular CSS, SPA Layout | 🟡 **Ready for Dev** |
 
 ---
 
 ## 🌟 Assignment 1: Personal Developer Portfolio
 
-### Key Features:
-- **Semantic HTML5 Structure:** Built with proper `<header>`, `<nav>`, `<main>`, `<section>`, `<article>`, and `<footer>` elements for accessibility and SEO.
-- **Glassmorphic Modern Dark Theme:** Customized CSS properties, ambient gradient glow effects, and modern typography.
-- **Hero & Profile:** Photorealistic developer portrait with interactive status badge and social links.
-- **Categorized Skills:** Badges grouped by Frontend, Backend & Database, and Tools & Workflow.
-- **Education Timeline:** Enhanced milestone cards with category icons, animated status indicator, and competency pills.
-- **Featured Projects Grid:** Responsive cards displaying tech stack tags, live demo, and code repository links.
-- **Interactive Contact Section:** Form styling with focus rings and contact details.
-- **Full Responsiveness:** Mobile drawer navigation with smooth scroll behavior.
+A responsive, high-performance developer portfolio built with semantic **HTML5** and a modern **CSS3** design system.
 
-### How to Run Assignment 1:
+### Key Highlights:
+- **Semantic HTML5 Layout:** Standardized `<header>`, `<nav>`, `<main>`, `<section>`, `<article>`, and `<footer>` architecture for optimal accessibility and search engine indexing.
+- **Glassmorphic Modern UI:** Dark palette, custom CSS variables (`--primary`, `--accent`, `--gradient-card`), and glowing ambient lighting.
+- **Hero & Profile:** Photorealistic studio portrait of Alex Morgan, availability status indicator, and social link badges.
+- **Skills Matrix:** Categorized cards for Frontend, Backend & Databases, and Tools & Workflow.
+- **Education Timeline:** Enhanced milestone cards with category icons, animated status indicator, academic credentials, and skill pills.
+- **Featured Projects Grid:** Responsive cards with badges, technology stacks, code repository links, and live preview buttons.
+- **Contact Form & Footer:** Form styling with focus rings, direct contact details, and smooth back-to-top navigation.
+
+### 🏃 How to Run Assignment 1:
 ```bash
 # Navigate to the portfolio folder
-cd "Week 1/01-portfolio"
+cd 01-portfolio
 
-# Open index.html directly in a browser or serve locally:
+# Option A: Open directly in browser
+start index.html
+
+# Option B: Run with static local server
 npx serve .
 ```
+
+---
+
+## ⚛️ Assignment 2 & 3: React Applications
+
+- **[02-react-components](./02-react-components/)**: Scaffolded React + Vite application for hands-on component modularization and reactive state management.
+- **[03-react-blog-ui](./03-react-blog-ui/)**: Scaffolded React + Vite publication UI for modern single-page application development.
+
+### How to Run React Projects:
+```bash
+# Navigate into project directory
+cd 02-react-components  # or 03-react-blog-ui
+
+# Install dependencies
+npm install
+
+# Start Vite dev server
+npm run dev
+```
+
+---
+
+## 📱 Responsiveness & Browser Compatibility
+All Week 1 assignments are designed to be mobile-first and fully responsive across:
+- 📱 **Mobile** (320px – 480px)
+- 💻 **Tablet** (768px – 1024px)
+- 🖥️ **Desktop & Ultrawide** (1200px+)
