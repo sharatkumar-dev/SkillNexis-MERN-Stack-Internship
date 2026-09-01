@@ -1,0 +1,258 @@
+{
+  "info": {
+    "_postman_id": "a1b2c3d4-e5f6-7a8b-9c0d-1e2f3a4b5c6d",
+    "name": "SkillNexis Week 2 - Assignment 1: To-Do List API",
+    "description": "Postman Collection for To-Do List REST API CRUD operations and error handling.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:5000/api",
+      "type": "string"
+    },
+    {
+      "key": "taskId",
+      "value": "6650a123456789abcdef0123",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/health",
+          "host": ["{{baseUrl}}"],
+          "path": ["health"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create Task - High Priority",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Complete MERN Week 2 Assignment\",\n  \"description\": \"Implement CRUD REST API for To-Do tasks with Express and MongoDB\",\n  \"priority\": \"high\",\n  \"dueDate\": \"2026-09-05T18:00:00.000Z\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/tasks",
+          "host": ["{{baseUrl}}"],
+          "path": ["tasks"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create Task - Low Priority",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Review MongoDB indexing\",\n  \"description\": \"Study text search and compound indexing strategies\",\n  \"priority\": \"low\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/tasks",
+          "host": ["{{baseUrl}}"],
+          "path": ["tasks"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create Task - Validation Error (Missing Title)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"description\": \"Missing title validation test\",\n  \"priority\": \"medium\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/tasks",
+          "host": ["{{baseUrl}}"],
+          "path": ["tasks"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get All Tasks",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/tasks",
+          "host": ["{{baseUrl}}"],
+          "path": ["tasks"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Tasks - Filter by Status (completed=false)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/tasks?completed=false",
+          "host": ["{{baseUrl}}"],
+          "path": ["tasks"],
+          "query": [
+            {
+              "key": "completed",
+              "value": "false"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Tasks - Filter by Priority (priority=high)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/tasks?priority=high",
+          "host": ["{{baseUrl}}"],
+          "path": ["tasks"],
+          "query": [
+            {
+              "key": "priority",
+              "value": "high"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Search Tasks (search=MERN)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/tasks?search=MERN",
+          "host": ["{{baseUrl}}"],
+          "path": ["tasks"],
+          "query": [
+            {
+              "key": "search",
+              "value": "MERN"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Task Stats",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/tasks/stats",
+          "host": ["{{baseUrl}}"],
+          "path": ["tasks", "stats"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Single Task By ID",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/tasks/{{taskId}}",
+          "host": ["{{baseUrl}}"],
+          "path": ["tasks", "{{taskId}}"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update Task (PUT)",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Complete MERN Week 2 Assignment (Updated)\",\n  \"completed\": true,\n  \"priority\": \"high\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/tasks/{{taskId}}",
+          "host": ["{{baseUrl}}"],
+          "path": ["tasks", "{{taskId}}"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Toggle Task Status (PATCH)",
+      "request": {
+        "method": "PATCH",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/tasks/{{taskId}}/toggle",
+          "host": ["{{baseUrl}}"],
+          "path": ["tasks", "{{taskId}}", "toggle"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete Task",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/tasks/{{taskId}}",
+          "host": ["{{baseUrl}}"],
+          "path": ["tasks", "{{taskId}}"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Invalid ObjectId (400 CastError)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/tasks/invalid-id-format",
+          "host": ["{{baseUrl}}"],
+          "path": ["tasks", "invalid-id-format"]
+        }
+      },
+      "response": []
+    }
+  ]
+}

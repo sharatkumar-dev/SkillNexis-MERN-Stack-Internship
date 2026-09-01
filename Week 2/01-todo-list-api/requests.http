@@ -1,0 +1,86 @@
+### ===================================================================
+### To-Do List REST API Testing File (VS Code REST Client)
+### Base URL: http://localhost:5000/api
+### ===================================================================
+
+@baseUrl = http://localhost:5000/api
+@taskId = 6650a123456789abcdef0123
+
+### 1. Health Check
+GET {{baseUrl}}/health HTTP/1.1
+
+### 2. Create Task (Standard Priority)
+# @name createSampleTask1
+POST {{baseUrl}}/tasks HTTP/1.1
+Content-Type: application/json
+
+{
+  "title": "Complete MERN Week 2 Assignment",
+  "description": "Implement CRUD REST API for To-Do tasks with Express and MongoDB",
+  "priority": "high",
+  "dueDate": "2026-09-05T18:00:00.000Z"
+}
+
+### 3. Create Task (Low Priority)
+# @name createSampleTask2
+POST {{baseUrl}}/tasks HTTP/1.1
+Content-Type: application/json
+
+{
+  "title": "Review MongoDB indexing",
+  "description": "Study text search and compound indexing strategies in Mongoose",
+  "priority": "low"
+}
+
+### 4. Create Task (Validation Error - Missing Title)
+POST {{baseUrl}}/tasks HTTP/1.1
+Content-Type: application/json
+
+{
+  "description": "This task is missing a required title",
+  "priority": "medium"
+}
+
+### 5. Get All Tasks (Default pagination & sort)
+GET {{baseUrl}}/tasks HTTP/1.1
+
+### 6. Get Tasks Filtered by Completed Status (completed=false)
+GET {{baseUrl}}/tasks?completed=false HTTP/1.1
+
+### 7. Get Tasks Filtered by Priority (priority=high)
+GET {{baseUrl}}/tasks?priority=high HTTP/1.1
+
+### 8. Search Tasks by Keyword
+GET {{baseUrl}}/tasks?search=MERN HTTP/1.1
+
+### 9. Get Tasks with Sorting (priority descending)
+GET {{baseUrl}}/tasks?sort=priority HTTP/1.1
+
+### 10. Get Task Statistics
+GET {{baseUrl}}/tasks/stats HTTP/1.1
+
+### 11. Get Single Task by Valid ID (Replace with created _id)
+GET {{baseUrl}}/tasks/{{taskId}} HTTP/1.1
+
+### 12. Get Task by Invalid ObjectId (CastError test)
+GET {{baseUrl}}/tasks/invalid-id-12345 HTTP/1.1
+
+### 13. Update Task (PUT /api/tasks/:id)
+PUT {{baseUrl}}/tasks/{{taskId}} HTTP/1.1
+Content-Type: application/json
+
+{
+  "title": "Complete MERN Week 2 Assignment (Updated)",
+  "description": "Added test cases and verified response schema",
+  "priority": "high",
+  "completed": true
+}
+
+### 14. Toggle Task Status (PATCH /api/tasks/:id/toggle)
+PATCH {{baseUrl}}/tasks/{{taskId}}/toggle HTTP/1.1
+
+### 15. Delete Task by ID
+DELETE {{baseUrl}}/tasks/{{taskId}} HTTP/1.1
+
+### 16. Test 404 on Undefined Route
+GET {{baseUrl}}/non-existing-route HTTP/1.1
