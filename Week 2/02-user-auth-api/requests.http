@@ -1,0 +1,182 @@
+###############################################################################
+# User Authentication REST API - Automated Test Suite
+# Extension: REST Client (Huachao Mao) for VS Code / Antigravity IDE
+###############################################################################
+
+@baseUrl = http://localhost:5001/api
+
+# ==============================================================================
+# 1. Health Check Endpoint
+# ==============================================================================
+
+### Check API Health Status
+GET {{baseUrl}}/health HTTP/1.1
+
+# ==============================================================================
+# 2. User Registration (POST /api/auth/register)
+# ==============================================================================
+
+### 2.1 Register Normal User (Valid)
+# @name registerUser
+POST {{baseUrl}}/auth/register HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "Sarah Connor",
+  "email": "sarah@skynet.com",
+  "password": "Password@123"
+}
+
+### Store Auth Token from Registration
+@userAuthToken = {{registerUser.response.body.data.token}}
+
+### 2.2 Register Duplicate Email (Should Fail - 400)
+POST {{baseUrl}}/auth/register HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "Sarah Connor Duplicate",
+  "email": "sarah@skynet.com",
+  "password": "Password@123"
+}
+
+### 2.3 Register Missing Required Fields (Should Fail - 400)
+POST {{baseUrl}}/auth/register HTTP/1.1
+Content-Type: application/json
+
+{
+  "email": "incomplete@skynet.com"
+}
+
+### 2.4 Register Invalid Email Format (Should Fail - 400)
+POST {{baseUrl}}/auth/register HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "Invalid Email User",
+  "email": "not-an-email",
+  "password": "Password@123"
+}
+
+### 2.5 Register Short Password (< 6 chars) (Should Fail - 400)
+POST {{baseUrl}}/auth/register HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "Short Password User",
+  "email": "short@skynet.com",
+  "password": "123"
+}
+
+### 2.6 Register Admin User (Valid)
+# @name registerAdmin
+POST {{baseUrl}}/auth/register HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "System Administrator",
+  "email": "admin@skillnexis.com",
+  "password": "AdminPassword@123",
+  "role": "admin"
+}
+
+### Store Admin Token from Registration
+@adminAuthToken = {{registerAdmin.response.body.data.token}}
+
+# ==============================================================================
+# 3. User Login (POST /api/auth/login)
+# ==============================================================================
+
+### 3.1 Login User with Valid Credentials (Should Succeed - 200)
+# @name loginUser
+POST {{baseUrl}}/auth/login HTTP/1.1
+Content-Type: application/json
+
+{
+  "email": "sarah@skynet.com",
+  "password": "Password@123"
+}
+
+### Store Login Token
+@loginToken = {{loginUser.response.body.data.token}}
+
+### 3.2 Login with Incorrect Password (Should Fail - 401)
+POST {{baseUrl}}/auth/login HTTP/1.1
+Content-Type: application/json
+
+{
+  "email": "sarah@skynet.com",
+  "password": "WrongPassword!"
+}
+
+### 3.3 Login with Non-Existent Email (Should Fail - 401)
+POST {{baseUrl}}/auth/login HTTP/1.1
+Content-Type: application/json
+
+{
+  "email": "nonexistent@skynet.com",
+  "password": "Password@123"
+}
+
+### 3.4 Login with Empty Body (Should Fail - 400)
+POST {{baseUrl}}/auth/login HTTP/1.1
+Content-Type: application/json
+
+{}
+
+# ==============================================================================
+# 4. Authenticated User Profile (GET /api/auth/profile)
+# ==============================================================================
+
+### 4.1 Get Profile with Valid Bearer Token (Should Succeed - 200)
+GET {{baseUrl}}/auth/profile HTTP/1.1
+Authorization: Bearer {{loginToken}}
+
+### 4.2 Get Profile without Token (Should Fail - 401)
+GET {{baseUrl}}/auth/profile HTTP/1.1
+
+### 4.3 Get Profile with Invalid / Tampered Token (Should Fail - 401)
+GET {{baseUrl}}/auth/profile HTTP/1.1
+Authorization: Bearer invalid_jwt_token_gibberish_12345
+
+# ==============================================================================
+# 5. Update Profile (PUT /api/auth/profile)
+# ==============================================================================
+
+### 5.1 Update User Name & Email
+PUT {{baseUrl}}/auth/profile HTTP/1.1
+Authorization: Bearer {{loginToken}}
+Content-Type: application/json
+
+{
+  "name": "Sarah Connor Updated",
+  "email": "sarah.connor@skynet.com"
+}
+
+### 5.2 Update User Password
+PUT {{baseUrl}}/auth/profile HTTP/1.1
+Authorization: Bearer {{loginToken}}
+Content-Type: application/json
+
+{
+  "password": "NewSecretPassword@2026"
+}
+
+# ==============================================================================
+# 6. Role-Based Access Control (RBAC) (GET /api/auth/users)
+# ==============================================================================
+
+### 6.1 Get All Users as Admin (Should Succeed - 200)
+GET {{baseUrl}}/auth/users HTTP/1.1
+Authorization: Bearer {{adminAuthToken}}
+
+### 6.2 Get All Users as Regular User (Should Fail - 403 Forbidden)
+GET {{baseUrl}}/auth/users HTTP/1.1
+Authorization: Bearer {{loginToken}}
+
+# ==============================================================================
+# 7. Undefined Route (404 Not Found)
+# ==============================================================================
+
+### 7.1 Non-existent Endpoint
+GET {{baseUrl}}/non-existent-route HTTP/1.1

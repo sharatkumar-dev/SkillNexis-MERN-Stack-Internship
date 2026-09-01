@@ -26,7 +26,7 @@ Welcome to the **Week 2** workspace of the **SkillNexis Full Stack Web Developme
 | Project Folder | Level | Description | Status |
 | :--- | :--- | :--- | :---: |
 | [**`01-todo-list-api/`**](./01-todo-list-api/) | **Assignment 1** | Full CRUD REST API for To-Do tasks with MongoDB, status toggling, search & filtering | ✅ **Completed** |
-| [**`02-user-auth-api/`**](./02-user-auth-api/) | **Assignment 2** | User Authentication API with Bcrypt password hashing & JWT token issuance | ⏳ *Upcoming* |
+| [**`02-user-auth-api/`**](./02-user-auth-api/) | **Assignment 2** | User Authentication API with Bcrypt password hashing & JWT token issuance | ✅ **Completed** |
 | [**`03-notes-app-backend/`**](./03-notes-app-backend/) | **Mini Project** | Secure Notes API with user-authenticated CRUD operations | ⏳ *Upcoming* |
 
 ---
@@ -64,22 +64,14 @@ The **`01-todo-list-api`** project implements a full-featured task management ba
    cd 01-todo-list-api
    ```
 
-2. **Install dependencies:**
+2. **Install dependencies & run:**
    ```bash
    npm install
-   ```
-
-3. **Configure Environment Variables:**
-   ```bash
    cp .env.example .env
-   ```
-
-4. **Run in Development Mode:**
-   ```bash
    npm run dev
    ```
 
-5. **API Endpoints Summary:**
+3. **API Endpoints Summary:**
    - `GET /api/health` — Health check endpoint
    - `POST /api/tasks` — Create new task (validates title, priority, due date)
    - `GET /api/tasks` — List tasks with search, pagination (`page`, `limit`), and filter (`completed`, `priority`, `sort`)
@@ -88,6 +80,59 @@ The **`01-todo-list-api`** project implements a full-featured task management ba
    - `PUT /api/tasks/:id` — Update task details
    - `PATCH /api/tasks/:id/toggle` — Quick completion status toggle
    - `DELETE /api/tasks/:id` — Remove task from database
+
+---
+
+## 🔐 Assignment 2: User Authentication API Highlights
+
+The **`02-user-auth-api`** project implements secure user registration, password hashing with bcrypt, JWT token generation, role-based access control, and user profile management:
+
+```text
+02-user-auth-api/
+├── src/
+│   ├── config/
+│   │   └── db.js                 # Resilient Mongoose connection
+│   ├── controllers/
+│   │   └── auth.controller.js    # Register, login, profile, and user handlers
+│   ├── middleware/
+│   │   ├── auth.middleware.js    # JWT Bearer verification & RBAC authorization
+│   │   └── error.middleware.js   # 404 router and centralized error interceptor
+│   ├── models/
+│   │   └── user.model.js         # User model with pre-save bcrypt hashing & methods
+│   ├── routes/
+│   │   └── auth.routes.js        # Express REST routing for auth endpoints
+│   ├── utils/
+│   │   └── generateToken.js      # JWT signing utility
+│   ├── app.js                    # Express app configuration & middleware pipeline
+│   └── server.js                 # Server initialization & graceful shutdown
+├── .env.example                  # Environment configuration template
+├── package.json                  # Dependencies & scripts
+├── postman_collection.json       # Postman Collection v2.1 importable schema
+├── requests.http                 # 19 executable test cases for VS Code REST Client
+└── README.md                     # Dedicated assignment documentation
+```
+
+### ⚡ Quick Start for Assignment 2
+
+1. **Navigate to the project directory:**
+   ```bash
+   cd 02-user-auth-api
+   ```
+
+2. **Install dependencies & run:**
+   ```bash
+   npm install
+   cp .env.example .env
+   npm run dev
+   ```
+
+3. **API Endpoints Summary:**
+   - `GET /api/health` — Health check endpoint
+   - `POST /api/auth/register` — Register a new user and issue JWT
+   - `POST /api/auth/login` — Authenticate user and return JWT
+   - `GET /api/auth/profile` — Get authenticated user's profile (Protected)
+   - `PUT /api/auth/profile` — Update user details or password (Protected)
+   - `GET /api/auth/users` — List all registered users (Admin only)
 
 ---
 
