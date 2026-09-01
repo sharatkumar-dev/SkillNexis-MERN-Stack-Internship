@@ -27,7 +27,7 @@ Welcome to the **Week 2** workspace of the **SkillNexis Full Stack Web Developme
 | :--- | :--- | :--- | :---: |
 | [**`01-todo-list-api/`**](./01-todo-list-api/) | **Assignment 1** | Full CRUD REST API for To-Do tasks with MongoDB, status toggling, search & filtering | ✅ **Completed** |
 | [**`02-user-auth-api/`**](./02-user-auth-api/) | **Assignment 2** | User Authentication API with Bcrypt password hashing & JWT token issuance | ✅ **Completed** |
-| [**`03-notes-app-backend/`**](./03-notes-app-backend/) | **Mini Project** | Secure Notes API with user-authenticated CRUD operations | ⏳ *Upcoming* |
+| [**`03-notes-app-backend/`**](./03-notes-app-backend/) | **Mini Project** | Secure Notes API with user-authenticated CRUD, pin/archive, search, tags & metrics | ✅ **Completed** |
 
 ---
 
@@ -133,6 +133,69 @@ The **`02-user-auth-api`** project implements secure user registration, password
    - `GET /api/auth/profile` — Get authenticated user's profile (Protected)
    - `PUT /api/auth/profile` — Update user details or password (Protected)
    - `GET /api/auth/users` — List all registered users (Admin only)
+
+---
+
+## 📝 Mini Project: Notes App Backend Highlights
+
+The **`03-notes-app-backend`** project implements a full-featured, secure, multi-tenant notes management backend:
+
+```text
+03-notes-app-backend/
+├── src/
+│   ├── config/
+│   │   └── db.js                 # Resilient Mongoose connection
+│   ├── controllers/
+│   │   ├── auth.controller.js    # User registration, login, and profile handlers
+│   │   └── note.controller.js    # User-scoped CRUD, pin/archive, search, and stats handlers
+│   ├── middleware/
+│   │   ├── auth.middleware.js    # JWT Bearer verification & user injection
+│   │   └── error.middleware.js   # 404 router and centralized error interceptor
+│   ├── models/
+│   │   ├── user.model.js         # User model with bcrypt hashing
+│   │   └── note.model.js         # Note model with tags, compound indexes & text search
+│   ├── routes/
+│   │   ├── auth.routes.js        # Express REST routing for auth endpoints
+│   │   └── note.routes.js        # Express REST routing for protected notes endpoints
+│   ├── utils/
+│   │   └── generateToken.js      # JWT signing utility
+│   ├── app.js                    # Express app configuration & middleware pipeline
+│   └── server.js                 # Server initialization & graceful shutdown
+├── .env.example                  # Environment configuration template
+├── package.json                  # Dependencies & scripts
+├── postman_collection.json       # Postman Collection v2.1 importable schema
+├── requests.http                 # 20+ executable test cases for VS Code REST Client
+└── README.md                     # Dedicated assignment documentation
+```
+
+### ⚡ Quick Start for Mini Project (Assignment 3)
+
+1. **Navigate to the project directory:**
+   ```bash
+   cd 03-notes-app-backend
+   ```
+
+2. **Install dependencies & run:**
+   ```bash
+   npm install
+   cp .env.example .env
+   npm run dev
+   ```
+
+3. **API Endpoints Summary:**
+   - `GET /api/health` — Health check endpoint
+   - `POST /api/auth/register` — Register user & return JWT
+   - `POST /api/auth/login` — Login user & return JWT
+   - `GET /api/auth/profile` — Get user profile (Protected)
+   - `PUT /api/auth/profile` — Update user profile (Protected)
+   - `POST /api/notes` — Create user-scoped note (Protected)
+   - `GET /api/notes` — List notes with search, pagination (`page`, `limit`), and filter (`category`, `tag`, `isPinned`, `isArchived`, `sort`)
+   - `GET /api/notes/stats` — Aggregate metrics summary (Protected)
+   - `GET /api/notes/:id` — Retrieve note by ID (Protected, ownership enforced)
+   - `PUT /api/notes/:id` — Update note by ID (Protected, ownership enforced)
+   - `PATCH /api/notes/:id/pin` — Toggle pin status (Protected)
+   - `PATCH /api/notes/:id/archive` — Toggle archive status (Protected)
+   - `DELETE /api/notes/:id` — Remove note from database (Protected, ownership enforced)
 
 ---
 

@@ -1,0 +1,464 @@
+{
+  "info": {
+    "_postman_id": "b3e94a81-79cb-4c54-8c8a-7e3f6d729a10",
+    "name": "Notes App Backend API",
+    "description": "Postman Collection for Mini Project 3: Notes App REST API with User Authentication, JWT, Scoped CRUD, Search, Filters, Pin/Archive, and Stats",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:5002/api",
+      "type": "string"
+    },
+    {
+      "key": "authToken",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "noteId",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/health",
+          "host": ["{{baseUrl}}"],
+          "path": ["health"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "1. Authentication",
+      "item": [
+        {
+          "name": "Register User",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = pm.response.json();",
+                  "if (jsonData.data && jsonData.data.token) {",
+                  "    pm.collectionVariables.set('authToken', jsonData.data.token);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Alice Wonderland\",\n  \"email\": \"alice@notesapp.io\",\n  \"password\": \"Password@123\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/register",
+              "host": ["{{baseUrl}}"],
+              "path": ["auth", "register"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login User",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = pm.response.json();",
+                  "if (jsonData.data && jsonData.data.token) {",
+                  "    pm.collectionVariables.set('authToken', jsonData.data.token);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"alice@notesapp.io\",\n  \"password\": \"Password@123\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/login",
+              "host": ["{{baseUrl}}"],
+              "path": ["auth", "login"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get User Profile",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/auth/profile",
+              "host": ["{{baseUrl}}"],
+              "path": ["auth", "profile"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update User Profile",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Alice W. Explorer\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/profile",
+              "host": ["{{baseUrl}}"],
+              "path": ["auth", "profile"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "2. Notes CRUD",
+      "item": [
+        {
+          "name": "Create Note (Pinned)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = pm.response.json();",
+                  "if (jsonData.data && jsonData.data._id) {",
+                  "    pm.collectionVariables.set('noteId', jsonData.data._id);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"MERN Stack Architecture Notes\",\n  \"content\": \"Ensure separation of concerns with controllers, middleware, models, and routes.\",\n  \"category\": \"Work\",\n  \"tags\": [\"mern\", \"express\", \"mongodb\"],\n  \"color\": \"#FEF3C7\",\n  \"isPinned\": true\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/notes",
+              "host": ["{{baseUrl}}"],
+              "path": ["notes"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Notes (Paginated)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/notes?page=1&limit=10",
+              "host": ["{{baseUrl}}"],
+              "path": ["notes"],
+              "query": [
+                { "key": "page", "value": "1" },
+                { "key": "limit", "value": "10" }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Note By ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/notes/{{noteId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["notes", "{{noteId}}"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Note By ID",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"MERN Stack Architecture Notes (Updated)\",\n  \"content\": \"Updated architectural best practices for 2026.\",\n  \"category\": \"Work\",\n  \"tags\": [\"mern\", \"express\", \"mongodb\", \"security\"]\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/notes/{{noteId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["notes", "{{noteId}}"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Note By ID",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/notes/{{noteId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["notes", "{{noteId}}"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "3. Search & Filters",
+      "item": [
+        {
+          "name": "Search Notes by Keyword",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/notes?q=architecture",
+              "host": ["{{baseUrl}}"],
+              "path": ["notes"],
+              "query": [
+                { "key": "q", "value": "architecture" }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Filter Notes by Category",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/notes?category=Work",
+              "host": ["{{baseUrl}}"],
+              "path": ["notes"],
+              "query": [
+                { "key": "category", "value": "Work" }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Filter Notes by Tag",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/notes?tag=mongodb",
+              "host": ["{{baseUrl}}"],
+              "path": ["notes"],
+              "query": [
+                { "key": "tag", "value": "mongodb" }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Filter Pinned Notes Only",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/notes?isPinned=true",
+              "host": ["{{baseUrl}}"],
+              "path": ["notes"],
+              "query": [
+                { "key": "isPinned", "value": "true" }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Filter Archived Notes Only",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/notes?isArchived=true",
+              "host": ["{{baseUrl}}"],
+              "path": ["notes"],
+              "query": [
+                { "key": "isArchived", "value": "true" }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "4. Pin & Archive Operations",
+      "item": [
+        {
+          "name": "Toggle Note Pin Status",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/notes/{{noteId}}/pin",
+              "host": ["{{baseUrl}}"],
+              "path": ["notes", "{{noteId}}", "pin"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Toggle Note Archive Status",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/notes/{{noteId}}/archive",
+              "host": ["{{baseUrl}}"],
+              "path": ["notes", "{{noteId}}", "archive"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "5. Notes Statistics",
+      "item": [
+        {
+          "name": "Get Note Statistics Aggregation",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/notes/stats",
+              "host": ["{{baseUrl}}"],
+              "path": ["notes", "stats"]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}

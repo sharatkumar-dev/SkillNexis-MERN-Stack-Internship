@@ -1,0 +1,274 @@
+###############################################################################
+# Notes App REST API - Automated Test Suite
+# Extension: REST Client (Huachao Mao) for VS Code / Antigravity IDE
+###############################################################################
+
+@baseUrl = http://localhost:5002/api
+
+# ==============================================================================
+# 1. Health Check Endpoint
+# ==============================================================================
+
+### 1.1 Check API Health Status
+GET {{baseUrl}}/health HTTP/1.1
+
+# ==============================================================================
+# 2. Authentication & User Management
+# ==============================================================================
+
+### 2.1 Register User 1 (Alice)
+# @name registerUser1
+POST {{baseUrl}}/auth/register HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "Alice Wonderland",
+  "email": "alice@notesapp.io",
+  "password": "Password@123"
+}
+
+### Store User 1 Token
+@tokenUser1 = {{registerUser1.response.body.data.token}}
+
+### 2.2 Register User 2 (Bob - For Multi-Tenant Isolation Testing)
+# @name registerUser2
+POST {{baseUrl}}/auth/register HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "Bob Builder",
+  "email": "bob@notesapp.io",
+  "password": "Password@456"
+}
+
+### Store User 2 Token
+@tokenUser2 = {{registerUser2.response.body.data.token}}
+
+### 2.3 Login User 1
+# @name loginUser1
+POST {{baseUrl}}/auth/login HTTP/1.1
+Content-Type: application/json
+
+{
+  "email": "alice@notesapp.io",
+  "password": "Password@123"
+}
+
+### Store Login Token
+@aliceToken = {{loginUser1.response.body.data.token}}
+
+### 2.4 Get Current User Profile (Protected)
+GET {{baseUrl}}/auth/profile HTTP/1.1
+Authorization: Bearer {{aliceToken}}
+
+### 2.5 Update User Profile (Protected)
+PUT {{baseUrl}}/auth/profile HTTP/1.1
+Authorization: Bearer {{aliceToken}}
+Content-Type: application/json
+
+{
+  "name": "Alice W. Explorer"
+}
+
+# ==============================================================================
+# 3. Notes Creation (POST /api/notes)
+# ==============================================================================
+
+### 3.1 Create Work Note (Pinned)
+# @name createNote1
+POST {{baseUrl}}/notes HTTP/1.1
+Authorization: Bearer {{aliceToken}}
+Content-Type: application/json
+
+{
+  "title": "MERN Stack Architecture Notes",
+  "content": "Ensure separation of concerns with controllers, middleware, models, and routes. Use JWT authentication and Mongoose indexes for performance.",
+  "category": "Work",
+  "tags": ["mern", "express", "architecture", "mongodb"],
+  "color": "#FEF3C7",
+  "isPinned": true
+}
+
+### Store Created Note ID
+@noteId1 = {{createNote1.response.body.data._id}}
+
+### 3.2 Create Personal Note
+# @name createNote2
+POST {{baseUrl}}/notes HTTP/1.1
+Authorization: Bearer {{aliceToken}}
+Content-Type: application/json
+
+{
+  "title": "Weekend Grocery Checklist",
+  "content": "Almond milk, avocados, whole grain sourdough, organic eggs, Greek yogurt, spinach.",
+  "category": "Personal",
+  "tags": ["groceries", "lifestyle"],
+  "color": "#D1FAE5",
+  "isPinned": false
+}
+
+### Store Note 2 ID
+@noteId2 = {{createNote2.response.body.data._id}}
+
+### 3.3 Create Study Note
+# @name createNote3
+POST {{baseUrl}}/notes HTTP/1.1
+Authorization: Bearer {{aliceToken}}
+Content-Type: application/json
+
+{
+  "title": "MongoDB Indexing Best Practices",
+  "content": "Compound indexes should follow the Equality, Sort, Range (ESR) rule. Single field indexes work for direct lookups.",
+  "category": "Study",
+  "tags": ["database", "mongodb", "indexing"],
+  "color": "#E0E7FF",
+  "isPinned": false
+}
+
+### Store Note 3 ID
+@noteId3 = {{createNote3.response.body.data._id}}
+
+### 3.4 Create Bob's Private Note (User 2)
+# @name createBobNote
+POST {{baseUrl}}/notes HTTP/1.1
+Authorization: Bearer {{tokenUser2}}
+Content-Type: application/json
+
+{
+  "title": "Bob's Secret Blueprints",
+  "content": "Top secret construction project details for downtown bridge.",
+  "category": "Work",
+  "tags": ["classified", "blueprints"]
+}
+
+### Store Bob Note ID
+@bobNoteId = {{createBobNote.response.body.data._id}}
+
+# ==============================================================================
+# 4. Notes Listing, Searching & Filtering (GET /api/notes)
+# ==============================================================================
+
+### 4.1 Get All Active Notes for Alice (Default Sorted with Pinned First)
+GET {{baseUrl}}/notes HTTP/1.1
+Authorization: Bearer {{aliceToken}}
+
+### 4.2 Search Notes by Keyword (e.g. 'MongoDB')
+GET {{baseUrl}}/notes?q=MongoDB HTTP/1.1
+Authorization: Bearer {{aliceToken}}
+
+### 4.3 Filter Notes by Category (e.g. 'Work')
+GET {{baseUrl}}/notes?category=Work HTTP/1.1
+Authorization: Bearer {{aliceToken}}
+
+### 4.4 Filter Notes by Tag (e.g. 'lifestyle')
+GET {{baseUrl}}/notes?tag=lifestyle HTTP/1.1
+Authorization: Bearer {{aliceToken}}
+
+### 4.5 Filter Pinned Notes Only
+GET {{baseUrl}}/notes?isPinned=true HTTP/1.1
+Authorization: Bearer {{aliceToken}}
+
+### 4.6 Paginate Notes (Page 1, Limit 2)
+GET {{baseUrl}}/notes?page=1&limit=2 HTTP/1.1
+Authorization: Bearer {{aliceToken}}
+
+### 4.7 Sort Notes Alphabetically by Title Ascending
+GET {{baseUrl}}/notes?sort=title-asc HTTP/1.1
+Authorization: Bearer {{aliceToken}}
+
+# ==============================================================================
+# 5. Note Statistics Summary (GET /api/notes/stats)
+# ==============================================================================
+
+### 5.1 Get Notes Statistics for Authenticated User
+GET {{baseUrl}}/notes/stats HTTP/1.1
+Authorization: Bearer {{aliceToken}}
+
+# ==============================================================================
+# 6. Single Note Operations (GET, PUT, PATCH, DELETE)
+# ==============================================================================
+
+### 6.1 Get Single Note by ID
+GET {{baseUrl}}/notes/{{noteId1}} HTTP/1.1
+Authorization: Bearer {{aliceToken}}
+
+### 6.2 Update Note Details
+PUT {{baseUrl}}/notes/{{noteId2}} HTTP/1.1
+Authorization: Bearer {{aliceToken}}
+Content-Type: application/json
+
+{
+  "title": "Weekend Grocery Checklist (Updated)",
+  "content": "Almond milk, avocados, whole grain sourdough, organic eggs, Greek yogurt, spinach, and blueberries.",
+  "category": "Personal",
+  "tags": ["groceries", "lifestyle", "healthy"],
+  "color": "#A7F3D0"
+}
+
+### 6.3 Toggle Note Pin (Unpin Note 1)
+PATCH {{baseUrl}}/notes/{{noteId1}}/pin HTTP/1.1
+Authorization: Bearer {{aliceToken}}
+
+### 6.4 Toggle Note Archive (Archive Note 3)
+PATCH {{baseUrl}}/notes/{{noteId3}}/archive HTTP/1.1
+Authorization: Bearer {{aliceToken}}
+
+### 6.5 Get Archived Notes
+GET {{baseUrl}}/notes?isArchived=true HTTP/1.1
+Authorization: Bearer {{aliceToken}}
+
+# ==============================================================================
+# 7. Multi-Tenant Security & Isolation Verification
+# ==============================================================================
+
+### 7.1 Alice tries to access Bob's Note (Should Fail - 404 Not Found)
+GET {{baseUrl}}/notes/{{bobNoteId}} HTTP/1.1
+Authorization: Bearer {{aliceToken}}
+
+### 7.2 Alice tries to update Bob's Note (Should Fail - 404 Not Found)
+PUT {{baseUrl}}/notes/{{bobNoteId}} HTTP/1.1
+Authorization: Bearer {{aliceToken}}
+Content-Type: application/json
+
+{
+  "title": "Hacked Title"
+}
+
+### 7.3 Alice tries to delete Bob's Note (Should Fail - 404 Not Found)
+DELETE {{baseUrl}}/notes/{{bobNoteId}} HTTP/1.1
+Authorization: Bearer {{aliceToken}}
+
+# ==============================================================================
+# 8. Note Deletion & Cleanup
+# ==============================================================================
+
+### 8.1 Delete Note by ID (Delete Note 2)
+DELETE {{baseUrl}}/notes/{{noteId2}} HTTP/1.1
+Authorization: Bearer {{aliceToken}}
+
+### 8.2 Verify Deletion (Should Fail - 404 Not Found)
+GET {{baseUrl}}/notes/{{noteId2}} HTTP/1.1
+Authorization: Bearer {{aliceToken}}
+
+# ==============================================================================
+# 9. Error Handling & Validation Tests
+# ==============================================================================
+
+### 9.1 Create Note Missing Title (Should Fail - 400)
+POST {{baseUrl}}/notes HTTP/1.1
+Authorization: Bearer {{aliceToken}}
+Content-Type: application/json
+
+{
+  "content": "Content without a title"
+}
+
+### 9.2 Request Without Auth Token (Should Fail - 401)
+GET {{baseUrl}}/notes HTTP/1.1
+
+### 9.3 Invalid MongoDB ObjectId format (Should Fail - 400)
+GET {{baseUrl}}/notes/invalid-object-id-12345 HTTP/1.1
+Authorization: Bearer {{aliceToken}}
+
+### 9.4 404 Route Not Found
+GET {{baseUrl}}/unrecognized/route HTTP/1.1
