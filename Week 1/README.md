@@ -10,7 +10,7 @@ Welcome to **Week 1** of the **SkillNexis MERN Stack Internship**. This director
 | :--- | :--- | :--- | :---: |
 | **[01-portfolio](./01-portfolio/)** | **Assignment 1:** Personal Developer Portfolio | Semantic HTML5, CSS3, Flexbox/Grid, Responsive Design | ✅ **Complete** |
 | **[02-react-components](./02-react-components/)** | **Assignment 2:** React Components & State | React.js, Vite, Hooks (`useState`), Component Architecture | ✅ **Complete** |
-| **[03-react-blog-ui](./03-react-blog-ui/)** | **Assignment 3:** React Tech Blog SPA UI | React.js, Vite, Modular CSS, SPA Layout | 🟡 **Ready for Dev** |
+| **[03-react-blog-ui](./03-react-blog-ui/)** | **Assignment 3 (Mini Project):** React Tech Blog UI | React.js, Vite, JSON Feed, Search & Filter, Glassmorphic UI | ✅ **Complete** |
 
 ---
 
@@ -63,11 +63,18 @@ npm run dev
 
 ---
 
-## 📰 Assignment 3 (Mini Project): React Tech Blog SPA UI
+## 📰 Assignment 3 (Mini Project): React Blog UI (DevPulse)
 
-- **[03-react-blog-ui](./03-react-blog-ui/)**: Scaffolded React + Vite publication UI for modern single-page application development.
+A modern technical publication Single Page Application (SPA) built strictly per the **SkillNexis Task PDF (Page 4)**.
 
-### How to Run Assignment 3:
+### Key Highlights:
+- **JSON Data Feed:** Loads structured blog posts from `posts.json` and renders responsive post cards with cover media, tags, author credentials, and reading times.
+- **Real-Time Search & Filters:** Live search query matching across titles, content, authors, and tags, alongside category filter pills and dynamic sorting (Newest, Popularity, Read Time).
+- **Interactive Full Reader Modal:** Reading progress bar, syntax-highlighted code blocks with copy triggers, author follow toggle, and discussion comment list with live upvoting.
+- **Story Publisher Modal:** Controlled form with live preview mode to create and publish new tech stories dynamically into state.
+- **Bookmarks Drawer & Theme System:** Saved article slide-over drawer with navbar badge counter, plus seamless Dark / Light mode switching.
+
+### 🏃 How to Run Assignment 3:
 ```bash
 # Navigate into project directory
 cd 03-react-blog-ui

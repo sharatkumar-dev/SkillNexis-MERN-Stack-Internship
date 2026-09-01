@@ -1,0 +1,122 @@
+[
+  {
+    "id": "post-1",
+    "title": "Mastering React 19: Server Actions, useOptimistic & Asset Loading",
+    "slug": "mastering-react-19-server-actions-useoptimistic",
+    "category": "React",
+    "tags": ["React 19", "Hooks", "Frontend", "Server Components"],
+    "author": {
+      "name": "Alex Morgan",
+      "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80",
+      "role": "Lead Frontend Architect"
+    },
+    "publishDate": "2026-08-28",
+    "readTime": "6 min read",
+    "coverImage": "https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=1200&auto=format&fit=crop&q=80",
+    "excerpt": "A deep dive into React 19's groundbreaking features: simplified form handling with useActionState, optimistic UI updates, and native document metadata management.",
+    "content": "React 19 introduces major upgrades that redefine how we handle asynchronous state, actions, and background updates. In this post, we explore how Server Actions and hooks like `useActionState` and `useOptimistic` eliminate boilerplate and bring ultra-responsive UX to the frontend ecosystem.\n\n### The Shift Toward Action-Driven State\nHistorically, managing async form submissions in React required managing multiple `useState` hooks for loading, error, and payload data. With React 19, `useActionState` encapsulates this workflow into a single cohesive hook.\n\n```jsx\nimport { useActionState } from 'react';\n\nasync function updateName(previousState, formData) {\n  const name = formData.get('name');\n  return await saveNameToServer(name);\n}\n\nexport function UserProfile() {\n  const [state, formAction, isPending] = useActionState(updateName, null);\n  return (\n    <form action={formAction}>\n      <input name=\"name\" defaultValue={state?.name} />\n      <button type=\"submit\" disabled={isPending}>\n        {isPending ? 'Updating...' : 'Save'}\n      </button>\n    </form>\n  );\n}\n```\n\n### Instant Feedback with useOptimistic\nOptimistic UI patterns allow user interfaces to immediately update assuming server operations will succeed, rolling back seamlessly on failure. React 19 makes this standard practice across production applications.",
+    "likes": 142,
+    "commentsCount": 18,
+    "featured": true
+  },
+  {
+    "id": "post-2",
+    "title": "TypeScript 5.8: Type-Safe Metaprogramming & Inferred Const",
+    "slug": "typescript-5-8-type-safe-metaprogramming",
+    "category": "JavaScript",
+    "tags": ["TypeScript", "JavaScript", "Developer Tooling", "Type Systems"],
+    "author": {
+      "name": "Elena Rostova",
+      "avatar": "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=150&auto=format&fit=crop&q=80",
+      "role": "Principal TS Engineer"
+    },
+    "publishDate": "2026-08-25",
+    "readTime": "5 min read",
+    "coverImage": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1200&auto=format&fit=crop&q=80",
+    "excerpt": "Exploring the newest typing primitives in TypeScript 5.8, compiler optimizations, and building zero-runtime-cost schemas.",
+    "content": "TypeScript continues to push the boundaries of developer productivity and runtime safety. With TS 5.8, we get enhanced template literal type inference, granular module resolution, and performance gains across large monorepos.\n\n### Const Type Parameters in Practice\nConst type parameters allow functions to infer literal types directly without requiring explicit `as const` assertions at every callsite.\n\n```typescript\nfunction createRoute<const TPath extends string, const TMethods extends readonly string[]>(\n  path: TPath,\n  methods: TMethods\n) {\n  return { path, methods };\n}\n\n// Inferred type: { path: '/api/v1/users'; methods: readonly ['GET', 'POST'] }\nconst userRoute = createRoute('/api/v1/users', ['GET', 'POST']);\n```\n\nThis makes building type-safe routers, RPC layers, and API clients much more ergonomic and declarative.",
+    "likes": 98,
+    "commentsCount": 12,
+    "featured": false
+  },
+  {
+    "id": "post-3",
+    "title": "Modern CSS in 2026: Container Queries, Subgrid & Color Mix",
+    "slug": "modern-css-container-queries-subgrid-color-mix",
+    "category": "CSS & UI",
+    "tags": ["CSS3", "Design Systems", "Responsive", "UI/UX"],
+    "author": {
+      "name": "Jordan Chen",
+      "avatar": "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=150&auto=format&fit=crop&q=80",
+      "role": "Design Technologist"
+    },
+    "publishDate": "2026-08-22",
+    "readTime": "4 min read",
+    "coverImage": "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?w=1200&auto=format&fit=crop&q=80",
+    "excerpt": "Why modern CSS has replaced the need for bulky utility frameworks and how container queries transform component reusability.",
+    "content": "Responsive design has evolved beyond viewport widths. Modern container queries allow components to adapt directly to their parent container's allocated dimensions, making design systems truly modular and context-aware.\n\n```css\n.card-container {\n  container-type: inline-size;\n  container-name: card-wrapper;\n}\n\n@container card-wrapper (min-width: 480px) {\n  .card {\n    display: grid;\n    grid-template-columns: 200px 1fr;\n    gap: 1.5rem;\n  }\n}\n```\n\nCombined with `color-mix()`, `:has()`, and `subgrid`, modern native CSS provides unparalleled control without the build baggage.",
+    "likes": 115,
+    "commentsCount": 14,
+    "featured": false
+  },
+  {
+    "id": "post-4",
+    "title": "Building High-Throughput Microservices with Node.js & Redis",
+    "slug": "high-throughput-microservices-nodejs-redis",
+    "category": "Backend",
+    "tags": ["Node.js", "Redis", "Microservices", "System Design"],
+    "author": {
+      "name": "Marcus Vance",
+      "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80",
+      "role": "Senior Distributed Systems Engineer"
+    },
+    "publishDate": "2026-08-19",
+    "readTime": "8 min read",
+    "coverImage": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&auto=format&fit=crop&q=80",
+    "excerpt": "Architecture patterns for handling 100k+ requests per second using Node.js event loops, Redis Streams, and distributed caching.",
+    "content": "Scaling Node.js backend services requires understanding event loop non-blocking behavior, connection pool saturation, and offloading compute tasks to asynchronous queues.\n\n### Redis Pub/Sub vs. Redis Streams\nRedis Streams provide message persistence, consumer groups, and replay capabilities, enabling robust decoupled microservice communication.\n\n```javascript\nimport Redis from 'ioredis';\nconst redis = new Redis(process.env.REDIS_URL);\n\nexport async function publishEvent(streamKey, payload) {\n  return await redis.xadd(streamKey, '*', 'eventData', JSON.stringify(payload));\n}\n```\n\nImplementing write-behind caching strategies ensures database longevity under extreme spiky workloads.",
+    "likes": 210,
+    "commentsCount": 31,
+    "featured": false
+  },
+  {
+    "id": "post-5",
+    "title": "Deploying Local LLMs & RAG Pipelines in Production",
+    "slug": "deploying-local-llms-rag-pipelines",
+    "category": "AI & Cloud",
+    "tags": ["AI", "Vector DB", "Python", "Cloud Architecture"],
+    "author": {
+      "name": "Sophia Lin",
+      "avatar": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&auto=format&fit=crop&q=80",
+      "role": "AI Research Scientist"
+    },
+    "publishDate": "2026-08-15",
+    "readTime": "7 min read",
+    "coverImage": "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=1200&auto=format&fit=crop&q=80",
+    "excerpt": "A practical guide to implementing Retrieval-Augmented Generation (RAG) using self-hosted vector databases, semantic search, and quantized models.",
+    "content": "Retrieval-Augmented Generation bridges proprietary contextual data with the generative power of Large Language Models without costly fine-tuning cycles.\n\n### Vector Indexing & Hybrid Search\nCombining keyword lexical BM25 search with dense vector embeddings produces state-of-the-art retrieval recall for enterprise documentation and customer knowledge bases.\n\n```python\ndef hybrid_search(query: str, top_k: int = 5):\n    sparse_results = bm25_index.search(query, k=top_k * 2)\n    dense_results = vector_db.similarity_search(query, k=top_k * 2)\n    return reciprocal_rank_fusion(sparse_results, dense_results)[:top_k]\n```\n\nOptimizing chunk sizes (512 tokens with 10% overlap) significantly minimizes hallucination rates in production bots.",
+    "likes": 184,
+    "commentsCount": 27,
+    "featured": false
+  },
+  {
+    "id": "post-6",
+    "title": "Designing Resilient Distributed Event-Driven Architectures",
+    "slug": "designing-resilient-event-driven-architectures",
+    "category": "System Design",
+    "tags": ["System Design", "Kafka", "Architecture", "Cloud"],
+    "author": {
+      "name": "Alex Morgan",
+      "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80",
+      "role": "Lead Frontend Architect"
+    },
+    "publishDate": "2026-08-10",
+    "readTime": "9 min read",
+    "coverImage": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1200&auto=format&fit=crop&q=80",
+    "excerpt": "Core principles of idempotency, dead-letter queues, outbox patterns, and saga orchestrations in enterprise distributed systems.",
+    "content": "In distributed microservices, network partitions and transient failures are inevitable. Designing systems around the Transactional Outbox Pattern prevents dual-write inconsistencies between relational databases and message brokers.\n\n### The Transactional Outbox Pattern\nBy persisting events within the same ACID database transaction as business entities, a background CDC (Change Data Capture) or poller worker guarantees at-least-once message delivery to Apache Kafka or RabbitMQ.",
+    "likes": 167,
+    "commentsCount": 19,
+    "featured": false
+  }
+]
