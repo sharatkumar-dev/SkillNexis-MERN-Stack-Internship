@@ -19,58 +19,77 @@ const generateId = () => {
 const isDbConnected = () => mongoose.connection.readyState === 1;
 
 const UserStore = {
-  async findOne(query) {
+  findOne(query) {
     if (isDbConnected()) {
       return UserMongoose.findOne(query);
     }
-    // In-memory lookup
     const email = query.email ? query.email.toLowerCase().trim() : null;
     const user = memoryUsers.find((u) => u.email === email);
-    if (!user) {
-      return {
-        select: () => null,
-        then: (resolve) => resolve(null)
-      };
-    }
+    let selectedFields = '';
 
-    const userObj = {
-      ...user,
-      comparePassword: async function (candidatePassword) {
-        return await bcrypt.compare(candidatePassword, this.password);
-      }
-    };
-
-    return {
-      select: (fields) => {
-        if (fields === '+password') {
-          return Promise.resolve(userObj);
+    const queryObj = {
+      select(fields) {
+        selectedFields = fields;
+        return this;
+      },
+      then(resolve, reject) {
+        if (!user) {
+          return Promise.resolve(null).then(resolve, reject);
+        }
+        const userObj = {
+          ...user,
+          comparePassword: async function (candidatePassword) {
+            return await bcrypt.compare(candidatePassword, this.password);
+          }
+        };
+        if (selectedFields === '+password') {
+          return Promise.resolve(userObj).then(resolve, reject);
         }
         const { password, ...safeUser } = userObj;
-        return Promise.resolve(safeUser);
+        return Promise.resolve(safeUser).then(resolve, reject);
       },
-      then: (resolve) => {
-        const { password, ...safeUser } = userObj;
-        resolve(safeUser);
+      catch(reject) {
+        return this.then(undefined, reject);
       }
     };
+
+    return queryObj;
   },
 
-  async findById(id) {
+  findById(id) {
     if (isDbConnected()) {
       return UserMongoose.findById(id);
     }
     const user = memoryUsers.find((u) => String(u._id) === String(id));
-    if (!user) {
-      return {
-        select: () => Promise.resolve(null),
-        then: (resolve) => resolve(null)
-      };
-    }
-    const { password, ...safeUser } = user;
-    return {
-      select: () => Promise.resolve(safeUser),
-      then: (resolve) => resolve(safeUser)
+    let selectedFields = '';
+
+    const queryObj = {
+      select(fields) {
+        selectedFields = fields;
+        return this;
+      },
+      then(resolve, reject) {
+        if (!user) {
+          return Promise.resolve(null).then(resolve, reject);
+        }
+        const userObj = {
+          ...user,
+          comparePassword: async function (candidatePassword) {
+            return await bcrypt.compare(candidatePassword, this.password);
+          }
+        };
+        if (selectedFields === '+password') {
+          return Promise.resolve(userObj).then(resolve, reject);
+        }
+        const { password, ...safeUser } = userObj;
+        return Promise.resolve(safeUser).then(resolve, reject);
+      },
+      catch(reject) {
+        return this.then(undefined, reject);
+      }
     };
+
+    return queryObj;
   },
 
   async create({ name, email, password }) {
