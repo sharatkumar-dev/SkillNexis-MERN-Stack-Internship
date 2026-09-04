@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { X, Download, Copy, Trash2, Calendar, FileText, HardDrive, Tag } from 'lucide-react';
-import { getFullImageUrl, getDownloadUrl } from '../api/imageApi';
+import { getFullImageUrl, downloadImageFile } from '../api/imageApi';
 
 const ImageModal = ({ image, onClose, onDelete, showToast }) => {
   useEffect(() => {
@@ -22,8 +22,15 @@ const ImageModal = ({ image, onClose, onDelete, showToast }) => {
     showToast('Direct image link copied to clipboard!', 'info');
   };
 
-  const handleDownload = () => {
-    window.open(getDownloadUrl(image._id), '_blank');
+  const handleDownload = async () => {
+    try {
+      showToast(`Downloading "${image.originalName}"...`, 'info');
+      await downloadImageFile(image._id, image.originalName);
+      showToast(`Downloaded "${image.originalName}" successfully!`, 'success');
+    } catch (err) {
+      console.error('Download error:', err);
+      showToast('Failed to download image. Please try again.', 'error');
+    }
   };
 
   const handleDelete = () => {

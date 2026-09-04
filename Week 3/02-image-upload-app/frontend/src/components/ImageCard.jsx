@@ -1,6 +1,6 @@
 import React from 'react';
 import { Eye, Download, Copy, Trash2, Tag, Calendar } from 'lucide-react';
-import { getFullImageUrl, getDownloadUrl } from '../api/imageApi';
+import { getFullImageUrl, downloadImageFile } from '../api/imageApi';
 
 const ImageCard = ({ image, onSelectImage, onDelete, showToast }) => {
   const fullUrl = getFullImageUrl(image.url);
@@ -11,9 +11,16 @@ const ImageCard = ({ image, onSelectImage, onDelete, showToast }) => {
     showToast('Image link copied to clipboard!', 'info');
   };
 
-  const handleDownload = (e) => {
+  const handleDownload = async (e) => {
     e.stopPropagation();
-    window.open(getDownloadUrl(image._id), '_blank');
+    try {
+      showToast(`Downloading "${image.originalName}"...`, 'info');
+      await downloadImageFile(image._id, image.originalName);
+      showToast(`Downloaded "${image.originalName}" successfully!`, 'success');
+    } catch (err) {
+      console.error('Download error:', err);
+      showToast('Failed to download image. Please try again.', 'error');
+    }
   };
 
   const handleDelete = (e) => {
