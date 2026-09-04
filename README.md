@@ -3,7 +3,7 @@
 # 🌐 SkillNexis MERN Stack Internship
 
 [![Internship Track](https://img.shields.io/badge/Track-Full--Stack%20MERN-blue?style=for-the-badge&logo=react)](https://github.com/sharatkumar-dev/SkillNexis-MERN-Stack-Internship)
-[![Status](https://img.shields.io/badge/Status-Week%203%20In%20Progress-success?style=for-the-badge)](https://github.com/sharatkumar-dev/SkillNexis-MERN-Stack-Internship)
+[![Status](https://img.shields.io/badge/Status-Week%203%20Complete-brightgreen?style=for-the-badge)](https://github.com/sharatkumar-dev/SkillNexis-MERN-Stack-Internship)
 [![Node.js](https://img.shields.io/badge/Node.js-v18%2B-339933?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org/)
 [![Express.js](https://img.shields.io/badge/Express.js-v4.21-000000?style=for-the-badge&logo=express&logoColor=white)](https://expressjs.com/)
 [![React](https://img.shields.io/badge/React-v18-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev/)
@@ -54,7 +54,11 @@ SkillNexis-MERN-Stack-Internship/
 │   │   ├── backend/                    # Express REST API (JWT Auth + Tasks CRUD + Settings)
 │   │   └── frontend/                   # React 18 + Vite SPA (Context API + Protected Routes)
 │   ├── 02-image-upload-app/            # Assignment 2: Image Upload Feature (Express + Multer + React)
-│   └── 03-task-manager-app/            # Mini Project: Task Manager Application
+│   │   ├── backend/                    # Multer upload endpoint, MIME filtering, static serving
+│   │   └── frontend/                   # File picker, live preview, multipart upload, gallery
+│   └── 03-task-manager-app/            # Mini Project: TaskFlow — Task Manager Application
+│       ├── backend/                    # Express REST API (JWT Auth, Task CRUD, Search, Stats)
+│       └── frontend/                   # React 18 + Vite (Kanban Board, Filters, Dashboard)
 │
 └── Week 4/                             # Week 4: Cloud Deployment & Capstone Project
     └── .gitkeep
@@ -68,7 +72,7 @@ SkillNexis-MERN-Stack-Internship/
 | :---: | :--- | :--- | :---: | :---: |
 | **01** | **Frontend Foundations & React Intro** | • **Assignment 1:** Personal Developer Portfolio (HTML5/CSS3)<br>• **Assignment 2:** React Components & Dynamic State<br>• **Assignment 3:** React Tech Blog SPA UI | ✅ **Completed** | [View Week 1](./Week%201) |
 | **02** | **Backend Development (Node, Express, MongoDB)** | • **Assignment 1:** To-Do List CRUD REST API with MongoDB<br>• **Assignment 2:** User Authentication API (Bcrypt & JWT)<br>• **Mini Project:** Notes App Backend API (User Scoped CRUD) | ✅ **Completed** | [View Week 2](./Week%202) |
-| **03** | **Full-Stack MERN Integration** | • **Assignment 1:** Full Stack To-Do Application (Auth + CRUD + Settings)<br>• **Assignment 2:** Image Upload Feature (Multer + React)<br>• **Mini Project:** Task Manager Application | 🔄 **In Progress**<br>*(Assignment 1 Completed)* | [View Week 3](./Week%203) |
+| **03** | **Full-Stack MERN Integration** | • **Assignment 1:** Full Stack To-Do Application (Auth + CRUD + Settings)<br>• **Assignment 2:** Image Upload Feature (Multer + React Gallery)<br>• **Mini Project:** TaskFlow — Task Manager (Kanban + Analytics) | ✅ **Completed** | [View Week 3](./Week%203) |
 | **04** | **Capstone Deployment & Performance** | *Scheduled for Week 4* | ⏳ Upcoming | [View Week 4](./Week%204) |
 
 ---
@@ -82,6 +86,7 @@ SkillNexis-MERN-Stack-Internship/
 | **Backend** | Node.js (v18+), Express.js (v4.21), RESTful Architecture, MVC Pattern |
 | **Database & ODM** | MongoDB (v7+), Mongoose (v8+), In-Memory Resilient Adapter Fallback |
 | **Authentication & Security** | JSON Web Tokens (JWT), Bcrypt.js (10 salt rounds), Stateless Bearer Middleware |
+| **File Uploads** | Multer (MIME filtering, size limits, collision-resistant filenames) |
 | **Testing & API Tooling** | Postman Collections (v2.1), VS Code REST Client (`.http`), Morgan |
 | **DevOps & VCS** | Git, GitHub, Nodemon, Dotenv |
 
@@ -116,7 +121,47 @@ npm run dev
 # Frontend application runs on http://localhost:5173
 ```
 
-### 3. Exploring Week 2 Backend Projects
+### 3. Running Week 3 — Assignment 2: PixelVault Image Upload App
+
+#### Start the Backend API:
+```bash
+cd "Week 3/02-image-upload-app/backend"
+npm install
+cp .env.example .env
+npm run dev
+# API runs on http://localhost:5001
+```
+
+#### Start the Frontend:
+```bash
+# In a new terminal tab:
+cd "Week 3/02-image-upload-app/frontend"
+npm install
+npm run dev
+# App runs on http://localhost:5174
+```
+
+### 4. Running Week 3 — Mini Project: TaskFlow Task Manager
+
+#### Start the Backend API:
+```bash
+cd "Week 3/03-task-manager-app/backend"
+npm install
+cp .env.example .env
+npm run dev
+# API runs on http://localhost:5002
+```
+
+#### Start the Frontend:
+```bash
+# In a new terminal tab:
+cd "Week 3/03-task-manager-app/frontend"
+npm install
+npm run dev
+# App runs on http://localhost:5175 — click "Demo Login" for instant access
+```
+
+### 5. Exploring Week 2 Backend Projects
 ```bash
 cd "Week 2/01-todo-list-api"    # Assignment 1: To-Do REST API
 cd "Week 2/02-user-auth-api"    # Assignment 2: User Authentication API
