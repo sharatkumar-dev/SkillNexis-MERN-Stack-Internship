@@ -1,0 +1,188 @@
+### ================================================================
+### SkillNexis MERN Stack — Week 3 Assignment 1: Full Stack To-Do API
+### Automated REST Client Test Suite (`requests.http`)
+### ================================================================
+
+@baseUrl = http://localhost:5000/api
+@contentType = application/json
+
+### ----------------------------------------------------------------
+### 1. Healthcheck / Server Status
+### ----------------------------------------------------------------
+# @name healthCheck
+GET http://localhost:5000/
+Content-Type: {{contentType}}
+
+### ----------------------------------------------------------------
+### 2. User Registration
+### ----------------------------------------------------------------
+# @name registerUser
+POST {{baseUrl}}/auth/register
+Content-Type: {{contentType}}
+
+{
+  "name": "Alex Johnson",
+  "email": "alex.johnson@skillnexis.example",
+  "password": "Password123!"
+}
+
+### ----------------------------------------------------------------
+### 3. User Login (Captures JWT Token for subsequent requests)
+### ----------------------------------------------------------------
+# @name loginUser
+POST {{baseUrl}}/auth/login
+Content-Type: {{contentType}}
+
+{
+  "email": "alex.johnson@skillnexis.example",
+  "password": "Password123!"
+}
+
+### Extract Token from Login Response
+@authToken = {{loginUser.response.body.data.token}}
+
+### ----------------------------------------------------------------
+### 4. Get Current User Profile (Protected)
+### ----------------------------------------------------------------
+# @name getCurrentUser
+GET {{baseUrl}}/auth/me
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+### ----------------------------------------------------------------
+### 5. Create First To-Do Task (High Priority)
+### ----------------------------------------------------------------
+# @name createTodo1
+POST {{baseUrl}}/todos
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+{
+  "title": "Complete Week 3 Full Stack Integration Assignment",
+  "description": "Connect React Vite frontend to Express backend and test JWT authentication flow.",
+  "priority": "high",
+  "dueDate": "2026-09-10T18:00:00.000Z"
+}
+
+### Capture Created Task ID
+@firstTodoId = {{createTodo1.response.body.data._id}}
+
+### ----------------------------------------------------------------
+### 6. Create Second To-Do Task (Medium Priority)
+### ----------------------------------------------------------------
+# @name createTodo2
+POST {{baseUrl}}/todos
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+{
+  "title": "Review Multer file upload documentation",
+  "description": "Understand diskStorage, fileFilter for MIME validation, and size constraints.",
+  "priority": "medium",
+  "dueDate": "2026-09-12T12:00:00.000Z"
+}
+
+### ----------------------------------------------------------------
+### 7. Create Third To-Do Task (Low Priority)
+### ----------------------------------------------------------------
+# @name createTodo3
+POST {{baseUrl}}/todos
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+{
+  "title": "Read React 19 documentation updates",
+  "description": "Explore new hooks like useActionState and optimistic updates.",
+  "priority": "low"
+}
+
+### ----------------------------------------------------------------
+### 8. Get All To-Dos for Current User (Includes Stats)
+### ----------------------------------------------------------------
+# @name getAllTodos
+GET {{baseUrl}}/todos
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+### ----------------------------------------------------------------
+### 9. Filter To-Dos by Status (Active / Pending)
+### ----------------------------------------------------------------
+# @name getActiveTodos
+GET {{baseUrl}}/todos?status=active
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+### ----------------------------------------------------------------
+### 10. Filter To-Dos by Priority (High)
+### ----------------------------------------------------------------
+# @name getHighPriorityTodos
+GET {{baseUrl}}/todos?priority=high
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+### ----------------------------------------------------------------
+### 11. Search To-Dos by Keyword
+### ----------------------------------------------------------------
+# @name searchTodos
+GET {{baseUrl}}/todos?search=Integration
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+### ----------------------------------------------------------------
+### 12. Get Single To-Do by ID
+### ----------------------------------------------------------------
+# @name getSingleTodo
+GET {{baseUrl}}/todos/{{firstTodoId}}
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+### ----------------------------------------------------------------
+### 13. Update To-Do Details
+### ----------------------------------------------------------------
+# @name updateTodo
+PUT {{baseUrl}}/todos/{{firstTodoId}}
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+{
+  "title": "Complete Week 3 Full Stack Integration Assignment (UPDATED)",
+  "description": "Updated description with verified endpoints and documentation.",
+  "priority": "high",
+  "isCompleted": false
+}
+
+### ----------------------------------------------------------------
+### 14. Toggle To-Do Completion Status
+### ----------------------------------------------------------------
+# @name toggleTodo
+PATCH {{baseUrl}}/todos/{{firstTodoId}}/toggle
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+### ----------------------------------------------------------------
+### 15. Delete To-Do Task
+### ----------------------------------------------------------------
+# @name deleteTodo
+DELETE {{baseUrl}}/todos/{{firstTodoId}}
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+### ----------------------------------------------------------------
+### 16. Negative Test: Access Protected Route Without Token (Expect 401)
+### ----------------------------------------------------------------
+# @name testUnauthorized
+GET {{baseUrl}}/todos
+Content-Type: {{contentType}}
+
+### ----------------------------------------------------------------
+### 17. Negative Test: Register with Existing Email (Expect 400)
+### ----------------------------------------------------------------
+# @name testDuplicateEmail
+POST {{baseUrl}}/auth/register
+Content-Type: {{contentType}}
+
+{
+  "name": "Alex Duplicate",
+  "email": "alex.johnson@skillnexis.example",
+  "password": "Password123!"
+}
