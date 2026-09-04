@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { CheckSquare, Mail, Lock, Eye, EyeOff, Loader2 } from 'lucide-react';
@@ -16,6 +16,13 @@ const LoginPage = () => {
 
   const from = location.state?.from?.pathname || '/';
 
+  // Always reset fields when navigating to or mounting LoginPage
+  useEffect(() => {
+    setEmail('');
+    setPassword('');
+    setError('');
+  }, [location.key]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!email.trim() || !password) {
@@ -30,6 +37,8 @@ const LoginPage = () => {
     setIsSubmitting(false);
 
     if (res.success) {
+      setEmail('');
+      setPassword('');
       navigate(from, { replace: true });
     } else {
       setError(res.message);
@@ -53,7 +62,7 @@ const LoginPage = () => {
           </div>
         )}
 
-        <form onSubmit={handleSubmit} className="auth-form">
+        <form onSubmit={handleSubmit} className="auth-form" autoComplete="off">
           <div className="form-group">
             <label className="form-label" htmlFor="login-email">
               Email Address
@@ -71,6 +80,7 @@ const LoginPage = () => {
                 placeholder="name@example.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                autoComplete="off"
                 required
               />
             </div>
@@ -93,6 +103,7 @@ const LoginPage = () => {
                 placeholder="••••••••"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                autoComplete="new-password"
                 required
               />
               <button

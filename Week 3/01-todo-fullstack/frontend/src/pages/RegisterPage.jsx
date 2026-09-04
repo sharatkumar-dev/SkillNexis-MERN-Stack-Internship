@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { CheckSquare, User, Mail, Lock, Eye, EyeOff, Loader2 } from 'lucide-react';
 
@@ -14,6 +14,15 @@ const RegisterPage = () => {
 
   const { register } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    setName('');
+    setEmail('');
+    setPassword('');
+    setConfirmPassword('');
+    setError('');
+  }, [location.key]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -39,6 +48,10 @@ const RegisterPage = () => {
     setIsSubmitting(false);
 
     if (res.success) {
+      setName('');
+      setEmail('');
+      setPassword('');
+      setConfirmPassword('');
       navigate('/', { replace: true });
     } else {
       setError(res.message);
