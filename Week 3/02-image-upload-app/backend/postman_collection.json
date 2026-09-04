@@ -1,0 +1,296 @@
+{
+  "info": {
+    "_postman_id": "c71a39f0-2f63-4b68-8090-e792c3a5024b",
+    "name": "Week 3 - Assignment 2: Image Upload Feature API",
+    "description": "Postman Collection for SkillNexis MERN Stack Internship - Week 3 Assignment 2 (Express + Multer + MongoDB Image Upload Pipeline)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:5001/api",
+      "type": "string"
+    },
+    {
+      "key": "serverUrl",
+      "value": "http://localhost:5001",
+      "type": "string"
+    },
+    {
+      "key": "imageId",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Health & Diagnostics",
+      "item": [
+        {
+          "name": "Service Health Check",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/health",
+              "host": ["{{baseUrl}}"],
+              "path": ["health"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Storage Statistics",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/images/stats",
+              "host": ["{{baseUrl}}"],
+              "path": ["images", "stats"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Upload Operations",
+      "item": [
+        {
+          "name": "Upload Single Image",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const responseJson = pm.response.json();",
+                  "if (responseJson.success && responseJson.data && responseJson.data._id) {",
+                  "    pm.collectionVariables.set('imageId', responseJson.data._id);",
+                  "    console.log('Saved imageId:', responseJson.data._id);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "image",
+                  "type": "file",
+                  "src": ""
+                },
+                {
+                  "key": "title",
+                  "value": "Cyberpunk Neon Skyline",
+                  "type": "text"
+                },
+                {
+                  "key": "category",
+                  "value": "technology",
+                  "type": "text"
+                },
+                {
+                  "key": "description",
+                  "value": "A beautiful view of city lights at twilight.",
+                  "type": "text"
+                },
+                {
+                  "key": "tags",
+                  "value": "cyberpunk,night,city,lights",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/images/upload",
+              "host": ["{{baseUrl}}"],
+              "path": ["images", "upload"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Upload Multiple Images (Batch)",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "images",
+                  "type": "file",
+                  "src": []
+                },
+                {
+                  "key": "category",
+                  "value": "nature",
+                  "type": "text"
+                },
+                {
+                  "key": "tags",
+                  "value": "batch,mountains,landscape",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/images/upload-multiple",
+              "host": ["{{baseUrl}}"],
+              "path": ["images", "upload-multiple"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Negative Test - No File Attached",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "title",
+                  "value": "Missing File",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/images/upload",
+              "host": ["{{baseUrl}}"],
+              "path": ["images", "upload"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Gallery & Search Operations",
+      "item": [
+        {
+          "name": "Get All Images",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/images",
+              "host": ["{{baseUrl}}"],
+              "path": ["images"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Filter Images by Category",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/images?category=technology",
+              "host": ["{{baseUrl}}"],
+              "path": ["images"],
+              "query": [
+                {
+                  "key": "category",
+                  "value": "technology"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Search Images by Query",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/images?search=cyberpunk",
+              "host": ["{{baseUrl}}"],
+              "path": ["images"],
+              "query": [
+                {
+                  "key": "search",
+                  "value": "cyberpunk"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Sort Images by Size (Descending)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/images?sortBy=size_desc",
+              "host": ["{{baseUrl}}"],
+              "path": ["images"],
+              "query": [
+                {
+                  "key": "sortBy",
+                  "value": "size_desc"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Single Image CRUD",
+      "item": [
+        {
+          "name": "Get Image Details by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/images/{{imageId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["images", "{{imageId}}"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Download Image Attachment",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/images/{{imageId}}/download",
+              "host": ["{{baseUrl}}"],
+              "path": ["images", "{{imageId}}", "download"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Image by ID",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/images/{{imageId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["images", "{{imageId}}"]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}

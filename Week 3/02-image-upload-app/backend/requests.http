@@ -1,0 +1,137 @@
+### ==========================================================================
+### Week 3 — Assignment 2: Image Upload Feature API Tests
+### VS Code REST Client Test Suite
+### ==========================================================================
+
+@baseUrl = http://localhost:5001/api
+@serverUrl = http://localhost:5001
+
+### 1. Health Check
+# @name healthCheck
+GET {{baseUrl}}/health
+Content-Type: application/json
+
+###
+
+### 2. Storage Statistics Overview
+# @name getStats
+GET {{baseUrl}}/images/stats
+Content-Type: application/json
+
+###
+
+### 3. Get All Images (Default: Newest first)
+# @name getAllImages
+GET {{baseUrl}}/images
+Content-Type: application/json
+
+###
+
+### 4. Upload Single Image (Valid JPEG/PNG)
+# Note: In REST Client, multipart file path is relative to the workspace or absolute.
+# @name uploadSingle
+POST {{baseUrl}}/images/upload
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="title"
+
+Cyberpunk Neon City
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="category"
+
+technology
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="description"
+
+A futuristic cybernetic metropolis glowing with violet and cyan neon lights.
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="tags"
+
+cyberpunk,neon,city,future
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="image"; filename="sample-cyberpunk.png"
+Content-Type: image/png
+
+< ./sample.png
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+###
+
+### 5. Negative Test: Upload Without File (Should return 400 Bad Request)
+# @name uploadWithoutFile
+POST {{baseUrl}}/images/upload
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="title"
+
+Image Missing File
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+###
+
+### 6. Negative Test: Upload Invalid MIME Type (Should return 400 Bad Request)
+# @name uploadInvalidMime
+POST {{baseUrl}}/images/upload
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="title"
+
+Document File
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="image"; filename="document.pdf"
+Content-Type: application/pdf
+
+%PDF-1.4 dummy pdf content
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+###
+
+### 7. Filter Images by Category (e.g. category=technology)
+# @name filterByCategory
+GET {{baseUrl}}/images?category=technology
+Content-Type: application/json
+
+###
+
+### 8. Search Images by Keyword in Title/Tags
+# @name searchImages
+GET {{baseUrl}}/images?search=cyberpunk
+Content-Type: application/json
+
+###
+
+### 9. Sort Images by Size Descending (Largest files first)
+# @name sortByLargest
+GET {{baseUrl}}/images?sortBy=size_desc
+Content-Type: application/json
+
+###
+
+### 10. Get Image by ID
+# Replace {{imageId}} with an actual ObjectId returned from an upload or listing
+@imageId = 66e857418a38c44d18fa9911
+# @name getImageById
+GET {{baseUrl}}/images/{{imageId}}
+Content-Type: application/json
+
+###
+
+### 11. Download Image File (Triggers attachment download)
+# @name downloadImage
+GET {{baseUrl}}/images/{{imageId}}/download
+
+###
+
+### 12. Delete Image by ID (Cascades to disk file in uploads/)
+# @name deleteImage
+DELETE {{baseUrl}}/images/{{imageId}}
+Content-Type: application/json
+
+###
+
+### 13. Test Static File Serving
+# @name testStaticServing
+GET {{serverUrl}}/uploads/test-file.png
