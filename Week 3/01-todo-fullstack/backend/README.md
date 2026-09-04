@@ -96,12 +96,16 @@ The server runs on `http://localhost:5000`.
 | `POST` | `/api/auth/register` | No | Register new user account |
 | `POST` | `/api/auth/login` | No | Authenticate user & return JWT token |
 | `GET` | `/api/auth/me` | Yes | Get authenticated user profile |
+| `PUT` | `/api/auth/profile` | Yes | Update user profile details (name, email) |
+| `PUT` | `/api/auth/update-password` | Yes | Update user password with current password verification |
+| `DELETE` | `/api/auth/account` | Yes | Permanently delete user account and associated tasks |
 | `GET` | `/api/todos` | Yes | Get user's todos (`?search=`, `?status=`, `?priority=`) |
 | `POST` | `/api/todos` | Yes | Create a new todo |
 | `GET` | `/api/todos/:id` | Yes | Get single todo by ID |
 | `PUT` | `/api/todos/:id` | Yes | Update todo title, description, priority, dueDate |
 | `PATCH`| `/api/todos/:id/toggle` | Yes | Toggle todo completion state |
-| `DELETE`| `/api/todos/:id` | Yes | Permanently delete a todo |
+| `DELETE`| `/api/todos/:id` | Yes | Permanently delete a single todo |
+| `DELETE`| `/api/todos/completed/clear` | Yes | Bulk clear all completed tasks for user |
 
 ---
 

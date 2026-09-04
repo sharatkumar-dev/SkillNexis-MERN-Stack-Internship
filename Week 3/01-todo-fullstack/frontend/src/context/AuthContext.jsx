@@ -3,6 +3,12 @@ import api from '../api/axiosInstance';
 
 const AuthContext = createContext(null);
 
+const DEFAULT_PREFERENCES = {
+  defaultPriority: 'medium',
+  defaultStatus: 'all',
+  confirmDelete: true
+};
+
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(() => {
     const savedUser = localStorage.getItem('user');
@@ -10,6 +16,12 @@ export const AuthProvider = ({ children }) => {
   });
   const [token, setToken] = useState(() => localStorage.getItem('token') || null);
   const [isLoading, setIsLoading] = useState(true);
+
+  // User preferences stored in localStorage
+  const [preferences, setPreferences] = useState(() => {
+    const savedPrefs = localStorage.getItem('taskflow_preferences');
+    return savedPrefs ? JSON.parse(savedPrefs) : DEFAULT_PREFERENCES;
+  });
 
   // Validate existing token on mount
   useEffect(() => {
@@ -77,6 +89,60 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const updateUserProfile = async (name, email) => {
+    try {
+      const response = await api.put('/auth/profile', { name, email });
+      if (response.data.success) {
+        const updatedUser = response.data.data.user;
+        setUser(updatedUser);
+        localStorage.setItem('user', JSON.stringify(updatedUser));
+        return { success: true, message: response.data.message };
+      }
+    } catch (error) {
+      const errorMsg =
+        error.response?.data?.errors?.[0] ||
+        error.response?.data?.message ||
+        'Failed to update profile.';
+      return { success: false, message: errorMsg };
+    }
+  };
+
+  const updateUserPassword = async (currentPassword, newPassword) => {
+    try {
+      const response = await api.put('/auth/update-password', {
+        currentPassword,
+        newPassword
+      });
+      return { success: true, message: response.data.message };
+    } catch (error) {
+      const errorMsg =
+        error.response?.data?.errors?.[0] ||
+        error.response?.data?.message ||
+        'Failed to update password.';
+      return { success: false, message: errorMsg };
+    }
+  };
+
+  const deleteUserAccount = async () => {
+    try {
+      await api.delete('/auth/account');
+      logout();
+      return { success: true, message: 'Account deleted' };
+    } catch (error) {
+      const errorMsg =
+        error.response?.data?.errors?.[0] ||
+        error.response?.data?.message ||
+        'Failed to delete account.';
+      return { success: false, message: errorMsg };
+    }
+  };
+
+  const updatePreferences = (newPrefs) => {
+    const updated = { ...preferences, ...newPrefs };
+    setPreferences(updated);
+    localStorage.setItem('taskflow_preferences', JSON.stringify(updated));
+  };
+
   const logout = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
@@ -89,9 +155,14 @@ export const AuthProvider = ({ children }) => {
     token,
     isAuthenticated: Boolean(token && user),
     isLoading,
+    preferences,
     login,
     register,
-    logout
+    logout,
+    updateUserProfile,
+    updateUserPassword,
+    deleteUserAccount,
+    updatePreferences
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

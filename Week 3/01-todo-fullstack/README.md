@@ -78,6 +78,11 @@
   - Priority dropdown filtering: `All Priorities`, `High`, `Medium`, and `Low`.
 - 📊 **Real-time Analytics Stats Bar:**
   - Total tasks, Pending count, Completed count, and percentage completion rate.
+- ⚙️ **User Settings & Preferences Panel:**
+  - Profile customization (Name, Email update).
+  - Security management (Current password check and password change).
+  - Workflow preferences (Default task priority, default dashboard status filter, delete confirmation prompts).
+  - Danger Zone actions (One-click "Clear All Completed Tasks" and permanent Account Deletion).
 - 🎨 **Modern User Experience:**
   - Dark slate & indigo aesthetic with glassmorphism panels.
   - Responsive layouts optimized for desktop and mobile devices.
@@ -91,13 +96,16 @@ All backend responses conform to the unified JSON schema:
 - **Success:** `{ "success": true, "message": "...", "data": { ... } }`
 - **Error:** `{ "success": false, "message": "...", "errors": [ "..." ] }`
 
-### Authentication Endpoints (`/api/auth`)
+### Authentication & User Settings Endpoints (`/api/auth`)
 
 | Method | Endpoint | Access | Description |
 | :--- | :--- | :--- | :--- |
 | `POST` | `/api/auth/register` | Public | Register a new user account |
 | `POST` | `/api/auth/login` | Public | Authenticate user and receive JWT token |
 | `GET` | `/api/auth/me` | Private | Retrieve authenticated user profile |
+| `PUT` | `/api/auth/profile` | Private | Update user profile details (name, email) |
+| `PUT` | `/api/auth/update-password` | Private | Update user password with current password verification |
+| `DELETE` | `/api/auth/account` | Private | Permanently delete user account and all associated tasks |
 
 ### To-Do Endpoints (`/api/todos`)
 
@@ -108,7 +116,8 @@ All backend responses conform to the unified JSON schema:
 | `POST` | `/api/todos` | Private | Create a new task |
 | `PUT` | `/api/todos/:id` | Private | Update an existing task |
 | `PATCH`| `/api/todos/:id/toggle`| Private | Toggle task completion status |
-| `DELETE`| `/api/todos/:id` | Private | Permanently delete a task |
+| `DELETE`| `/api/todos/:id` | Private | Permanently delete a single task |
+| `DELETE`| `/api/todos/completed/clear`| Private | Bulk clear all completed tasks for current user |
 
 ---
 

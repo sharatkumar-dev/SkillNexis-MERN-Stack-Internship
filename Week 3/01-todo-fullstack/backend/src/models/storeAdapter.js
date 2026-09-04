@@ -117,6 +117,37 @@ const UserStore = {
         return await bcrypt.compare(candidatePassword, newUser.password);
       }
     };
+  },
+
+  async findByIdAndUpdate(id, updateData, options = {}) {
+    if (isDbConnected()) {
+      return UserMongoose.findByIdAndUpdate(id, updateData, options);
+    }
+    const idx = memoryUsers.findIndex((u) => String(u._id) === String(id));
+    if (idx === -1) return null;
+
+    if (updateData.password) {
+      const salt = await bcrypt.genSalt(10);
+      updateData.password = await bcrypt.hash(updateData.password, salt);
+    }
+
+    memoryUsers[idx] = {
+      ...memoryUsers[idx],
+      ...updateData,
+      updatedAt: new Date().toISOString()
+    };
+
+    const { password, ...safeUser } = memoryUsers[idx];
+    return safeUser;
+  },
+
+  async findByIdAndDelete(id) {
+    if (isDbConnected()) {
+      return UserMongoose.findByIdAndDelete(id);
+    }
+    const idx = memoryUsers.findIndex((u) => String(u._id) === String(id));
+    if (idx === -1) return null;
+    return memoryUsers.splice(idx, 1)[0];
   }
 };
 
@@ -240,6 +271,24 @@ const TodoStore = {
     if (idx === -1) return null;
     const deleted = memoryTodos.splice(idx, 1)[0];
     return deleted;
+  },
+
+  async deleteMany(query) {
+    if (isDbConnected()) {
+      return TodoMongoose.deleteMany(query);
+    }
+    const initialLen = memoryTodos.length;
+    for (let i = memoryTodos.length - 1; i >= 0; i--) {
+      const t = memoryTodos[i];
+      let matches = true;
+      if (query.user && String(t.user) !== String(query.user)) matches = false;
+      if (query.isCompleted !== undefined && t.isCompleted !== query.isCompleted) matches = false;
+      if (matches) {
+        memoryTodos.splice(i, 1);
+      }
+    }
+    const deletedCount = initialLen - memoryTodos.length;
+    return { deletedCount };
   }
 };
 

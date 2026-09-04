@@ -61,7 +61,7 @@ const TodoFormModal = ({ isOpen, onClose, onSave, editingTodo }) => {
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal-dialog" onClick={(e) => e.stopPropagation()}>
         <div className="modal-header">
-          <h3>{editingTodo ? 'Edit Task' : 'Create New Task'}</h3>
+          <h3>{editingTodo && editingTodo._id ? 'Edit Task' : 'Create New Task'}</h3>
           <button onClick={onClose} className="btn-icon" aria-label="Close modal">
             <X size={20} />
           </button>
@@ -157,7 +157,7 @@ const TodoFormModal = ({ isOpen, onClose, onSave, editingTodo }) => {
                   <span>Saving...</span>
                 </>
               ) : (
-                <span>{editingTodo ? 'Update Task' : 'Create Task'}</span>
+                <span>{editingTodo && editingTodo._id ? 'Update Task' : 'Create Task'}</span>
               )}
             </button>
           </div>

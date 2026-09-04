@@ -146,8 +146,136 @@ const getMe = async (req, res, next) => {
   }
 };
 
+// @desc    Update user profile details
+// @route   PUT /api/auth/profile
+// @access  Private
+const updateProfile = async (req, res, next) => {
+  try {
+    const { name, email } = req.body;
+
+    if (!name && !email) {
+      return res.status(400).json({
+        success: false,
+        message: 'Validation failed',
+        errors: ['Please provide at least a name or email to update']
+      });
+    }
+
+    const updates = {};
+    if (name && name.trim()) updates.name = name.trim();
+
+    if (email && email.trim()) {
+      const cleanEmail = email.toLowerCase().trim();
+      // Check if another user already has this email
+      const existingUser = await UserStore.findOne({ email: cleanEmail });
+      if (existingUser && String(existingUser._id) !== String(req.user._id)) {
+        return res.status(400).json({
+          success: false,
+          message: 'Email already in use',
+          errors: ['This email address is already registered to another account']
+        });
+      }
+      updates.email = cleanEmail;
+    }
+
+    const updatedUser = await UserStore.findByIdAndUpdate(req.user._id, updates, {
+      new: true,
+      runValidators: true
+    });
+
+    res.status(200).json({
+      success: true,
+      message: 'Profile updated successfully',
+      data: {
+        user: {
+          id: updatedUser._id,
+          name: updatedUser.name,
+          email: updatedUser.email,
+          createdAt: updatedUser.createdAt
+        }
+      }
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+// @desc    Update user password
+// @route   PUT /api/auth/update-password
+// @access  Private
+const updatePassword = async (req, res, next) => {
+  try {
+    const { currentPassword, newPassword } = req.body;
+
+    if (!currentPassword || !newPassword) {
+      return res.status(400).json({
+        success: false,
+        message: 'Validation failed',
+        errors: ['Both current password and new password are required']
+      });
+    }
+
+    if (newPassword.length < 6) {
+      return res.status(400).json({
+        success: false,
+        message: 'Validation failed',
+        errors: ['New password must be at least 6 characters long']
+      });
+    }
+
+    // Retrieve user with password
+    const user = await UserStore.findById(req.user._id).select('+password');
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: 'User not found',
+        errors: ['User session invalid']
+      });
+    }
+
+    const isMatch = await user.comparePassword(currentPassword);
+    if (!isMatch) {
+      return res.status(401).json({
+        success: false,
+        message: 'Invalid current password',
+        errors: ['The current password you entered is incorrect']
+      });
+    }
+
+    await UserStore.findByIdAndUpdate(req.user._id, { password: newPassword });
+
+    res.status(200).json({
+      success: true,
+      message: 'Password updated successfully'
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+// @desc    Delete user account and all tasks
+// @route   DELETE /api/auth/account
+// @access  Private
+const deleteAccount = async (req, res, next) => {
+  try {
+    const { TodoStore } = require('../models/storeAdapter');
+    await TodoStore.deleteMany({ user: req.user._id });
+    await UserStore.findByIdAndDelete(req.user._id);
+
+    res.status(200).json({
+      success: true,
+      message: 'Account and all associated tasks permanently deleted'
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   register,
   login,
-  getMe
+  getMe,
+  updateProfile,
+  updatePassword,
+  deleteAccount
 };

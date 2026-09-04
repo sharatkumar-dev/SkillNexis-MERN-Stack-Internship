@@ -4,23 +4,28 @@ import StatsBar from '../components/StatsBar';
 import TodoFilter from '../components/TodoFilter';
 import TodoCard from '../components/TodoCard';
 import TodoFormModal from '../components/TodoFormModal';
+import SettingsModal from '../components/SettingsModal';
+import { useAuth } from '../context/AuthContext';
 import api from '../api/axiosInstance';
 import { ListTodo, CheckCircle2, AlertCircle, Loader2 } from 'lucide-react';
 
 const DashboardPage = () => {
+  const { preferences } = useAuth();
+
   const [todos, setTodos] = useState([]);
   const [stats, setStats] = useState({ total: 0, completed: 0, pending: 0 });
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
 
-  // Filters
+  // Filters (initially respect user's defaultStatus preference if set)
   const [search, setSearch] = useState('');
-  const [status, setStatus] = useState('all');
+  const [status, setStatus] = useState(() => preferences?.defaultStatus || 'all');
   const [priority, setPriority] = useState('all');
 
   // Modal states
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingTodo, setEditingTodo] = useState(null);
+  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
 
   // Toast notification
   const [toast, setToast] = useState(null);
@@ -80,12 +85,10 @@ const DashboardPage = () => {
           `Task marked as ${updated.isCompleted ? 'completed' : 'pending'}`,
           'success'
         );
-        // Refresh full stats
         fetchTodos();
       }
     } catch (err) {
       showToast('Failed to update task status.', 'error');
-      // Revert if error
       fetchTodos();
     }
   };
@@ -121,8 +124,10 @@ const DashboardPage = () => {
 
   // Delete todo
   const handleDelete = async (id, title) => {
-    if (!window.confirm(`Are you sure you want to delete "${title}"?`)) {
-      return;
+    if (preferences?.confirmDelete !== false) {
+      if (!window.confirm(`Are you sure you want to delete "${title}"?`)) {
+        return;
+      }
     }
     try {
       const res = await api.delete(`/todos/${id}`);
@@ -136,7 +141,7 @@ const DashboardPage = () => {
   };
 
   const handleOpenCreate = () => {
-    setEditingTodo(null);
+    setEditingTodo({ priority: preferences?.defaultPriority || 'medium' });
     setIsModalOpen(true);
   };
 
@@ -147,7 +152,7 @@ const DashboardPage = () => {
 
   return (
     <div className="app-container">
-      <Navbar />
+      <Navbar onOpenSettings={() => setIsSettingsOpen(true)} />
 
       <main className="main-content">
         <StatsBar stats={stats} />
@@ -213,6 +218,13 @@ const DashboardPage = () => {
         onClose={() => setIsModalOpen(false)}
         onSave={handleSaveTodo}
         editingTodo={editingTodo}
+      />
+
+      <SettingsModal
+        isOpen={isSettingsOpen}
+        onClose={() => setIsSettingsOpen(false)}
+        onClearCompletedSuccess={fetchTodos}
+        completedCount={stats.completed}
       />
 
       {toast && (

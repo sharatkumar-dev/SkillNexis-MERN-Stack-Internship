@@ -25,11 +25,12 @@ frontend/
     │   └── AuthContext.jsx        # Authentication state & localStorage sync
     ├── components/
     │   ├── ProtectedRoute.jsx     # Route authentication guard
-    │   ├── Navbar.jsx             # App bar with user session management
+    │   ├── Navbar.jsx             # App bar with user session & settings trigger
     │   ├── StatsBar.jsx           # Task summary analytics cards
     │   ├── TodoFilter.jsx         # Search and filter controls
     │   ├── TodoCard.jsx           # Interactive task item card
-    │   └── TodoFormModal.jsx      # Task creation & editing modal
+    │   ├── TodoFormModal.jsx      # Task creation & editing modal
+    │   └── SettingsModal.jsx      # User settings & preferences modal
     └── pages/
         ├── LoginPage.jsx          # Login view with input validation
         ├── RegisterPage.jsx       # Registration view with password matching
@@ -71,6 +72,7 @@ Generates optimized static assets inside the `dist/` directory.
 ## 🌟 Key Features
 - 🛡️ **Protected Routing:** Prevents unauthenticated access to the dashboard using `<ProtectedRoute>`.
 - 🔄 **Axios Interceptors:** Automatically attaches JWT tokens to request headers and manages 401 unauthenticated session expirations.
+- ⚙️ **User Settings & Preferences:** Modal for updating profile info, changing passwords, setting default task priorities, and bulk-clearing completed tasks.
 - 📊 **Real-time Analytics:** Visual KPIs dynamically reflect task completion rates.
 - 🏷️ **Priority Categorization:** Color-coded badges for High, Medium, and Low priorities.
 - ⚡ **Optimistic Updates:** Instant UI response when toggling task completion.

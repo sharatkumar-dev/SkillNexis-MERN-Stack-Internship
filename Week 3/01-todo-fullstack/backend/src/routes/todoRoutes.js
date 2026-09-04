@@ -6,12 +6,16 @@ const {
   createTodo,
   updateTodo,
   toggleTodo,
-  deleteTodo
+  deleteTodo,
+  clearCompletedTodos
 } = require('../controllers/todoController');
 const { protect } = require('../middleware/authMiddleware');
 
 // All todo routes require authentication
 router.use(protect);
+
+// Bulk actions
+router.delete('/completed/clear', clearCompletedTodos);
 
 router.route('/')
   .get(getTodos)

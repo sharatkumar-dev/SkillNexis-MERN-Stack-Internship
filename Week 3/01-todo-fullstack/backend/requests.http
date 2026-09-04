@@ -186,3 +186,45 @@ Content-Type: {{contentType}}
   "email": "alex.johnson@skillnexis.example",
   "password": "Password123!"
 }
+
+### ----------------------------------------------------------------
+### 18. Update User Profile Name and Email
+### ----------------------------------------------------------------
+# @name updateProfile
+PUT {{baseUrl}}/auth/profile
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+{
+  "name": "Alex Johnson Senior",
+  "email": "alex.senior@skillnexis.example"
+}
+
+### ----------------------------------------------------------------
+### 19. Update User Password
+### ----------------------------------------------------------------
+# @name updatePassword
+PUT {{baseUrl}}/auth/update-password
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+{
+  "currentPassword": "Password123!",
+  "newPassword": "BrandNewSecurePassword456!"
+}
+
+### ----------------------------------------------------------------
+### 20. Bulk Clear All Completed Tasks
+### ----------------------------------------------------------------
+# @name clearCompletedTasks
+DELETE {{baseUrl}}/todos/completed/clear
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+### ----------------------------------------------------------------
+### 21. Delete User Account and Associated Tasks
+### ----------------------------------------------------------------
+# @name deleteAccount
+DELETE {{baseUrl}}/auth/account
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}

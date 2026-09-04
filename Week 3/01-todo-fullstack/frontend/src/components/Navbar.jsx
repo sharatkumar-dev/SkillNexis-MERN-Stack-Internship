@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { CheckSquare, LogOut, User as UserIcon } from 'lucide-react';
+import { CheckSquare, LogOut, Settings } from 'lucide-react';
 
-const Navbar = () => {
+const Navbar = ({ onOpenSettings }) => {
   const { user, isAuthenticated, logout } = useAuth();
   const navigate = useNavigate();
 
@@ -40,10 +40,20 @@ const Navbar = () => {
                 <span>{user.name}</span>
               </div>
               <button
+                onClick={onOpenSettings}
+                className="btn btn-secondary"
+                title="Account & App Settings"
+                aria-label="Open Settings"
+                style={{ padding: '0.4rem 0.6rem', fontSize: '0.8125rem' }}
+              >
+                <Settings size={16} />
+                <span>Settings</span>
+              </button>
+              <button
                 onClick={handleLogout}
                 className="btn btn-secondary"
                 title="Sign out of your account"
-                style={{ padding: '0.4rem 0.8rem', fontSize: '0.8125rem' }}
+                style={{ padding: '0.4rem 0.6rem', fontSize: '0.8125rem' }}
               >
                 <LogOut size={16} />
                 <span>Logout</span>

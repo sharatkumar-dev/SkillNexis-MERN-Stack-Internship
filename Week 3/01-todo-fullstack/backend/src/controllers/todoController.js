@@ -224,11 +224,32 @@ const deleteTodo = async (req, res, next) => {
   }
 };
 
+// @desc    Clear all completed todos for current user
+// @route   DELETE /api/todos/completed/clear
+// @access  Private
+const clearCompletedTodos = async (req, res, next) => {
+  try {
+    const result = await TodoStore.deleteMany({
+      user: req.user._id,
+      isCompleted: true
+    });
+
+    res.status(200).json({
+      success: true,
+      message: `Successfully cleared ${result.deletedCount || 0} completed tasks`,
+      data: { deletedCount: result.deletedCount || 0 }
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   getTodos,
   getTodoById,
   createTodo,
   updateTodo,
   toggleTodo,
-  deleteTodo
+  deleteTodo,
+  clearCompletedTodos
 };
