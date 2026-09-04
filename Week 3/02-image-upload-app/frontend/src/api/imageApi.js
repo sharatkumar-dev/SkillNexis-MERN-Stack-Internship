@@ -73,22 +73,20 @@ export const getDownloadUrl = (id) => {
   return `${API_BASE_URL}/images/${id}/download`;
 };
 
-// Client-side direct blob download without popup blocker issues
-export const downloadImageFile = async (id, originalName = 'downloaded-image') => {
+// Trigger direct native file download with original filename
+export const downloadImageFile = (id, originalName = 'downloaded-image') => {
   const downloadUrl = getDownloadUrl(id);
-  const response = await fetch(downloadUrl);
-  if (!response.ok) {
-    throw new Error(`Download failed with status: ${response.status}`);
-  }
-  const blob = await response.blob();
-  const blobUrl = window.URL.createObjectURL(blob);
   const link = document.createElement('a');
-  link.href = blobUrl;
-  link.download = originalName;
+  link.href = downloadUrl;
+  link.setAttribute('download', originalName);
+  link.style.display = 'none';
   document.body.appendChild(link);
   link.click();
-  document.body.removeChild(link);
-  setTimeout(() => window.URL.revokeObjectURL(blobUrl), 2000);
+  setTimeout(() => {
+    if (document.body.contains(link)) {
+      document.body.removeChild(link);
+    }
+  }, 1500);
 };
 
 export default api;

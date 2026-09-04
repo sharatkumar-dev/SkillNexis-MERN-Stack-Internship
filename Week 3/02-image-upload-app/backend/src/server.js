@@ -34,6 +34,7 @@ app.use(
         callback(null, true); // Permissive in dev
       }
     },
+    exposedHeaders: ['Content-Disposition', 'Content-Type', 'Content-Length'],
     credentials: true
   })
 );
