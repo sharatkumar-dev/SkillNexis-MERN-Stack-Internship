@@ -1,0 +1,164 @@
+### =========================================================================
+### Task Manager Application — API Automated Test Scenarios (REST Client)
+### =========================================================================
+
+@baseUrl = http://localhost:5002/api
+@contentType = application/json
+
+### 1. Health Check
+GET {{baseUrl}}/health HTTP/1.1
+
+### -------------------------------------------------------------------------
+### AUTHENTICATION ENDPOINTS
+### -------------------------------------------------------------------------
+
+### 2. Register New User
+# @name registerUser
+POST {{baseUrl}}/auth/register HTTP/1.1
+Content-Type: {{contentType}}
+
+{
+  "name": "Alex Mercer",
+  "email": "alex.mercer@taskmanager.com",
+  "password": "password123"
+}
+
+### 3. Register Duplicate User (Expect 400 Validation Error)
+POST {{baseUrl}}/auth/register HTTP/1.1
+Content-Type: {{contentType}}
+
+{
+  "name": "Alex Mercer",
+  "email": "alex.mercer@taskmanager.com",
+  "password": "password123"
+}
+
+### 4. Login User
+# @name loginUser
+POST {{baseUrl}}/auth/login HTTP/1.1
+Content-Type: {{contentType}}
+
+{
+  "email": "alex.mercer@taskmanager.com",
+  "password": "password123"
+}
+
+### Store Auth Token from Login
+@authToken = {{loginUser.response.body.data.token}}
+
+### 5. Get Current User Profile (Authenticated)
+GET {{baseUrl}}/auth/me HTTP/1.1
+Authorization: Bearer {{authToken}}
+
+### 6. Get Profile Without Token (Expect 401 Unauthorized)
+GET {{baseUrl}}/auth/me HTTP/1.1
+
+### -------------------------------------------------------------------------
+### TASK MANAGEMENT ENDPOINTS
+### -------------------------------------------------------------------------
+
+### 7. Create Task 1 — High Priority Work Task
+# @name createTask1
+POST {{baseUrl}}/tasks HTTP/1.1
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+{
+  "title": "Build MERN Task Manager API",
+  "description": "Design REST endpoints, implement JWT auth, connect MongoDB, and test with REST Client.",
+  "status": "in_progress",
+  "priority": "urgent",
+  "category": "Work",
+  "dueDate": "2026-09-10T18:00:00.000Z"
+}
+
+### Store Task 1 ID
+@task1Id = {{createTask1.response.body.data.task._id}}
+
+### 8. Create Task 2 — Study Task
+# @name createTask2
+POST {{baseUrl}}/tasks HTTP/1.1
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+{
+  "title": "Study React Router v6 & Context API",
+  "description": "Review protected route patterns and global state handling with createContext and useContext.",
+  "status": "todo",
+  "priority": "high",
+  "category": "Study",
+  "dueDate": "2026-09-15T12:00:00.000Z"
+}
+
+### 9. Create Task 3 — Personal Task (Completed)
+# @name createTask3
+POST {{baseUrl}}/tasks HTTP/1.1
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+{
+  "title": "Weekly Grocery Shopping",
+  "description": "Buy fresh fruits, vegetables, almond milk, and coffee beans.",
+  "status": "completed",
+  "priority": "medium",
+  "category": "Personal",
+  "dueDate": "2026-09-05T10:00:00.000Z"
+}
+
+### 10. Get All Tasks (No Filter)
+GET {{baseUrl}}/tasks HTTP/1.1
+Authorization: Bearer {{authToken}}
+
+### 11. Search Tasks by Keyword
+GET {{baseUrl}}/tasks?search=MERN HTTP/1.1
+Authorization: Bearer {{authToken}}
+
+### 12. Filter Tasks by Status (todo)
+GET {{baseUrl}}/tasks?status=todo HTTP/1.1
+Authorization: Bearer {{authToken}}
+
+### 13. Filter Tasks by Priority (urgent)
+GET {{baseUrl}}/tasks?priority=urgent HTTP/1.1
+Authorization: Bearer {{authToken}}
+
+### 14. Filter Tasks by Category (Work) & Sort by Due Date Ascending
+GET {{baseUrl}}/tasks?category=Work&sortBy=dueDate&order=asc HTTP/1.1
+Authorization: Bearer {{authToken}}
+
+### 15. Get Task Analytics / Statistics
+GET {{baseUrl}}/tasks/stats HTTP/1.1
+Authorization: Bearer {{authToken}}
+
+### 16. Get Single Task By ID
+GET {{baseUrl}}/tasks/{{task1Id}} HTTP/1.1
+Authorization: Bearer {{authToken}}
+
+### 17. Update Task Details
+PUT {{baseUrl}}/tasks/{{task1Id}} HTTP/1.1
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+{
+  "title": "Build MERN Task Manager API (Updated)",
+  "description": "Successfully designed REST endpoints and added full validation.",
+  "status": "in_progress",
+  "priority": "high",
+  "category": "Work"
+}
+
+### 18. Quick Toggle Status (PATCH)
+PATCH {{baseUrl}}/tasks/{{task1Id}}/status HTTP/1.1
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+{
+  "status": "completed"
+}
+
+### 19. Delete Task
+DELETE {{baseUrl}}/tasks/{{task1Id}} HTTP/1.1
+Authorization: Bearer {{authToken}}
+
+### 20. Verify Deletion (Expect 404)
+GET {{baseUrl}}/tasks/{{task1Id}} HTTP/1.1
+Authorization: Bearer {{authToken}}

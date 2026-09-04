@@ -4,6 +4,16 @@ Welcome to **Week 3** of the SkillNexis MERN Stack Internship! This week is focu
 
 ---
 
+## ✅ Week 3 Assignments — Status
+
+| # | Project | Description | Status |
+|:---:|:---|:---|:---:|
+| 1 | [`01-todo-fullstack`](./01-todo-fullstack/) | Full Stack To-Do App — JWT Auth, CRUD, Protected Routes | ✅ Complete |
+| 2 | [`02-image-upload-app`](./02-image-upload-app/) | Image Upload with Multer, gallery rendering, file preview | ✅ Complete |
+| 🏆 | [`03-task-manager-app`](./03-task-manager-app/) | **Mini Project** — Task Manager with Kanban, filters & analytics | ✅ Complete |
+
+---
+
 ## 📚 Syllabus & Core Topics
 
 - **Full-Stack Communication:** Connecting React (Vite) frontend with Express REST APIs using Axios / Fetch API.
