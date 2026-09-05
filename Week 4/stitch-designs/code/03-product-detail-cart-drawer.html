@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Space+Grotesk:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+    @layer base {
+      html, body {
+        margin: 0;
+        padding: 0;
+        background-color: #090A0F;
+        color: #e3e1e9;
+      }
+      body {
+        overscroll-behavior: none;
+      }
+      main > :first-child { margin-top: 0 !important; }
+      main > :last-child { margin-bottom: 0 !important; }
+    }
+    ::-webkit-scrollbar { display: none; }
+  </style>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "surface-container-high": "#1B202D",
+            "surface-container-lowest": "#07080C",
+            "surface-container-low": "#0C0E14",
+            "surface-container": "#12151E",
+            "surface-container-highest": "#161A24",
+            "surface-bright": "#242A3A",
+            "surface": "#090A0F",
+            "canvas-base": "#090A0F",
+            "border-subtle": "rgba(255, 255, 255, 0.08)",
+            "border-amber": "rgba(245, 158, 11, 0.35)",
+            "primary": "#F59E0B",
+            "primary-container": "#F59E0B",
+            "on-primary": "#2A1700",
+            "on-surface": "#F1F5F9",
+            "on-surface-variant": "#94A3B8",
+            "titanium-light": "#E2E8F0",
+            "titanium-muted": "#8A94A6",
+            "titanium-dark": "#505A6B",
+            "amber-accent": "#F59E0B",
+            "amber-bright": "#FBBF24",
+            "amber-deep": "#D97706"
+          },
+          fontFamily: {
+            "space": ["Space Grotesk", "sans-serif"],
+            "inter": ["Inter", "sans-serif"],
+            "mono": ["JetBrains Mono", "monospace"],
+            "body-md": ["Inter", "sans-serif"],
+            "body-sm": ["Inter", "sans-serif"],
+            "body-lg": ["Inter", "sans-serif"],
+            "label-md": ["Inter", "sans-serif"]
+          },
+          borderRadius: {
+            "DEFAULT": "0.25rem",
+            "sm": "0.25rem",
+            "md": "0.375rem",
+            "lg": "0.5rem"
+          },
+          spacing: {
+            "gutter-desktop": "1.5rem",
+            "container-max": "1440px",
+            "space-2xs": "0.25rem",
+            "space-xs": "0.5rem",
+            "space-sm": "0.75rem",
+            "space-md": "1rem",
+            "space-lg": "1.5rem",
+            "space-xl": "2rem",
+            "space-2xl": "3rem",
+            "space-3xl": "4rem",
+            "space-4xl": "6rem"
+          }
+        }
+      }
+    };
+  </script>
+</head>
+<body class="bg-[#090A0F] font-body-md text-body-md text-on-surface antialiased selection:bg-amber-500/30 selection:text-amber-300">
+<!-- Header -->
+<header class="fixed top-0 left-0 right-0 z-40 bg-[#090A0F]/90 backdrop-blur-xl border-b border-white/[0.08] shadow-[0_4px_30px_rgba(0,0,0,0.8)]">
+<div class="h-20 max-w-container-max mx-auto px-gutter-desktop flex items-center justify-between gap-space-lg">
+<div class="flex items-center gap-space-lg">
+<a class="flex items-center gap-2.5 group" data-path="catalog" href="#">
+<img alt="NexisStore Precision Hardware Logo" class="h-8 object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1ULvr2UnPIoOEGsOVl_INMNsL5BJKoUwFPiJFK-5T7YrKJCrsqGFBFaVq6LMQrR3HutzpLOrwCbzgs4IKPPSsF_Dxzjsg0vix8Gk3ULUmk_Pfgs2QSxdSp37jeflBs4ZD0dxEzRwteFoF1TM_0HiJIL6j2A2rVTBVwNmYH5_HqS5u2wVU0QEs2GlTDJhFXiL5KDfl17fjzSUx1qx10mvxtsI1PwxnaJCNkjHmnUBFWXrwcV-O14TD4HI0VV"/>
+</a>
+<nav class="hidden xl:flex items-center gap-space-xs">
+<a class="px-space-sm py-space-xs rounded-sm font-label-md text-label-md text-titanium-muted hover:text-titanium-light hover:bg-[#12151E] transition-colors" data-path="catalog" href="#">Catalog</a>
+<a aria-current="page" class="px-space-sm py-space-xs transition-colors bg-[#161A24] border border-amber-500/30 text-amber-400 font-semibold rounded-sm shadow-sm" data-path="product-detail" href="#">Product</a>
+<a class="px-space-sm py-space-xs rounded-sm font-label-md text-label-md text-titanium-muted hover:text-titanium-light hover:bg-[#12151E] transition-colors" data-path="checkout-tracking" href="#">Checkout</a>
+<a class="px-space-sm py-space-xs rounded-sm font-label-md text-label-md text-titanium-muted hover:text-titanium-light hover:bg-[#12151E] transition-colors" data-path="admin-portal" href="#">Admin</a>
+</nav>
+</div>
+<div class="flex-1 max-w-md hidden md:block">
+<div class="relative flex items-center w-full bg-[#12151E] border border-white/[0.08] rounded-sm px-space-md py-space-xs focus-within:border-amber-500/50 transition-colors">
+<span class="material-symbols-outlined text-titanium-dark mr-space-xs text-xl">search</span>
+<input class="w-full bg-transparent font-body-sm text-body-sm text-titanium-light placeholder:text-titanium-dark focus:outline-none" placeholder="Search ultra-gear, chips, hardware..." type="text"/>
+<kbd class="font-mono text-[11px] bg-[#161A24] text-titanium-muted px-space-2xs py-0.5 rounded-sm ml-space-xs border border-white/5">⌘K</kbd>
+</div>
+</div>
+<div class="flex items-center gap-space-sm">
+<button class="relative p-space-xs rounded-sm text-titanium-muted hover:text-white hover:bg-[#161A24] transition-colors">
+<span class="material-symbols-outlined">favorite</span>
+<span class="absolute top-1 right-1 flex items-center justify-center w-4 h-4 rounded-sm bg-amber-500 text-[#090A0F] font-mono text-[10px] font-bold">3</span>
+</button>
+<button class="relative p-space-xs rounded-sm text-titanium-muted hover:text-white hover:bg-[#161A24] transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
+</button>
+<button class="flex items-center gap-space-xs px-space-sm py-space-xs bg-amber-500 hover:bg-amber-400 rounded-sm text-[#2A1700] font-semibold transition-all shadow-[0_0_20px_rgba(245,158,11,0.3)]" data-path="checkout-tracking" id="header-cart-btn">
+<span class="material-symbols-outlined text-xl">shopping_bag</span>
+<div class="flex flex-col text-left leading-tight">
+<span class="font-mono text-xs font-bold text-[#2A1700]">$2,489.00</span>
+<span class="font-mono text-[10px] text-[#2A1700]/80 font-bold tracking-tight">4 items</span>
+</div>
+</button>
+<div class="flex items-center gap-space-xs pl-space-xs">
+<img alt="Profile" class="w-8 h-8 rounded-full object-cover border border-amber-500/40" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDntNCv3lwB_yWbMadnhi4vDvV2fynDH_p9AowrM4UlBqybD9L_wxS-BpTb32k4YO_yidzpI5Be0wds60bPlcNx-wG8wzVye_dU-0ur_JUc0fPZgvRuSSv7E0i_NneVrktux-q4mQ0IAFlOdl7pk7vWTb5DQvX85TGRVj4tW-H9DgmzXo9fBEImp6nuzp4XDm3DxCtOKRi4y8lVulQR5CHy_CJXNJ4ixDBsi9439yIh2T2hkQ2ctFzXzw"/>
+<div class="hidden 2xl:flex flex-col">
+<span class="font-label-md text-label-md text-titanium-light font-semibold">Alex Rivera</span>
+<span class="font-mono text-[11px] text-amber-400">Pro Member</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Category Sub-bar -->
+<div class="bg-[#0C0E14]/90 border-t border-white/[0.08] px-gutter-desktop">
+<div class="max-w-container-max mx-auto flex items-center gap-space-xs py-2 overflow-x-auto">
+<button class="px-space-sm py-1 rounded-sm font-label-sm text-xs font-medium bg-[#1B202D] text-amber-300 border border-amber-500/30 shadow-sm">All Categories</button>
+<button class="px-space-sm py-1 rounded-sm font-label-sm text-xs font-medium text-titanium-muted hover:text-titanium-light hover:bg-[#12151E] transition-colors">Laptops</button>
+<button class="px-space-sm py-1 rounded-sm font-label-sm text-xs font-medium text-titanium-muted hover:text-titanium-light hover:bg-[#12151E] transition-colors">Audio</button>
+<button class="px-space-sm py-1 rounded-sm font-label-sm text-xs font-medium text-titanium-muted hover:text-titanium-light hover:bg-[#12151E] transition-colors">Smartphones</button>
+<button class="px-space-sm py-1 rounded-sm font-label-sm text-xs font-medium text-titanium-muted hover:text-titanium-light hover:bg-[#12151E] transition-colors">Wearables</button>
+<button class="px-space-sm py-1 rounded-sm font-label-sm text-xs font-medium text-titanium-muted hover:text-titanium-light hover:bg-[#12151E] transition-colors">Gaming</button>
+<button class="px-space-sm py-1 rounded-sm font-label-sm text-xs font-medium text-titanium-muted hover:text-titanium-light hover:bg-[#12151E] transition-colors">Accessories</button>
+</div>
+</div>
+</header>
+<!-- Main Showcase -->
+<main class="w-full pt-28 bg-[#090A0F] min-h-screen">
+<div class="flex flex-col w-full relative">
+<!-- Ambient Backdrop Glows -->
+<div class="absolute top-12 left-1/4 w-96 h-96 bg-amber-500/5 rounded-full blur-3xl pointer-events-none -z-10"></div>
+<div class="absolute top-80 right-1/3 w-[500px] h-[500px] bg-[#161A24]/40 rounded-full blur-3xl pointer-events-none -z-10"></div>
+<!-- Breadcrumb Navigation Bar -->
+<div class="w-full max-w-container-max mx-auto px-gutter-desktop pt-space-md pb-space-xs">
+<nav class="flex items-center gap-space-xs font-label-md text-xs font-mono text-titanium-muted">
+<a class="hover:text-amber-400 transition-colors flex items-center gap-1" href="#">
+<span class="material-symbols-outlined text-sm">home</span>
+<span>Home</span>
+</a>
+<span class="text-titanium-dark">/</span>
+<a class="hover:text-amber-400 transition-colors" href="#">Laptops &amp; Workstations</a>
+<span class="text-titanium-dark">/</span>
+<a class="hover:text-amber-400 transition-colors" href="#">ProBook Series</a>
+<span class="text-titanium-dark">/</span>
+<span class="text-titanium-light font-semibold truncate max-w-xs sm:max-w-md font-mono">Nexis ProBook 16 M3 Ultra</span>
+</nav>
+</div>
+<!-- Main Showcase Grid Section -->
+<section class="w-full max-w-container-max mx-auto px-gutter-desktop py-space-md">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-xl items-start">
+<!-- Left Column: Media Gallery (7 Cols) -->
+<div class="lg:col-span-7 flex flex-col gap-space-md">
+<!-- Main Product Frame -->
+<div class="relative group rounded-sm overflow-hidden bg-[#12151E] border border-white/[0.08] shadow-2xl p-space-md flex flex-col items-center justify-center min-h-[460px] md:min-h-[520px]">
+<!-- Top Floating Badges -->
+<div class="absolute top-space-md left-space-md right-space-md flex items-center justify-between pointer-events-none z-10 flex-wrap gap-space-xs">
+<div class="flex items-center gap-space-2xs flex-wrap">
+<span class="px-space-sm py-1 rounded-sm bg-[#161A24]/90 backdrop-blur-md font-mono text-xs text-amber-400 border border-amber-500/30 font-semibold flex items-center gap-1.5 shadow-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span>
+                    Flagship 2025 Edition
+                  </span>
+<span class="px-space-sm py-1 rounded-sm bg-[#12151E]/90 backdrop-blur-md font-mono text-xs text-titanium-light border border-white/10 font-medium shadow-sm">
+                    M3 Max Chipset
+                  </span>
+</div>
+<span class="px-space-sm py-1 rounded-sm bg-amber-500/15 backdrop-blur-md font-mono text-xs text-amber-300 border border-amber-500/35 font-semibold flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-xs">rocket_launch</span>
+                  Free Next-Day Air
+                </span>
+</div>
+<!-- Product Main Image View -->
+<div class="relative w-full h-[360px] md:h-[420px] flex items-center justify-center overflow-hidden rounded-sm bg-[#090A0F] border border-white/5">
+<div class="absolute inset-0 bg-gradient-to-tr from-amber-500/5 via-transparent to-white/5 pointer-events-none"></div>
+<img alt="Nexis ProBook 16 M3 Ultra" class="w-full h-full object-contain p-space-md transition-transform duration-500 ease-out group-hover:scale-105" id="main-product-img" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBqFdu1dLzwhaqIjw0M7PmEAVrzNnLloKJa9Pprtx6LuOnKxybGWFSE4afCQiacwhmhJftHEJ5niYqMDSviW0_YalAoUDZOW0TnYFMPKfCGLPsple9FQ3dPL86IlasJphpCz2E1MRwBrbU1S81HYpSBkupZbps1OnY45y5EUuwZlbr1U0fC9_pnbsk13oiWNauRePdNT_y5KQqvRRI6TQwXllbBt8u2F8Vr53LTIqczkfzh8Dw1RfZKrQ"/>
+<div class="absolute bottom-space-sm right-space-sm bg-[#161A24]/90 backdrop-blur-md px-space-xs py-1 rounded-sm font-mono text-xs text-titanium-muted border border-white/5 flex items-center gap-1 pointer-events-none opacity-80 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-sm text-amber-400">zoom_in</span>
+                  Interactive 8K Retina Loupe
+                </div>
+</div>
+<!-- Fast Spec Pill Ribbon -->
+<div class="w-full mt-space-sm grid grid-cols-4 gap-space-xs pt-space-xs">
+<div class="bg-[#161A24] border border-white/[0.08] rounded-sm p-space-xs text-center">
+<span class="block font-mono text-[11px] text-titanium-muted">Architecture</span>
+<span class="font-mono text-xs text-titanium-light font-semibold">3nm Nanometer</span>
+</div>
+<div class="bg-[#161A24] border border-white/[0.08] rounded-sm p-space-xs text-center">
+<span class="block font-mono text-[11px] text-titanium-muted">Display Peak</span>
+<span class="font-mono text-xs text-amber-400 font-semibold">1,600 Nits</span>
+</div>
+<div class="bg-[#161A24] border border-white/[0.08] rounded-sm p-space-xs text-center">
+<span class="block font-mono text-[11px] text-titanium-muted">Battery Run</span>
+<span class="font-mono text-xs text-amber-300 font-semibold">22 Hours</span>
+</div>
+<div class="bg-[#161A24] border border-white/[0.08] rounded-sm p-space-xs text-center">
+<span class="block font-mono text-[11px] text-titanium-muted">Chassis</span>
+<span class="font-mono text-xs text-titanium-light font-semibold">CNC Alum.</span>
+</div>
+</div>
+</div>
+<!-- 4-Thumbnail Multi-Angle Selector -->
+<div class="grid grid-cols-4 gap-space-sm">
+<button class="thumb-btn active relative rounded-sm overflow-hidden bg-[#1B202D] border-2 border-amber-500 p-space-2xs transition-all shadow-md group focus:outline-none" data-title="Front View">
+<div class="aspect-[4/3] rounded-sm bg-[#090A0F] overflow-hidden flex items-center justify-center">
+<img alt="Front angle thumbnail" class="w-full h-full object-cover group-hover:scale-105 transition-transform" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDRM_ckXGN3g2zsiCK52n8X7A2PekliNJa6MojtPczu1savbVOd7A32Day9j3V1Cm0uSR2mfD_AmbNJGiuZqOO1IHl7oDou-Iuo_mRu88EFBRmG5UNV-QYiEWedEl5LGwd27s2i40D-tzTF1mnJtFbcL7spxyM23CQXD6788d48-b3Tt63cyGMHcft_D694CcfkodCl0u-Mpvr0nUD9lffJZveNvRXVWwV_sr5jmse5HND9X6jSAB7z_w"/>
+</div>
+<span class="block font-mono text-xs text-amber-400 text-center pt-1 truncate">01 // Front</span>
+</button>
+<button class="thumb-btn relative rounded-sm overflow-hidden bg-[#12151E] border border-white/[0.08] hover:border-amber-500/30 p-space-2xs hover:bg-[#161A24] transition-all shadow-sm group focus:outline-none" data-title="Side Profile">
+<div class="aspect-[4/3] rounded-sm bg-[#090A0F] overflow-hidden flex items-center justify-center">
+<img alt="Ports angle thumbnail" class="w-full h-full object-cover group-hover:scale-105 transition-transform" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC2VcyDthaU2wmpR35ZOuba7uTETrN3PFFRGRjo3Ww8TyUgK2ws2HY47Bc-mtHLtSYDtMfqQt_4tgKLr_hOEu-vllT0F9csm3npZVeUZxZylwUk5HANuFr76KFDofqjttaHzj_HcQM-ULU0EgBkmxxDT5Y1F9XTFVs2gqhdWPngT4rF46puRv8JhoaU0l4qsta0VJO2k7F2IGwH2INjRNQFn5tOVATvUo4zVloLc3_y5zEHSMBYVNHvXA"/>
+</div>
+<span class="block font-mono text-xs text-titanium-muted group-hover:text-titanium-light text-center pt-1 truncate">02 // Side I/O</span>
+</button>
+<button class="thumb-btn relative rounded-sm overflow-hidden bg-[#12151E] border border-white/[0.08] hover:border-amber-500/30 p-space-2xs hover:bg-[#161A24] transition-all shadow-sm group focus:outline-none" data-title="Top-down Keyboard">
+<div class="aspect-[4/3] rounded-sm bg-[#090A0F] overflow-hidden flex items-center justify-center">
+<img alt="Keyboard view thumbnail" class="w-full h-full object-cover group-hover:scale-105 transition-transform" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDC_78SdtKBlnfLWAJROUYQpUGpJ7_e3Xbh0dEpENhtou2RjcFh9Wd3F6NjnaTC6p2NYfBFX5Mm74mbor-H-CQvwXC5AZWreQrx4w7myJbk5x9RDu7NuKSp_gHptkDvcfLihXRQ63KX59-m_eT11D-gf9GOatdldQcZg9QPsvZd3CBSDA0jq0R29ImDkwoG-cVRWCVciqlK8SPQGDmwKgxiaWe0z4F0E5wjOMIVOj7dNEjFyYrYB79lWQ"/>
+</div>
+<span class="block font-mono text-xs text-titanium-muted group-hover:text-titanium-light text-center pt-1 truncate">03 // Deck</span>
+</button>
+<button class="thumb-btn relative rounded-sm overflow-hidden bg-[#12151E] border border-white/[0.08] hover:border-amber-500/30 p-space-2xs hover:bg-[#161A24] transition-all shadow-sm group focus:outline-none" data-title="Vapor Chamber">
+<div class="aspect-[4/3] rounded-sm bg-[#090A0F] overflow-hidden flex items-center justify-center">
+<img alt="Vapor chamber internal cooling thumbnail" class="w-full h-full object-cover group-hover:scale-105 transition-transform" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAyyVHGcHpNeu3eoTn1SphfqKLB6dcfiXqx3TLcfBKvnccGduieVTFR_4YhkNxeUXUDzyVbREKHisqTMGH9Ejgvy6OtdCAQrXNyFKljR5q9oj82Dt7dHSqc99m5urdYS7kkU6md9tMCRDpuZDtG3C7Dj9MuupdFfp2u6JwjS_ISIrME-gI-3Y1VGLFUA58WgC6XKZtAOD5mJWA_tBu5_t2Dbqire9wWSho8G2PYuYY3eEvpsUD4vL-zUQ"/>
+</div>
+<span class="block font-mono text-xs text-titanium-muted group-hover:text-titanium-light text-center pt-1 truncate">04 // Vapor</span>
+</button>
+</div>
+</div>
+<!-- Right Column: Decision Engine & Configurator (5 Cols) -->
+<div class="lg:col-span-5 flex flex-col gap-space-md">
+<!-- SKU & Stock Badge Row -->
+<div class="flex items-center justify-between flex-wrap gap-space-xs">
+<span class="font-mono text-xs text-titanium-dark uppercase tracking-wider">SKU: NXS-PB16-TITANIUM-01</span>
+<div class="flex items-center gap-space-2xs px-space-sm py-1 rounded-sm bg-amber-500/10 border border-amber-500/25 text-amber-400">
+<span class="w-2 h-2 rounded-full bg-amber-400 animate-ping"></span>
+<span class="font-mono text-xs font-bold tracking-tight">In Stock · Ready to Ship</span>
+</div>
+</div>
+<!-- Product Title (Space Grotesk) -->
+<h1 class="font-space text-2xl lg:text-3xl font-bold tracking-tight text-white leading-tight">
+              Nexis ProBook 16 M3 Ultra
+              <span class="font-mono text-xs font-normal text-titanium-muted block mt-1.5 tracking-normal">16.2" Liquid Retina XDR (64GB RAM, 2TB SSD, Space Black)</span>
+</h1>
+<!-- Reviews & Meta Rating -->
+<div class="flex items-center gap-space-sm flex-wrap pb-space-2xs">
+<div class="flex items-center text-amber-400 gap-0.5">
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<span class="font-mono text-xs font-bold text-titanium-light">4.9</span>
+<span class="text-titanium-dark">·</span>
+<a class="font-body-sm text-body-sm text-amber-400 hover:underline" href="#reviews-section">348 verified reviews</a>
+<span class="text-titanium-dark">·</span>
+<span class="font-mono text-xs px-2 py-0.5 rounded-sm bg-[#161A24] border border-white/5 text-titanium-muted font-medium">Top Workstation</span>
+</div>
+<!-- Dynamic Pricing Card -->
+<div class="p-space-md rounded-sm bg-[#12151E] border border-white/[0.08] shadow-lg flex flex-col gap-space-xs">
+<div class="flex items-baseline gap-space-sm flex-wrap">
+<span class="font-mono text-3xl font-bold text-white tracking-tight" id="active-price">$2,499.00</span>
+<span class="font-mono text-base line-through text-titanium-dark" id="original-price">$2,799.00</span>
+<span class="px-space-xs py-0.5 rounded-sm bg-amber-500/15 border border-amber-500/30 text-amber-400 font-mono text-xs font-bold">SAVE $300 (11% OFF)</span>
+</div>
+<div class="flex items-center gap-space-xs font-body-sm text-xs text-titanium-muted">
+<span>Or 4 interest-free payments of <strong class="text-titanium-light font-mono font-semibold">$624.75</strong> with</span>
+<span class="px-1.5 py-0.5 rounded-sm bg-[#161A24] text-titanium-light font-mono text-xs font-semibold border border-white/5">Klarna</span>
+<span class="text-titanium-dark">/</span>
+<span class="px-1.5 py-0.5 rounded-sm bg-[#161A24] text-titanium-light font-mono text-xs font-semibold border border-white/5">Affirm</span>
+</div>
+</div>
+<!-- Configuration Section -->
+<div class="space-y-space-md pt-space-xs">
+<!-- Memory Config -->
+<div class="space-y-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-space text-sm text-titanium-light font-semibold">Unified Memory</span>
+<span class="font-mono text-xs text-amber-400">64GB Recommended for LLMs</span>
+</div>
+<div class="grid grid-cols-3 gap-space-xs" id="memory-options">
+<button class="config-btn p-space-sm rounded-sm bg-[#161A24] hover:bg-[#1B202D] border border-white/[0.08] text-left transition-all group" data-price="-400" data-tier="32" type="button">
+<span class="block font-mono text-xs font-semibold text-titanium-muted group-hover:text-titanium-light">32GB</span>
+<span class="block font-mono text-xs text-titanium-dark">-$400</span>
+</button>
+<button class="config-btn p-space-sm rounded-sm bg-[#1B202D] border-2 border-amber-500 text-left shadow-[0_0_15px_rgba(245,158,11,0.2)] transition-all" data-price="0" data-tier="64" type="button">
+<span class="block font-mono text-xs font-semibold text-amber-300">64GB Unified</span>
+<span class="block font-mono text-xs text-amber-400/90">Included</span>
+</button>
+<button class="config-btn p-space-sm rounded-sm bg-[#161A24] hover:bg-[#1B202D] border border-white/[0.08] text-left transition-all group" data-price="800" data-tier="128" type="button">
+<span class="block font-mono text-xs font-semibold text-titanium-muted group-hover:text-titanium-light">128GB</span>
+<span class="block font-mono text-xs text-titanium-dark">+$800</span>
+</button>
+</div>
+</div>
+<!-- Storage Config -->
+<div class="space-y-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-space text-sm text-titanium-light font-semibold">Storage Capacity</span>
+<span class="font-mono text-xs text-titanium-muted">PCIe 5.0 (7,400 MB/s)</span>
+</div>
+<div class="grid grid-cols-3 gap-space-xs" id="storage-options">
+<button class="config-btn p-space-sm rounded-sm bg-[#161A24] hover:bg-[#1B202D] border border-white/[0.08] text-left transition-all group" data-price="-200" data-tier="1tb" type="button">
+<span class="block font-mono text-xs font-semibold text-titanium-muted group-hover:text-titanium-light">1TB SSD</span>
+<span class="block font-mono text-xs text-titanium-dark">-$200</span>
+</button>
+<button class="config-btn p-space-sm rounded-sm bg-[#1B202D] border-2 border-amber-500 text-left shadow-[0_0_15px_rgba(245,158,11,0.2)] transition-all" data-price="0" data-tier="2tb" type="button">
+<span class="block font-mono text-xs font-semibold text-amber-300">2TB Gen4</span>
+<span class="block font-mono text-xs text-amber-400/90">Included</span>
+</button>
+<button class="config-btn p-space-sm rounded-sm bg-[#161A24] hover:bg-[#1B202D] border border-white/[0.08] text-left transition-all group" data-price="600" data-tier="4tb" type="button">
+<span class="block font-mono text-xs font-semibold text-titanium-muted group-hover:text-titanium-light">4TB Ent.</span>
+<span class="block font-mono text-xs text-titanium-dark">+$600</span>
+</button>
+</div>
+</div>
+<!-- Color Finish -->
+<div class="space-y-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-space text-sm text-titanium-light font-semibold">Anodized Finish</span>
+<span class="font-mono text-xs text-titanium-muted" id="selected-color-label">Space Black</span>
+</div>
+<div class="flex items-center gap-space-sm">
+<button class="color-swatch active w-9 h-9 rounded-sm bg-[#111317] border-2 border-amber-400 shadow-md flex items-center justify-center transition-transform hover:scale-105 focus:outline-none" data-color="Space Black" type="button">
+<span class="w-2.5 h-2.5 rounded-sm bg-amber-400"></span>
+</button>
+<button class="color-swatch w-9 h-9 rounded-sm bg-[#303848] border border-white/10 shadow-md flex items-center justify-center transition-transform hover:scale-105 focus:outline-none" data-color="Slate Titanium" type="button">
+</button>
+<button class="color-swatch w-9 h-9 rounded-sm bg-[#0D1B2A] border border-white/10 shadow-md flex items-center justify-center transition-transform hover:scale-105 focus:outline-none" data-color="Midnight Blue" type="button">
+</button>
+</div>
+</div>
+</div>
+<!-- Quantity & Purchase Action -->
+<div class="pt-space-sm space-y-space-sm">
+<div class="flex items-center gap-space-sm">
+<!-- Stepper -->
+<div class="flex items-center bg-[#12151E] border border-white/[0.08] rounded-sm p-1 shadow-sm">
+<button class="w-9 h-9 flex items-center justify-center text-titanium-muted hover:text-titanium-light hover:bg-[#161A24] rounded-sm transition-colors font-mono font-bold text-base" id="qty-minus">-</button>
+<span class="w-10 text-center font-mono text-sm font-bold text-titanium-light" id="qty-val">1</span>
+<button class="w-9 h-9 flex items-center justify-center text-titanium-muted hover:text-titanium-light hover:bg-[#161A24] rounded-sm transition-colors font-mono font-bold text-base" id="qty-plus">+</button>
+</div>
+<!-- Primary Add to Cart (Signal Amber) -->
+<button class="flex-1 h-12 bg-amber-500 hover:bg-amber-400 active:scale-[0.98] text-[#2A1700] font-space text-sm font-bold rounded-sm flex items-center justify-center gap-space-xs shadow-[0_0_24px_rgba(245,158,11,0.35)] transition-all cursor-pointer" id="btn-add-cart">
+<span class="material-symbols-outlined text-xl">add_shopping_cart</span>
+<span id="cta-label">Add to Cart · $2,499.00</span>
+</button>
+</div>
+<!-- Secondary 1-Click Buy -->
+<button class="w-full h-11 bg-[#161A24] hover:bg-[#1B202D] border border-amber-500/40 text-amber-300 font-mono text-xs font-semibold rounded-sm flex items-center justify-center gap-space-xs shadow-sm transition-all" id="btn-quick-buy">
+<span class="material-symbols-outlined text-lg text-amber-400">bolt</span>
+<span>Buy with 1-Click (Apple Pay / Encrypted Card)</span>
+</button>
+</div>
+<!-- Reassurance Grid -->
+<div class="grid grid-cols-3 gap-space-xs pt-space-xs">
+<div class="p-space-xs rounded-sm bg-[#12151E] border border-white/[0.08] flex flex-col items-center text-center gap-1">
+<span class="material-symbols-outlined text-amber-400 text-lg">local_shipping</span>
+<span class="font-space text-xs text-titanium-light font-semibold">Overnight Free</span>
+<span class="font-mono text-titanium-muted text-[10px] leading-tight">Order by 4 PM EST</span>
+</div>
+<div class="p-space-xs rounded-sm bg-[#12151E] border border-white/[0.08] flex flex-col items-center text-center gap-1">
+<span class="material-symbols-outlined text-amber-400 text-lg">verified_user</span>
+<span class="font-space text-xs text-titanium-light font-semibold">2-Year NexisCare</span>
+<span class="font-mono text-titanium-muted text-[10px] leading-tight">Full RMA + Battery</span>
+</div>
+<div class="p-space-xs rounded-sm bg-[#12151E] border border-white/[0.08] flex flex-col items-center text-center gap-1">
+<span class="material-symbols-outlined text-amber-400 text-lg">sync</span>
+<span class="font-space text-xs text-titanium-light font-semibold">30-Day Returns</span>
+<span class="font-mono text-titanium-muted text-[10px] leading-tight">Zero restocking fees</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Below The Fold: Tabbed Deep-Dive Architecture Section -->
+<section class="w-full max-w-container-max mx-auto px-gutter-desktop mt-space-3xl mb-space-2xl">
+<div class="w-full bg-[#12151E] border border-white/[0.08] rounded-sm shadow-2xl overflow-hidden">
+<!-- Tabs Navigation Header -->
+<div class="flex items-center gap-space-xs px-space-lg pt-space-md bg-[#090A0F]/80 border-b border-white/[0.08] overflow-x-auto">
+<button class="tab-btn px-space-lg py-space-sm font-space text-sm font-bold text-white bg-[#161A24] border-t-2 border-amber-400 rounded-t-sm transition-colors flex items-center gap-2" id="tab-specs">
+<span class="material-symbols-outlined text-amber-400 text-lg">memory</span>
+              Technical Specifications
+            </button>
+<button class="tab-btn px-space-lg py-space-sm font-space text-sm font-semibold text-titanium-muted hover:text-titanium-light hover:bg-[#12151E] rounded-t-sm transition-colors flex items-center gap-2" id="tab-shipping">
+<span class="material-symbols-outlined text-lg">local_shipping</span>
+              Shipping &amp; Delivery Logistics
+            </button>
+<button class="tab-btn px-space-lg py-space-sm font-space text-sm font-semibold text-titanium-muted hover:text-titanium-light hover:bg-[#12151E] rounded-t-sm transition-colors flex items-center gap-2" id="tab-reviews">
+<span class="material-symbols-outlined text-lg">rate_review</span>
+              Verified Reviews (348)
+            </button>
+</div>
+<!-- Tab Content 1: Deep Tech Specs -->
+<div class="tab-panel p-space-xl block" id="content-specs">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-xl">
+<!-- Architecture Matrix Table -->
+<div class="lg:col-span-8 space-y-space-md">
+<div>
+<span class="font-mono text-xs text-amber-400 uppercase font-semibold tracking-wider">Silicon Engine</span>
+<h3 class="font-space text-xl font-bold text-white mt-1">Nexis Quantum Silicon Architecture</h3>
+<p class="font-inter text-sm text-titanium-muted mt-2 leading-relaxed">
+                    Engineered with TSMC 3nm second-generation extreme ultraviolet lithography, packing 92 billion transistors into a unified system-on-chip with dual media encoding pipelines.
+                  </p>
+</div>
+<!-- Spec Grid Data Table -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-sm pt-space-xs">
+<div class="p-space-md rounded-sm bg-[#161A24] border border-white/[0.08] flex flex-col gap-1 shadow-sm">
+<span class="font-mono text-xs text-titanium-dark">Compute Units</span>
+<span class="font-mono text-sm text-white font-semibold">16-Core CPU (12 Perf + 4 Eff)</span>
+<span class="font-inter text-xs text-titanium-muted">Up to 4.2 GHz boost frequency</span>
+</div>
+<div class="p-space-md rounded-sm bg-[#161A24] border border-white/[0.08] flex flex-col gap-1 shadow-sm">
+<span class="font-mono text-xs text-titanium-dark">Graphics Pipeline</span>
+<span class="font-mono text-sm text-amber-400 font-semibold">40-Core Neural GPU</span>
+<span class="font-inter text-xs text-titanium-muted">Hardware-accelerated mesh shaders</span>
+</div>
+<div class="p-space-md rounded-sm bg-[#161A24] border border-white/[0.08] flex flex-col gap-1 shadow-sm">
+<span class="font-mono text-xs text-titanium-dark">Thermal Design</span>
+<span class="font-mono text-sm text-amber-300 font-semibold">Liquid Vapour Active Flow</span>
+<span class="font-inter text-xs text-titanium-muted">Zero throttling under continuous 140W load</span>
+</div>
+<div class="p-space-md rounded-sm bg-[#161A24] border border-white/[0.08] flex flex-col gap-1 shadow-sm">
+<span class="font-mono text-xs text-titanium-dark">Display Panel</span>
+<span class="font-mono text-sm text-white font-semibold">16.2" Mini-LED XDR</span>
+<span class="font-inter text-xs text-titanium-muted">3456 x 2234 at 120Hz ProMotion</span>
+</div>
+<div class="p-space-md rounded-sm bg-[#161A24] border border-white/[0.08] flex flex-col gap-1 shadow-sm">
+<span class="font-mono text-xs text-titanium-dark">I/O Infrastructure</span>
+<span class="font-mono text-sm text-white font-semibold">3x Thunderbolt 4 + HDMI 2.1</span>
+<span class="font-inter text-xs text-titanium-muted">Supports up to 4 external 6K displays</span>
+</div>
+<div class="p-space-md rounded-sm bg-[#161A24] border border-white/[0.08] flex flex-col gap-1 shadow-sm">
+<span class="font-mono text-xs text-titanium-dark">Physical Metrics</span>
+<span class="font-mono text-sm text-white font-semibold">2.14 kg (4.71 lbs) · 16.8mm</span>
+<span class="font-inter text-xs text-titanium-muted">100Wh Lithium-Polymer (96W GaN Charger)</span>
+</div>
+</div>
+</div>
+<!-- Inline Data Graphic -->
+<div class="lg:col-span-4 bg-[#161A24] border border-white/[0.08] p-space-md rounded-sm shadow-md flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-space-sm">
+<span class="font-space text-sm font-bold text-white">Compiler Throughput</span>
+<span class="font-mono text-xs text-amber-400 font-bold">+64% vs M2 Max</span>
+</div>
+<div class="space-y-space-sm pt-space-xs">
+<div>
+<div class="flex justify-between font-mono text-xs text-titanium-light mb-1">
+<span>Nexis ProBook 16 M3 Ultra</span>
+<span class="text-amber-400 font-bold">38.4 kTokens/s</span>
+</div>
+<div class="w-full bg-[#090A0F] h-2.5 rounded-sm overflow-hidden border border-white/5">
+<div class="bg-gradient-to-r from-amber-600 to-amber-400 h-full rounded-sm w-[94%] transition-all shadow-[0_0_10px_rgba(245,158,11,0.5)]"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between font-mono text-xs text-titanium-muted mb-1">
+<span>ProBook 16 M2 Ultra</span>
+<span>23.1 kTokens/s</span>
+</div>
+<div class="w-full bg-[#090A0F] h-2.5 rounded-sm overflow-hidden border border-white/5">
+<div class="bg-[#1B202D] h-full rounded-sm w-[62%]"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between font-mono text-xs text-titanium-muted mb-1">
+<span>Legacy x86 Core i9-13900HK</span>
+<span>18.6 kTokens/s</span>
+</div>
+<div class="w-full bg-[#090A0F] h-2.5 rounded-sm overflow-hidden border border-white/5">
+<div class="bg-[#1B202D]/60 h-full rounded-sm w-[46%]"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-space-lg p-space-sm rounded-sm bg-[#12151E] border border-amber-500/30 flex items-start gap-space-xs">
+<span class="material-symbols-outlined text-amber-400 text-lg shrink-0 mt-0.5">terminal</span>
+<p class="font-mono text-[11px] text-titanium-muted leading-relaxed">
+                    Tested running Llama-3-70B 4-bit quant locally with zero memory swapping. Sustained thermals remain below 41°C ambient skin temp.
+                  </p>
+</div>
+</div>
+</div>
+</div>
+<!-- Tab Content 2: Shipping -->
+<div class="tab-panel p-space-xl hidden" id="content-shipping">
+<div class="max-w-3xl space-y-space-lg">
+<div>
+<h3 class="font-space text-xl font-bold text-white">Global Express Dispatch Logistics</h3>
+<p class="font-inter text-sm text-titanium-muted mt-1">Orders processed before 16:00 EST depart our automated Newark robotic hub the same business day.</p>
+</div>
+<!-- Dynamic ZIP Calculator Box -->
+<div class="p-space-md rounded-sm bg-[#161A24] border border-white/[0.08] shadow-sm space-y-space-sm">
+<label class="block font-space text-sm text-titanium-light font-semibold">Calculate Real-Time Shipping to Your Postal Node</label>
+<div class="flex items-center gap-space-xs max-w-md">
+<div class="relative flex-1">
+<span class="material-symbols-outlined absolute left-3 top-2.5 text-titanium-dark text-lg">pin_drop</span>
+<input class="w-full bg-[#12151E] border border-white/[0.08] rounded-sm pl-9 pr-space-sm py-2 font-mono text-xs text-titanium-light focus:outline-none focus:border-amber-500/40" id="shipping-zip" placeholder="Enter ZIP code" type="text" value="94107"/>
+</div>
+<button class="px-space-md py-2 bg-amber-500 text-[#2A1700] font-space text-xs font-bold rounded-sm hover:bg-amber-400 transition-colors" id="calc-zip-btn" type="button">
+                    Calculate
+                  </button>
+</div>
+<div class="flex items-center gap-space-xs text-amber-400 font-mono text-xs pt-1" id="zip-result">
+<span class="material-symbols-outlined text-sm">check_circle</span>
+<span>Express Next-Day Air delivers to San Francisco, CA (94107) tomorrow by 10:30 AM.</span>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
+<div class="p-space-md rounded-sm bg-[#161A24] border border-white/[0.08] flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-amber-400 text-2xl">flight_takeoff</span>
+<div>
+<span class="font-space text-sm font-bold text-white block">Priority Air Cargo</span>
+<span class="font-mono text-xs text-amber-400 font-bold">FREE ($45 Value)</span>
+<p class="font-inter text-xs text-titanium-muted mt-1 leading-relaxed">Direct temperature-controlled air freight with real-time GPS tracking &amp; adult signature confirmation.</p>
+</div>
+</div>
+<div class="p-space-md rounded-sm bg-[#161A24] border border-white/[0.08] flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-amber-400 text-2xl">shield</span>
+<div>
+<span class="font-space text-sm font-bold text-white block">Tamper-Proof Courier</span>
+<span class="font-mono text-xs text-titanium-muted font-semibold">Available for Bulk Enterprise</span>
+<p class="font-inter text-xs text-titanium-muted mt-1 leading-relaxed">Dedicated bonded ground vehicle for orders over $15,000 or custom hardware cryptokey pre-loads.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Tab Content 3: Reviews -->
+<div class="tab-panel p-space-xl hidden" id="content-reviews">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-xl" id="reviews-section">
+<div class="lg:col-span-4 space-y-space-md bg-[#161A24] border border-white/[0.08] p-space-lg rounded-sm">
+<div class="text-center pb-space-xs">
+<span class="font-mono text-5xl font-bold text-white leading-none block">4.9</span>
+<div class="flex items-center justify-center text-amber-400 gap-1 my-2">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<span class="font-mono text-xs text-titanium-muted">Based on 348 verified pro buyer orders</span>
+</div>
+<div class="space-y-space-xs font-mono text-xs">
+<div class="flex items-center gap-2">
+<span class="w-10 text-titanium-muted">5 Star</span>
+<div class="flex-1 bg-[#090A0F] h-2 rounded-sm overflow-hidden border border-white/5">
+<div class="bg-amber-400 h-full rounded-sm w-[88%]"></div>
+</div>
+<span class="w-8 text-right text-titanium-light">88%</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-10 text-titanium-muted">4 Star</span>
+<div class="flex-1 bg-[#090A0F] h-2 rounded-sm overflow-hidden border border-white/5">
+<div class="bg-amber-400/70 h-full rounded-sm w-[9%]"></div>
+</div>
+<span class="w-8 text-right text-titanium-light">9%</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-10 text-titanium-muted">3 Star</span>
+<div class="flex-1 bg-[#090A0F] h-2 rounded-sm overflow-hidden border border-white/5">
+<div class="bg-[#1B202D] h-full rounded-sm w-[2%]"></div>
+</div>
+<span class="w-8 text-right text-titanium-light">2%</span>
+</div>
+</div>
+<button class="w-full py-2.5 bg-[#1B202D] hover:bg-[#12151E] border border-amber-500/40 text-amber-300 rounded-sm font-space text-xs font-semibold transition-colors shadow-sm">
+                  Write a Technical Review
+                </button>
+</div>
+<!-- Testimonial Feed -->
+<div class="lg:col-span-8 space-y-space-md">
+<div class="p-space-md rounded-sm bg-[#161A24] border border-white/[0.08] shadow-sm space-y-space-xs">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="w-8 h-8 rounded-sm bg-amber-500/20 text-amber-400 border border-amber-500/30 font-bold flex items-center justify-center font-mono text-xs">DR</span>
+<div>
+<span class="font-space text-sm font-bold text-white block">Dr. Rachel Chen</span>
+<span class="font-mono text-[11px] text-amber-400">Principal ML Engineer @ SynapseAI</span>
+</div>
+</div>
+<span class="px-space-xs py-0.5 rounded-sm bg-amber-500/10 border border-amber-500/20 text-amber-400 font-mono text-[10px] font-bold">VERIFIED BUYER</span>
+</div>
+<div class="flex items-center text-amber-400 gap-0.5 pt-1">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-mono text-xs text-titanium-muted ml-2">Space Black / 64GB / 2TB</span>
+</div>
+<p class="font-inter text-sm text-titanium-muted pt-1 leading-relaxed">
+                    "The unified memory bus bandwidth on this M3 Ultra configuration allows us to run inference on custom quantized 34B models without touching the cloud cluster. Compile times in Rust dropped by 45% compared to my workstation tower."
+                  </p>
+</div>
+<div class="p-space-md rounded-sm bg-[#161A24] border border-white/[0.08] shadow-sm space-y-space-xs">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="w-8 h-8 rounded-sm bg-[#1B202D] text-titanium-light border border-white/5 font-bold flex items-center justify-center font-mono text-xs">MV</span>
+<div>
+<span class="font-space text-sm font-bold text-white block">Marcus Vance</span>
+<span class="font-mono text-[11px] text-amber-400">Lead VFX Supervisor</span>
+</div>
+</div>
+<span class="px-space-xs py-0.5 rounded-sm bg-amber-500/10 border border-amber-500/20 text-amber-400 font-mono text-[10px] font-bold">VERIFIED BUYER</span>
+</div>
+<div class="flex items-center text-amber-400 gap-0.5 pt-1">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-mono text-xs text-titanium-muted ml-2">Space Black / 128GB / 4TB</span>
+</div>
+<p class="font-inter text-sm text-titanium-muted pt-1 leading-relaxed">
+                    "Color calibration out of the crate was within 0.4 Delta-E for DCI-P3 gamut. Being able to scrub 8K ProRes 4444 on battery while sitting on a flight across the Atlantic without dropped frames feels like alien technology."
+                  </p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Cart Drawer Overlay -->
+<div class="fixed inset-0 bg-[#07080C]/80 backdrop-blur-sm z-50 transition-opacity duration-300" id="cart-backdrop"></div>
+<!-- Cart Drawer Panel (Graphite Slate with Amber Trim) -->
+<aside class="fixed top-0 right-0 bottom-0 w-full sm:w-[460px] bg-[#12151E]/95 backdrop-blur-2xl border-l border-amber-500/30 z-50 shadow-[0_0_50px_rgba(0,0,0,0.9)] flex flex-col justify-between transition-transform duration-300" id="cart-drawer">
+<!-- Top Section -->
+<div class="p-space-lg bg-[#090A0F]/90 border-b border-white/[0.08]">
+<div class="flex items-center justify-between pb-space-sm">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-amber-400 text-2xl">shopping_cart</span>
+<h2 class="font-space text-lg font-bold text-white">Your Cart</h2>
+<span class="px-2 py-0.5 rounded-sm bg-amber-500/20 border border-amber-500/30 text-amber-300 font-mono text-xs font-bold" id="cart-item-count-badge">3 items</span>
+</div>
+<button class="w-8 h-8 rounded-sm bg-[#161A24] hover:bg-[#1B202D] text-titanium-muted hover:text-white flex items-center justify-center transition-colors border border-white/5" id="close-drawer-btn">
+<span class="material-symbols-outlined text-lg">close</span>
+</button>
+</div>
+<!-- Progress Meter -->
+<div class="pt-space-2xs space-y-1">
+<div class="flex items-center justify-between font-mono text-xs">
+<span class="text-amber-400 flex items-center gap-1 font-semibold">
+<span class="material-symbols-outlined text-sm">celebration</span>
+                Unlocked Free Priority Air!
+              </span>
+<span class="text-titanium-light font-bold">$2,499.00 / $150.00</span>
+</div>
+<div class="w-full bg-[#161A24] h-1.5 rounded-sm overflow-hidden border border-white/5">
+<div class="bg-gradient-to-r from-amber-600 to-amber-400 h-full rounded-sm w-full shadow-[0_0_8px_rgba(245,158,11,0.5)]"></div>
+</div>
+</div>
+</div>
+<!-- Scrollable Line Items -->
+<div class="flex-1 overflow-y-auto px-space-lg py-space-md space-y-space-md">
+<!-- Item 1 -->
+<div class="flex items-start gap-space-sm p-space-sm rounded-sm bg-[#161A24] border border-white/[0.08] shadow-sm group">
+<div class="w-20 h-20 rounded-sm bg-[#090A0F] shrink-0 overflow-hidden flex items-center justify-center p-1 border border-white/5">
+<img alt="Nexis ProBook" class="w-full h-full object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDcinWfx31696YW1JZpfzlgjPY_MA4-WgSe9A4cxhsxMEN1D5rpF7Ddz21eCyWrEl-LGuSXV9FBahELTPCGsCLN8jlVQSg0e7jzK3XluoSaCpMVTxXZfvmG86iIqYV4IO2DKyZ8jrrjGv8VMGysjSyUPtvFRoOmsaZhSSSA5C1qp7XnzlFKnXOuf4hck25eK2Z8C0EbiVUrEFqJGas7sUZ3hpIYL0tw0mlb_zG2tUqwwI1DXAc9bjsiaw"/>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-start justify-between gap-1">
+<h4 class="font-space text-sm font-bold text-white truncate">Nexis ProBook 16 M3 Ultra</h4>
+<button class="cart-remove-item text-titanium-dark hover:text-rose-400 transition-colors p-1" title="Remove item">
+<span class="material-symbols-outlined text-lg">delete</span>
+</button>
+</div>
+<span class="block font-mono text-[11px] text-titanium-muted truncate">64GB Unified · 2TB NVMe · Space Black</span>
+<div class="flex items-center justify-between mt-space-xs pt-1">
+<div class="flex items-center bg-[#12151E] border border-white/5 rounded-sm p-0.5">
+<button class="w-6 h-6 flex items-center justify-center text-titanium-muted hover:text-white font-mono text-xs">-</button>
+<span class="w-6 text-center font-mono text-xs font-semibold text-titanium-light">1</span>
+<button class="w-6 h-6 flex items-center justify-center text-titanium-muted hover:text-white font-mono text-xs">+</button>
+</div>
+<span class="font-mono text-sm font-bold text-amber-400">$2,499.00</span>
+</div>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="flex items-start gap-space-sm p-space-sm rounded-sm bg-[#161A24] border border-white/[0.08] shadow-sm group">
+<div class="w-20 h-20 rounded-sm bg-[#090A0F] shrink-0 overflow-hidden flex items-center justify-center p-1 border border-white/5">
+<img alt="AetherSonic Studio Max ANC Headphones" class="w-full h-full object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCAFbh5qd7GqqsiHQLHU3cFXT1AMgk_FBx_QfW0EVIR7qXTIqeHFJ_yp1bbI0C1tTcLz9EFu8D1OyCEZrojVdabkTHlnbyMGXxSDpbUEhM8A7IdYJDFfg4iDStyOQRpgi2E-Rzz7DhzGTXA1BbKheSLQ13Lr7l43rOFVtzn9T9wGC9QRf-O_XxdLplpVCU_-82PX9wmAb8k7K4KcpJC0lZMG-kbWBu6H153mRuaJJYBogUzyulfTAjC4g"/>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-start justify-between gap-1">
+<h4 class="font-space text-sm font-bold text-white truncate">AetherSonic Studio Max ANC</h4>
+<button class="cart-remove-item text-titanium-dark hover:text-rose-400 transition-colors p-1" title="Remove item">
+<span class="material-symbols-outlined text-lg">delete</span>
+</button>
+</div>
+<span class="block font-mono text-[11px] text-titanium-muted truncate">Spatial Audio · Midnight</span>
+<div class="flex items-center justify-between mt-space-xs pt-1">
+<div class="flex items-center bg-[#12151E] border border-white/5 rounded-sm p-0.5">
+<button class="w-6 h-6 flex items-center justify-center text-titanium-muted hover:text-white font-mono text-xs">-</button>
+<span class="w-6 text-center font-mono text-xs font-semibold text-titanium-light">1</span>
+<button class="w-6 h-6 flex items-center justify-center text-titanium-muted hover:text-white font-mono text-xs">+</button>
+</div>
+<span class="font-mono text-sm font-bold text-amber-400">$349.00</span>
+</div>
+</div>
+</div>
+<!-- Item 3 -->
+<div class="flex items-start gap-space-sm p-space-sm rounded-sm bg-[#161A24] border border-white/[0.08] shadow-sm group">
+<div class="w-20 h-20 rounded-sm bg-[#090A0F] shrink-0 overflow-hidden flex items-center justify-center p-1 border border-white/5">
+<img alt="QuantumKey Mechanical Keyboard" class="w-full h-full object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAXWeii9ZhfR4rwgYZFEBkUf69jOzORz8P1_YJfk0JBgGBxp-S7OBAlhft2b3gqiWYNVD0mlgRd5Ec4pZx4-Q8c3-deG3dC6TFS6aiBE6IBxOfSteAefg7nCQ9Y3xWQbH6lfweHhH5P5PwQzh6xz1AOkSVLQFXJYfcX4YXKCwmd-pf-EMLBpT2uMZ7sZ0VHo5v0QJodosB0tyRosqhFwNohVqcv-5zKoTMeNbcXUTEBlnxS-NWxnMo4QA"/>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-start justify-between gap-1">
+<h4 class="font-space text-sm font-bold text-white truncate">QuantumKey Mechanical Board</h4>
+<button class="cart-remove-item text-titanium-dark hover:text-rose-400 transition-colors p-1" title="Remove item">
+<span class="material-symbols-outlined text-lg">delete</span>
+</button>
+</div>
+<span class="block font-mono text-[11px] text-titanium-muted truncate">Gateron Magnetic Jade · 75% Layout</span>
+<div class="flex items-center justify-between mt-space-xs pt-1">
+<div class="flex items-center bg-[#12151E] border border-white/5 rounded-sm p-0.5">
+<button class="w-6 h-6 flex items-center justify-center text-titanium-muted hover:text-white font-mono text-xs">-</button>
+<span class="w-6 text-center font-mono text-xs font-semibold text-titanium-light">1</span>
+<button class="w-6 h-6 flex items-center justify-center text-titanium-muted hover:text-white font-mono text-xs">+</button>
+</div>
+<span class="font-mono text-sm font-bold text-amber-400">$189.00</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Section: Pricing & Checkout -->
+<div class="p-space-lg bg-[#090A0F]/95 border-t border-white/[0.08] space-y-space-sm">
+<div class="flex items-center justify-between p-space-xs px-space-sm rounded-sm bg-[#161A24] border border-white/[0.08] font-mono text-xs">
+<div class="flex items-center gap-1.5 text-amber-400">
+<span class="material-symbols-outlined text-sm">local_offer</span>
+<span class="font-bold">NEXISPRO10</span>
+<span class="text-titanium-muted text-[11px]">(10% Pro Discount)</span>
+</div>
+<span class="text-amber-300 font-bold">-$303.70</span>
+</div>
+<!-- Financial Breakdown -->
+<div class="space-y-1 font-mono text-xs text-titanium-muted pt-1">
+<div class="flex justify-between">
+<span>Subtotal (3 items)</span>
+<span class="font-mono text-titanium-light">$3,037.00</span>
+</div>
+<div class="flex justify-between">
+<span>Logistics Air Freight</span>
+<span class="font-mono text-amber-400 font-semibold">FREE</span>
+</div>
+<div class="flex justify-between">
+<span>Estimated Sales Tax (8%)</span>
+<span class="font-mono text-titanium-light">$242.96</span>
+</div>
+<div class="flex justify-between font-space text-sm font-bold text-white pt-2 border-t border-white/[0.08]">
+<span>Total Balance</span>
+<span class="font-mono text-amber-400 text-lg font-bold">$2,976.26</span>
+</div>
+</div>
+<!-- Proceed to Checkout Action Button (Signal Amber) -->
+<button class="w-full h-12 bg-amber-500 hover:bg-amber-400 active:scale-[0.98] text-[#2A1700] font-space text-sm font-bold rounded-sm flex items-center justify-center gap-space-xs shadow-[0_0_24px_rgba(245,158,11,0.35)] transition-all cursor-pointer">
+<span class="material-symbols-outlined text-lg">lock</span>
+<span>Proceed to Checkout ($2,976.26)</span>
+<span class="material-symbols-outlined text-lg">arrow_forward</span>
+</button>
+<!-- Safe Payment Gateways -->
+<div class="flex items-center justify-center gap-space-md pt-space-xs text-titanium-dark font-mono text-[11px]">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-sm text-amber-400">lock</span>
+<span>PCI-DSS Level 1</span>
+</div>
+<span>·</span>
+<span>Apple Pay</span>
+<span>·</span>
+<span>Stripe 256-bit</span>
+<span>·</span>
+<span>PayPal</span>
+</div>
+</div>
+</aside>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full bg-[#090A0F] border-t border-white/[0.08] mt-space-4xl">
+<div class="max-w-container-max mx-auto px-gutter-desktop py-space-3xl">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-space-xl mb-space-2xl">
+<div class="space-y-space-sm">
+<div class="flex items-center gap-2">
+<img alt="NexisStore Precision Hardware Logo" class="h-8 object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1ULvr2UnPIoOEGsOVl_INMNsL5BJKoUwFPiJFK-5T7YrKJCrsqGFBFaVq6LMQrR3HutzpLOrwCbzgs4IKPPSsF_Dxzjsg0vix8Gk3ULUmk_Pfgs2QSxdSp37jeflBs4ZD0dxEzRwteFoF1TM_0HiJIL6j2A2rVTBVwNmYH5_HqS5u2wVU0QEs2GlTDJhFXiL5KDfl17fjzSUx1qx10mvxtsI1PwxnaJCNkjHmnUBFWXrwcV-O14TD4HI0VV"/>
+</div>
+<p class="font-inter text-xs text-titanium-muted leading-relaxed">Architectural hardware and consumer technology curated for high-velocity engineers and precision creators.</p>
+<div class="flex items-center gap-space-xs font-mono text-xs text-amber-400">
+<span class="w-2 h-2 rounded-full bg-amber-400"></span>
+<span>API 99.98% Online</span>
+</div>
+</div>
+<div class="space-y-space-sm">
+<h4 class="font-space text-xs uppercase tracking-wider text-titanium-light font-bold">MERN Stack Core</h4>
+<ul class="space-y-space-xs font-mono text-xs text-titanium-muted">
+<li>MongoDB Atlas / Vector Search</li>
+<li>Express REST Engine + Auth</li>
+<li>React 18 Architecture + Tailwind</li>
+<li>Node.js High-Throughput Cluster</li>
+</ul>
+</div>
+<div class="space-y-space-sm">
+<h4 class="font-space text-xs uppercase tracking-wider text-titanium-light font-bold">Customer Protocol</h4>
+<ul class="space-y-space-xs font-inter text-xs text-titanium-muted">
+<li><a class="hover:text-amber-400 transition-colors" href="#">Real-Time Order Tracking</a></li>
+<li><a class="hover:text-amber-400 transition-colors" href="#">Global Express Logistics</a></li>
+<li><a class="hover:text-amber-400 transition-colors" href="#">Hardware Warranty &amp; RMA</a></li>
+<li><a class="hover:text-amber-400 transition-colors" href="#">Developer API Access</a></li>
+</ul>
+</div>
+<div class="space-y-space-sm">
+<h4 class="font-space text-xs uppercase tracking-wider text-titanium-light font-bold">Encrypted Checkout</h4>
+<p class="font-inter text-xs text-titanium-muted">End-to-end multi-currency payment nodes verified via PCI DSS Level 1.</p>
+<div class="flex flex-wrap gap-space-xs pt-space-xs">
+<span class="px-space-sm py-1 rounded-sm bg-[#161A24] border border-white/5 font-mono text-xs text-titanium-light">Stripe 256-bit</span>
+<span class="px-space-sm py-1 rounded-sm bg-[#161A24] border border-white/5 font-mono text-xs text-titanium-light">PayPal Vault</span>
+<span class="px-space-sm py-1 rounded-sm bg-[#161A24] border border-white/5 font-mono text-xs text-titanium-light">Apple Pay</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col sm:flex-row items-center justify-between pt-space-xl border-t border-white/[0.08] text-titanium-muted font-inter text-xs gap-space-md">
+<p>© 2025 NexisStore Systems. Pure Precision Hardware &amp; Amber Edition.</p>
+<p class="font-mono text-titanium-dark">Node: us-east-1 // Prod Cluster</p>
+</div>
+</div>
+</footer>
+<!-- Client-side Interactive Logic -->
+<script>
+    (function initProductInteractions() {
+      let basePrice = 2499;
+      let memoryOffset = 0;
+      let storageOffset = 0;
+      let quantity = 1;
+
+      const activePriceEl = document.getElementById('active-price');
+      const ctaLabelEl = document.getElementById('cta-label');
+      const qtyValEl = document.getElementById('qty-val');
+      const colorLabelEl = document.getElementById('selected-color-label');
+
+      function updatePricing() {
+        const unitPrice = basePrice + memoryOffset + storageOffset;
+        const total = unitPrice * quantity;
+        const formattedTotal = '$' + total.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        const formattedUnit = '$' + unitPrice.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        
+        if (activePriceEl) activePriceEl.textContent = formattedUnit;
+        if (ctaLabelEl) ctaLabelEl.textContent = `Add to Cart · ${formattedTotal}`;
+      }
+
+      // Memory buttons
+      const memButtons = document.querySelectorAll('#memory-options button');
+      memButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          memButtons.forEach(b => {
+            b.className = 'config-btn p-space-sm rounded-sm bg-[#161A24] hover:bg-[#1B202D] border border-white/[0.08] text-left transition-all group';
+            const s1 = b.querySelector('span:first-child');
+            const s2 = b.querySelector('span:last-child');
+            if (s1) s1.className = 'block font-mono text-xs font-semibold text-titanium-muted group-hover:text-titanium-light';
+            if (s2) s2.className = 'block font-mono text-xs text-titanium-dark';
+          });
+          btn.className = 'config-btn p-space-sm rounded-sm bg-[#1B202D] border-2 border-amber-500 text-left shadow-[0_0_15px_rgba(245,158,11,0.2)] transition-all';
+          const activeS1 = btn.querySelector('span:first-child');
+          const activeS2 = btn.querySelector('span:last-child');
+          if (activeS1) activeS1.className = 'block font-mono text-xs font-semibold text-amber-300';
+          if (activeS2) activeS2.className = 'block font-mono text-xs text-amber-400/90';
+          
+          memoryOffset = parseInt(btn.getAttribute('data-price') || '0', 10);
+          updatePricing();
+        });
+      });
+
+      // Storage buttons
+      const storButtons = document.querySelectorAll('#storage-options button');
+      storButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          storButtons.forEach(b => {
+            b.className = 'config-btn p-space-sm rounded-sm bg-[#161A24] hover:bg-[#1B202D] border border-white/[0.08] text-left transition-all group';
+            const s1 = b.querySelector('span:first-child');
+            const s2 = b.querySelector('span:last-child');
+            if (s1) s1.className = 'block font-mono text-xs font-semibold text-titanium-muted group-hover:text-titanium-light';
+            if (s2) s2.className = 'block font-mono text-xs text-titanium-dark';
+          });
+          btn.className = 'config-btn p-space-sm rounded-sm bg-[#1B202D] border-2 border-amber-500 text-left shadow-[0_0_15px_rgba(245,158,11,0.2)] transition-all';
+          const activeS1 = btn.querySelector('span:first-child');
+          const activeS2 = btn.querySelector('span:last-child');
+          if (activeS1) activeS1.className = 'block font-mono text-xs font-semibold text-amber-300';
+          if (activeS2) activeS2.className = 'block font-mono text-xs text-amber-400/90';
+
+          storageOffset = parseInt(btn.getAttribute('data-price') || '0', 10);
+          updatePricing();
+        });
+      });
+
+      // Color Swatches
+      const swatches = document.querySelectorAll('.color-swatch');
+      swatches.forEach(sw => {
+        sw.addEventListener('click', () => {
+          swatches.forEach(s => {
+            s.innerHTML = '';
+            s.classList.remove('border-amber-400', 'border-2');
+            s.classList.add('border-white/10', 'border');
+          });
+          sw.innerHTML = `<span class="w-2.5 h-2.5 rounded-sm bg-amber-400"></span>`;
+          sw.classList.remove('border-white/10', 'border');
+          sw.classList.add('border-amber-400', 'border-2');
+          if (colorLabelEl) colorLabelEl.textContent = sw.getAttribute('data-color');
+        });
+      });
+
+      // Quantity controls
+      const minusBtn = document.getElementById('qty-minus');
+      const plusBtn = document.getElementById('qty-plus');
+      if (minusBtn && plusBtn && qtyValEl) {
+        minusBtn.addEventListener('click', () => {
+          if (quantity > 1) {
+            quantity--;
+            qtyValEl.textContent = quantity;
+            updatePricing();
+          }
+        });
+        plusBtn.addEventListener('click', () => {
+          if (quantity < 10) {
+            quantity++;
+            qtyValEl.textContent = quantity;
+            updatePricing();
+          }
+        });
+      }
+
+      // Tab switcher
+      const tabSpecs = document.getElementById('tab-specs');
+      const tabShipping = document.getElementById('tab-shipping');
+      const tabReviews = document.getElementById('tab-reviews');
+      const pSpecs = document.getElementById('content-specs');
+      const pShipping = document.getElementById('content-shipping');
+      const pReviews = document.getElementById('content-reviews');
+
+      function switchTab(activeBtn, activePanel) {
+        [tabSpecs, tabShipping, tabReviews].forEach(t => {
+          if (t) {
+            t.className = 'tab-btn px-space-lg py-space-sm font-space text-sm font-semibold text-titanium-muted hover:text-titanium-light hover:bg-[#12151E] rounded-t-sm transition-colors flex items-center gap-2';
+            const icon = t.querySelector('.material-symbols-outlined');
+            if (icon) icon.classList.remove('text-amber-400');
+          }
+        });
+        [pSpecs, pShipping, pReviews].forEach(p => {
+          if (p) p.classList.add('hidden');
+        });
+
+        if (activeBtn) {
+          activeBtn.className = 'tab-btn px-space-lg py-space-sm font-space text-sm font-bold text-white bg-[#161A24] border-t-2 border-amber-400 rounded-t-sm transition-colors flex items-center gap-2';
+          const icon = activeBtn.querySelector('.material-symbols-outlined');
+          if (icon) icon.classList.add('text-amber-400');
+        }
+        if (activePanel) activePanel.classList.remove('hidden');
+      }
+
+      if (tabSpecs && tabShipping && tabReviews) {
+        tabSpecs.addEventListener('click', () => switchTab(tabSpecs, pSpecs));
+        tabShipping.addEventListener('click', () => switchTab(tabShipping, pShipping));
+        tabReviews.addEventListener('click', () => switchTab(tabReviews, pReviews));
+      }
+
+      // Slide-over cart drawer
+      const cartDrawer = document.getElementById('cart-drawer');
+      const cartBackdrop = document.getElementById('cart-backdrop');
+      const closeDrawerBtn = document.getElementById('close-drawer-btn');
+      const btnAddCart = document.getElementById('btn-add-cart');
+      const headerCartBtn = document.getElementById('header-cart-btn');
+
+      function openDrawer() {
+        if (cartDrawer && cartBackdrop) {
+          cartDrawer.classList.remove('translate-x-full');
+          cartBackdrop.classList.remove('opacity-0', 'pointer-events-none');
+          cartBackdrop.classList.add('opacity-100');
+        }
+      }
+
+      function closeDrawer() {
+        if (cartDrawer && cartBackdrop) {
+          cartDrawer.classList.add('translate-x-full');
+          cartBackdrop.classList.add('opacity-0', 'pointer-events-none');
+          cartBackdrop.classList.remove('opacity-100');
+        }
+      }
+
+      if (closeDrawerBtn) closeDrawerBtn.addEventListener('click', closeDrawer);
+      if (cartBackdrop) cartBackdrop.addEventListener('click', closeDrawer);
+      if (btnAddCart) btnAddCart.addEventListener('click', openDrawer);
+      if (headerCartBtn) headerCartBtn.addEventListener('click', openDrawer);
+
+      // Thumbnail selection
+      const thumbs = document.querySelectorAll('.thumb-btn');
+      thumbs.forEach(thumb => {
+        thumb.addEventListener('click', () => {
+          thumbs.forEach(t => {
+            t.className = 'thumb-btn relative rounded-sm overflow-hidden bg-[#12151E] border border-white/[0.08] hover:border-amber-500/30 p-space-2xs hover:bg-[#161A24] transition-all shadow-sm group focus:outline-none';
+            const label = t.querySelector('span');
+            if (label) label.className = 'block font-mono text-xs text-titanium-muted group-hover:text-titanium-light text-center pt-1 truncate';
+          });
+          thumb.className = 'thumb-btn active relative rounded-sm overflow-hidden bg-[#1B202D] border-2 border-amber-500 p-space-2xs transition-all shadow-md group focus:outline-none';
+          const activeLabel = thumb.querySelector('span');
+          if (activeLabel) activeLabel.className = 'block font-mono text-xs text-amber-400 text-center pt-1 truncate';
+        });
+      });
+    })();
+  </script>
+</body></html>

@@ -33,14 +33,14 @@ export const Cart = () => {
         style={{
           textAlign: 'center',
           padding: '4.5rem 2rem',
-          maxWidth: '550px',
+          maxWidth: '560px',
           margin: '3rem auto',
         }}
       >
-        <ShoppingBag size={56} color="#6366f1" style={{ margin: '0 auto 1.5rem', opacity: 0.8 }} />
-        <h2 style={{ marginBottom: '0.8rem' }}>Your Shopping Cart is Empty</h2>
-        <p style={{ color: 'var(--text-secondary)', marginBottom: '2rem' }}>
-          Looks like you haven't added anything to your cart yet. Explore our curated catalog to get started.
+        <ShoppingBag size={50} color="var(--color-primary)" style={{ margin: '0 auto 1.25rem', opacity: 0.85 }} />
+        <h2 style={{ marginBottom: '0.6rem' }}>Your Shopping Cart is Empty</h2>
+        <p style={{ color: 'var(--text-secondary)', marginBottom: '1.8rem', fontSize: '0.92rem' }}>
+          Looks like you haven't added any products to your cart yet. Explore our curated catalog to get started.
         </p>
         <Link to="/" className="btn btn-primary btn-lg">
           Explore Products
@@ -49,12 +49,21 @@ export const Cart = () => {
     );
   }
 
+  const freeShippingThreshold = 999;
+  const remainingForFreeShipping = Math.max(0, freeShippingThreshold - itemsPrice);
+  const progressPercent = Math.min(100, Math.round((itemsPrice / freeShippingThreshold) * 100));
+
   return (
     <div>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.8rem' }}>
         <div>
-          <h1 style={{ fontSize: '2rem' }}>Shopping Bag</h1>
-          <p style={{ color: 'var(--text-secondary)' }}>Review your items before proceeding to checkout</p>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.2rem' }}>
+            <span className="spec-chip">SHOPPING CART</span>
+            <span style={{ fontSize: '0.75rem', fontFamily: 'var(--font-mono)', color: 'var(--text-muted)' }}>
+              {cartItems.length} {cartItems.length === 1 ? 'ITEM' : 'ITEMS'} ADDED
+            </span>
+          </div>
+          <h1 style={{ fontSize: '1.9rem', letterSpacing: '-0.02em' }}>Shopping Cart</h1>
         </div>
         <button onClick={clearCart} className="btn btn-outline btn-sm">
           Clear Entire Cart
@@ -69,8 +78,8 @@ export const Cart = () => {
           alignItems: 'start',
         }}
       >
-        {/* Cart Items Table / List */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+        {/* Cart Items List */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
           {cartItems.map((item) => (
             <div
               key={item.product}
@@ -79,43 +88,49 @@ export const Cart = () => {
                 display: 'flex',
                 alignItems: 'center',
                 gap: '1.25rem',
-                padding: '1.25rem',
+                padding: '1.15rem',
                 flexWrap: 'wrap',
+                background: 'var(--bg-surface)',
               }}
             >
               <img
                 src={getImageUrl(item.imageUrl)}
                 alt={item.name}
                 style={{
-                  width: '90px',
-                  height: '90px',
+                  width: '80px',
+                  height: '80px',
                   objectFit: 'cover',
-                  borderRadius: 'var(--radius-md)',
+                  borderRadius: 'var(--radius-sm)',
+                  border: '1px solid var(--border-subtle)',
+                  background: '#0c0e14',
                 }}
               />
 
               <div style={{ flex: 1, minWidth: '180px' }}>
+                <span className="spec-chip" style={{ fontSize: '0.65rem', marginBottom: '0.3rem' }}>
+                  SKU-{item.product.slice(-6).toUpperCase()}
+                </span>
                 <Link
                   to={`/product/${item.product}`}
-                  style={{ fontWeight: 600, fontSize: '1.05rem', display: 'block', marginBottom: '0.3rem' }}
+                  style={{ fontWeight: 600, fontSize: '1rem', display: 'block', marginBottom: '0.25rem' }}
                 >
                   {item.name}
                 </Link>
-                <span style={{ color: '#818cf8', fontWeight: 700 }}>
+                <span style={{ color: 'var(--text-amber)', fontWeight: 700, fontFamily: 'var(--font-heading)' }}>
                   {formatPrice(item.price)} each
                 </span>
               </div>
 
               {/* Quantity Select */}
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                <label style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>Qty:</label>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                <label style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>Qty:</label>
                 <select
                   className="form-control"
-                  style={{ width: '80px', padding: '0.35rem 0.6rem' }}
+                  style={{ width: '75px', padding: '0.3rem 0.5rem', fontFamily: 'var(--font-mono)', fontSize: '0.82rem' }}
                   value={item.qty}
                   onChange={(e) => updateQty(item.product, Number(e.target.value))}
                 >
-                  {[...Array(Math.min(item.countInStock, 10)).keys()].map((x) => (
+                  {[...Array(Math.min(item.countInStock || 10, 10)).keys()].map((x) => (
                     <option key={x + 1} value={x + 1}>
                       {x + 1}
                     </option>
@@ -124,7 +139,7 @@ export const Cart = () => {
               </div>
 
               {/* Line Subtotal */}
-              <div style={{ minWidth: '90px', textAlign: 'right', fontWeight: 700, fontSize: '1.1rem' }}>
+              <div style={{ minWidth: '85px', textAlign: 'right', fontWeight: 700, fontSize: '1.05rem', fontFamily: 'var(--font-heading)' }}>
                 {formatPrice(item.price * item.qty)}
               </div>
 
@@ -133,19 +148,19 @@ export const Cart = () => {
                 onClick={() => removeFromCart(item.product)}
                 style={{
                   color: 'var(--text-muted)',
-                  padding: '0.5rem',
+                  padding: '0.4rem',
                   borderRadius: 'var(--radius-sm)',
                   transition: 'var(--transition)',
                 }}
                 title="Remove item"
               >
-                <Trash2 size={18} />
+                <Trash2 size={16} />
               </button>
             </div>
           ))}
 
-          <Link to="/" className="btn btn-outline btn-sm" style={{ alignSelf: 'flex-start', marginTop: '0.5rem' }}>
-            <ArrowLeft size={16} /> Continue Shopping
+          <Link to="/" className="btn btn-secondary btn-sm" style={{ alignSelf: 'flex-start', marginTop: '0.5rem' }}>
+            <ArrowLeft size={14} /> Continue Shopping
           </Link>
         </div>
 
@@ -159,24 +174,40 @@ export const Cart = () => {
             border: '1px solid var(--border-medium)',
           }}
         >
-          <h3 style={{ fontSize: '1.3rem', marginBottom: '1.25rem', paddingBottom: '0.75rem', borderBottom: '1px solid var(--border-subtle)' }}>
-            Order Summary
-          </h3>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', paddingBottom: '0.75rem', marginBottom: '1rem', borderBottom: '1px solid var(--border-subtle)' }}>
+            <h3 style={{ fontSize: '1.15rem' }}>
+              Order Summary
+            </h3>
+            <span className="status-ping"></span>
+          </div>
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem', marginBottom: '1.5rem', fontSize: '0.95rem' }}>
+          {/* Free Shipping Progress Bar */}
+          <div style={{ padding: '0.75rem', background: 'var(--bg-surface-dim)', borderRadius: 'var(--radius-sm)', marginBottom: '1.25rem', border: '1px solid var(--border-subtle)' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.75rem', fontFamily: 'var(--font-mono)', marginBottom: '0.4rem' }}>
+              <span>EXPRESS DELIVERY:</span>
+              <strong style={{ color: remainingForFreeShipping === 0 ? 'var(--success)' : 'var(--text-amber)' }}>
+                {remainingForFreeShipping === 0 ? 'QUALIFIED FOR FREE DELIVERY' : `ADD ${formatPrice(remainingForFreeShipping)} FOR FREE`}
+              </strong>
+            </div>
+            <div style={{ width: '100%', height: '5px', background: 'rgba(255, 255, 255, 0.08)', borderRadius: '2px', overflow: 'hidden' }}>
+              <div style={{ width: `${progressPercent}%`, height: '100%', background: 'var(--color-primary)', transition: 'width 0.3s ease' }}></div>
+            </div>
+          </div>
+
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', marginBottom: '1.25rem', fontSize: '0.9rem' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
               <span style={{ color: 'var(--text-secondary)' }}>Items Subtotal</span>
-              <span>{formatPrice(itemsPrice)}</span>
+              <span style={{ fontWeight: 600 }}>{formatPrice(itemsPrice)}</span>
             </div>
 
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
               <span style={{ color: 'var(--text-secondary)' }}>Estimated Shipping</span>
-              <span>{shippingPrice === 0 ? <span style={{ color: '#34d399' }}>FREE</span> : formatPrice(shippingPrice)}</span>
+              <span style={{ fontWeight: 600 }}>{shippingPrice === 0 ? <span style={{ color: 'var(--success)' }}>FREE</span> : formatPrice(shippingPrice)}</span>
             </div>
 
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
               <span style={{ color: 'var(--text-secondary)' }}>Estimated GST (18%)</span>
-              <span>{formatPrice(taxPrice)}</span>
+              <span style={{ fontWeight: 600 }}>{formatPrice(taxPrice)}</span>
             </div>
 
             <div
@@ -185,13 +216,13 @@ export const Cart = () => {
                 justifyContent: 'space-between',
                 paddingTop: '0.85rem',
                 borderTop: '1px solid var(--border-subtle)',
-                fontSize: '1.2rem',
-                fontWeight: 800,
+                fontSize: '1.25rem',
+                fontWeight: 700,
                 fontFamily: 'var(--font-heading)',
               }}
             >
-              <span>Total</span>
-              <span style={{ color: '#818cf8' }}>{formatPrice(totalPrice)}</span>
+              <span>Total Amount</span>
+              <span style={{ color: 'var(--text-amber)' }}>{formatPrice(totalPrice)}</span>
             </div>
           </div>
 
@@ -201,7 +232,7 @@ export const Cart = () => {
             onClick={() => navigate('/checkout')}
           >
             <span>Proceed to Checkout</span>
-            <ArrowRight size={18} />
+            <ArrowRight size={16} />
           </button>
         </div>
       </div>

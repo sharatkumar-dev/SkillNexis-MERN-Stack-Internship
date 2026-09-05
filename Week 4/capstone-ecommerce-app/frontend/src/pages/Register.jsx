@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { UserPlus, Lock, Mail, User } from 'lucide-react';
+import { UserPlus, Lock, Mail, User, ShieldCheck } from 'lucide-react';
 
 export const Register = () => {
   const [name, setName] = useState('');
@@ -35,22 +35,26 @@ export const Register = () => {
         <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
           <div
             style={{
-              width: '56px',
-              height: '56px',
-              background: 'var(--color-primary-light)',
-              borderRadius: '16px',
+              width: '52px',
+              height: '52px',
+              background: 'rgba(245, 158, 11, 0.1)',
+              border: '1px solid rgba(245, 158, 11, 0.3)',
+              borderRadius: 'var(--radius-sm)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               margin: '0 auto 1rem',
-              color: '#6366f1',
+              color: 'var(--text-amber)',
             }}
           >
-            <UserPlus size={26} />
+            <UserPlus size={22} />
           </div>
-          <h1 style={{ fontSize: '1.8rem', marginBottom: '0.4rem' }}>Create Account</h1>
-          <p style={{ color: 'var(--text-secondary)', fontSize: '0.92rem' }}>
-            Join NexisStore to manage your orders & fast checkout
+          <span className="spec-chip" style={{ marginBottom: '0.5rem' }}>CREATE ACCOUNT</span>
+          <h1 style={{ fontSize: '1.75rem', marginBottom: '0.35rem', letterSpacing: '-0.02em', textTransform: 'uppercase' }}>
+            Create Your Account
+          </h1>
+          <p style={{ color: 'var(--text-secondary)', fontSize: '0.88rem' }}>
+            Join NexisStore for quick checkout, instant order tracking, and warranty support
           </p>
         </div>
 
@@ -61,12 +65,13 @@ export const Register = () => {
               border: '1px solid #ef4444',
               color: '#fecaca',
               padding: '0.75rem 1rem',
-              borderRadius: 'var(--radius-md)',
-              fontSize: '0.88rem',
+              borderRadius: 'var(--radius-sm)',
+              fontSize: '0.82rem',
+              fontFamily: 'var(--font-mono)',
               marginBottom: '1.25rem',
             }}
           >
-            {errorMsg}
+            Error: {errorMsg}
           </div>
         )}
 
@@ -77,7 +82,7 @@ export const Register = () => {
               type="text"
               required
               className="form-control"
-              placeholder="Jane Doe"
+              placeholder="John Doe"
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
@@ -89,7 +94,7 @@ export const Register = () => {
               type="email"
               required
               className="form-control"
-              placeholder="jane@example.com"
+              placeholder="john@example.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
@@ -123,16 +128,16 @@ export const Register = () => {
           <button
             type="submit"
             className="btn btn-primary btn-lg"
-            style={{ width: '100%', marginTop: '0.5rem' }}
+            style={{ width: '100%', marginTop: '0.5rem', textTransform: 'uppercase' }}
             disabled={loading}
           >
-            {loading ? 'Creating Account...' : 'Register'}
+            {loading ? 'Creating Account...' : 'Create Account'}
           </button>
         </form>
 
-        <p style={{ textAlign: 'center', marginTop: '1.5rem', fontSize: '0.9rem', color: 'var(--text-secondary)' }}>
+        <p style={{ textAlign: 'center', marginTop: '1.5rem', fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
           Already have an account?{' '}
-          <Link to="/login" style={{ color: '#818cf8', fontWeight: 600 }}>
+          <Link to="/login" style={{ color: 'var(--text-amber)', fontWeight: 600 }}>
             Sign In
           </Link>
         </p>

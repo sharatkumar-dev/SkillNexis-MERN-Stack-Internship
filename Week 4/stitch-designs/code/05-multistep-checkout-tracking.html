@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;family=Space+Grotesk:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "carbon-deep": "#090A0F",
+          "carbon-base": "#0C0E14",
+          "surface-slate-dim": "#12151E",
+          "surface-slate": "#161A24",
+          "surface-slate-bright": "#1B202D",
+          "surface-container-lowest": "#090A0F",
+          "surface-container-low": "#12151E",
+          "surface-container": "#161A24",
+          "surface-container-high": "#1B202D",
+          "surface-container-highest": "#242A3B",
+          "border-subtle": "rgba(255, 255, 255, 0.08)",
+          "border-elevated": "rgba(255, 255, 255, 0.15)",
+          "border-amber": "rgba(245, 158, 11, 0.3)",
+          "amber-primary": "#F59E0B",
+          "amber-bright": "#FBBF24",
+          "amber-deep": "#D97706",
+          "amber-glow": "rgba(245, 158, 11, 0.2)",
+          "hardware-emerald": "#10B981",
+          "titanium-highlight": "#F8FAFC",
+          "titanium-light": "#E2E8F0",
+          "titanium-muted": "#94A3B8",
+          "titanium-dark": "#64748B",
+          "primary": "#F59E0B",
+          "primary-container": "#F59E0B",
+          "on-primary": "#090A0F",
+          "background": "#090A0F",
+          "surface": "#12151E"
+        },
+        fontFamily: {
+          "headline-xl": ["Space Grotesk", "sans-serif"],
+          "headline-lg": ["Space Grotesk", "sans-serif"],
+          "headline-md": ["Space Grotesk", "sans-serif"],
+          "headline-sm": ["Space Grotesk", "sans-serif"],
+          "title-md": ["Space Grotesk", "sans-serif"],
+          "body-lg": ["Inter", "sans-serif"],
+          "body-md": ["Inter", "sans-serif"],
+          "body-sm": ["Inter", "sans-serif"],
+          "label-lg": ["Inter", "sans-serif"],
+          "label-md": ["Inter", "sans-serif"],
+          "label-sm": ["Inter", "sans-serif"],
+          "code-spec": ["JetBrains Mono", "monospace"]
+        },
+        borderRadius: {
+          "DEFAULT": "4px",
+          "sm": "4px",
+          "md": "4px",
+          "lg": "4px",
+          "xl": "4px",
+          "2xl": "6px"
+        },
+        spacing: {
+          "gutter-mobile": "1rem",
+          "gutter-desktop": "1.5rem",
+          "container-max": "1440px",
+          "space-2xs": "0.25rem",
+          "space-xs": "0.5rem",
+          "space-sm": "0.75rem",
+          "space-md": "1rem",
+          "space-lg": "1.5rem",
+          "space-xl": "2rem",
+          "space-2xl": "3rem",
+          "space-3xl": "4rem",
+          "space-4xl": "6rem"
+        }
+      }
+    }
+  };
+</script></head><body class="bg-carbon-deep font-body-md text-body-md text-titanium-light antialiased selection:bg-amber-primary selection:text-carbon-deep"><header class="fixed top-0 left-0 right-0 z-50 bg-carbon-deep/90 backdrop-blur-xl border-b border-border-subtle shadow-[0_4px_24px_rgba(0,0,0,0.6)]"><div class="h-20 max-w-container-max mx-auto px-gutter-desktop flex items-center justify-between gap-space-lg"><div class="flex items-center gap-space-lg"><a class="flex items-center gap-space-sm group" data-path="catalog" href="#"><img alt="NexisStore Precision Hardware Logo" class="h-9 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1ULvr2UnPIoOEGsOVl_INMNsL5BJKoUwFPiJFK-5T7YrKJCrsqGFBFaVq6LMQrR3HutzpLOrwCbzgs4IKPPSsF_Dxzjsg0vix8Gk3ULUmk_Pfgs2QSxdSp37jeflBs4ZD0dxEzRwteFoF1TM_0HiJIL6j2A2rVTBVwNmYH5_HqS5u2wVU0QEs2GlTDJhFXiL5KDfl17fjzSUx1qx10mvxtsI1PwxnaJCNkjHmnUBFWXrwcV-O14TD4HI0VV"/></a><nav class="hidden xl:flex items-center gap-space-xs"><a class="px-space-sm py-space-xs rounded-sm font-label-md text-xs text-titanium-muted hover:text-titanium-light hover:bg-surface-slate transition-colors" data-path="catalog" href="#">Catalog</a><a class="px-space-sm py-space-xs rounded-sm font-label-md text-xs text-titanium-muted hover:text-titanium-light hover:bg-surface-slate transition-colors" data-path="product-detail" href="#">Product</a><a aria-current="page" class="px-space-sm py-space-xs transition-colors bg-surface-slate-bright text-amber-primary font-semibold rounded-sm border border-border-amber" data-path="checkout-tracking" href="#">Checkout</a><a class="px-space-sm py-space-xs rounded-sm font-label-md text-xs text-titanium-muted hover:text-titanium-light hover:bg-surface-slate transition-colors" data-path="admin-portal" href="#">Admin</a></nav></div><div class="flex-1 max-w-md hidden md:block"><div class="relative flex items-center w-full bg-surface-slate-dim border border-border-subtle rounded-sm px-space-md py-space-xs focus-within:border-amber-primary/50 transition-colors"><span class="material-symbols-outlined text-titanium-dark mr-space-xs text-xl">search</span><input class="w-full bg-transparent font-body-sm text-xs text-titanium-highlight placeholder:text-titanium-dark focus:outline-none" placeholder="Search ultra-gear, chips, hardware..." type="text"/><kbd class="font-code-spec text-[11px] bg-surface-slate text-titanium-muted px-space-2xs py-0.5 rounded-sm ml-space-xs border border-border-subtle">⌘K</kbd></div></div><div class="flex items-center gap-space-sm"><button class="relative p-space-xs rounded-sm text-titanium-muted hover:text-titanium-light hover:bg-surface-slate transition-colors"><span class="material-symbols-outlined">favorite</span><span class="absolute top-1 right-1 flex items-center justify-center w-4 h-4 rounded-full bg-amber-primary text-carbon-deep font-code-spec text-[10px] font-bold">3</span></button><button class="relative p-space-xs rounded-sm text-titanium-muted hover:text-titanium-light hover:bg-surface-slate transition-colors"><span class="material-symbols-outlined">notifications</span><span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-amber-primary animate-pulse"></span></button><a class="flex items-center gap-space-xs px-space-sm py-space-xs bg-amber-primary hover:bg-amber-bright rounded-sm text-carbon-deep font-semibold transition-all shadow-[0_0_18px_rgba(245,158,11,0.3)]" data-path="checkout-tracking" href="#"><span class="material-symbols-outlined text-xl">shopping_bag</span><div class="flex flex-col text-left"><span class="font-code-spec text-xs font-bold text-carbon-deep">$2,489.00</span><span class="font-label-sm text-[10px] text-carbon-deep/90 font-medium">4 items</span></div></a><div class="flex items-center gap-space-xs pl-space-xs"><img alt="Profile" class="w-8 h-8 rounded-full object-cover ring-1 ring-border-amber" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDntNCv3lwB_yWbMadnhi4vDvV2fynDH_p9AowrM4UlBqybD9L_wxS-BpTb32k4YO_yidzpI5Be0wds60bPlcNx-wG8wzVye_dU-0ur_JUc0fPZgvRuSSv7E0i_NneVrktux-q4mQ0IAFlOdl7pk7vWTb5DQvX85TGRVj4tW-H9DgmzXo9fBEImp6nuzp4XDm3DxCtOKRi4y8lVulQR5CHy_CJXNJ4ixDBsi9439yIh2T2hkQ2ctFzXzw"/><div class="hidden 2xl:flex flex-col"><span class="font-label-md text-xs text-titanium-highlight font-semibold">Alex Rivera</span><span class="font-code-spec text-[11px] text-amber-bright">Pro Member</span></div></div></div></div><div class="bg-carbon-base/90 border-b border-border-subtle backdrop-blur-md px-gutter-desktop"><div class="max-w-container-max mx-auto flex items-center gap-space-xs py-space-2xs overflow-x-auto"><button class="px-space-sm py-1 rounded-sm font-label-sm text-xs font-medium bg-amber-primary/15 text-amber-bright border border-amber-primary/40 transition-colors">All Categories</button><button class="px-space-sm py-1 rounded-sm font-label-sm text-xs font-medium text-titanium-muted hover:text-titanium-highlight hover:bg-surface-slate transition-colors">Laptops</button><button class="px-space-sm py-1 rounded-sm font-label-sm text-xs font-medium text-titanium-muted hover:text-titanium-highlight hover:bg-surface-slate transition-colors">Audio</button><button class="px-space-sm py-1 rounded-sm font-label-sm text-xs font-medium text-titanium-muted hover:text-titanium-highlight hover:bg-surface-slate transition-colors">Smartphones</button><button class="px-space-sm py-1 rounded-sm font-label-sm text-xs font-medium text-titanium-muted hover:text-titanium-highlight hover:bg-surface-slate transition-colors">Wearables</button><button class="px-space-sm py-1 rounded-sm font-label-sm text-xs font-medium text-titanium-muted hover:text-titanium-highlight hover:bg-surface-slate transition-colors">Gaming</button><button class="px-space-sm py-1 rounded-sm font-label-sm text-xs font-medium text-titanium-muted hover:text-titanium-highlight hover:bg-surface-slate transition-colors">Accessories</button></div></div></header><main class="w-full pt-20 bg-carbon-deep min-h-screen"><div class="flex flex-col w-full">
+<div class="max-w-container-max mx-auto w-full px-gutter-mobile md:px-gutter-desktop py-space-xl">
+<!-- Top Interactive Breadcrumb Stepper -->
+<section class="mb-space-2xl">
+<div class="bg-surface-slate-dim border border-border-subtle rounded-sm p-space-md shadow-xl">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-sm items-center relative">
+<!-- Step 1: Shipping Details -->
+<div class="flex items-center gap-space-sm p-space-xs rounded-sm bg-surface-slate/60 border border-border-subtle">
+<div class="flex items-center justify-center w-8 h-8 rounded-sm bg-hardware-emerald/20 text-hardware-emerald border border-hardware-emerald/40 shadow-[0_0_12px_rgba(16,185,129,0.2)]">
+<span class="material-symbols-outlined text-base font-bold">check</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-code-spec text-[10px] uppercase tracking-wider text-hardware-emerald font-bold">Step 01 // Completed</span>
+<span class="font-title-md text-sm text-titanium-highlight truncate">Shipping Details</span>
+</div>
+<span class="font-code-spec text-xs text-titanium-dark ml-auto hidden lg:inline">01/03</span>
+</div>
+<!-- Step 2: Payment Method -->
+<div class="flex items-center gap-space-sm p-space-xs rounded-sm bg-surface-slate/60 border border-border-subtle">
+<div class="flex items-center justify-center w-8 h-8 rounded-sm bg-hardware-emerald/20 text-hardware-emerald border border-hardware-emerald/40 shadow-[0_0_12px_rgba(16,185,129,0.2)]">
+<span class="material-symbols-outlined text-base font-bold">check</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-code-spec text-[10px] uppercase tracking-wider text-hardware-emerald font-bold">Step 02 // Authorized</span>
+<span class="font-title-md text-sm text-titanium-highlight truncate">Payment Method</span>
+</div>
+<span class="font-code-spec text-xs text-titanium-dark ml-auto hidden lg:inline">02/03</span>
+</div>
+<!-- Step 3: Confirmation (Active) -->
+<div class="flex items-center gap-space-sm p-space-xs rounded-sm bg-amber-primary/10 border border-amber-primary/50 shadow-[0_0_20px_rgba(245,158,11,0.2)]">
+<div class="flex items-center justify-center w-8 h-8 rounded-sm bg-amber-primary text-carbon-deep shadow-[0_0_14px_rgba(245,158,11,0.5)]">
+<span class="material-symbols-outlined text-base font-bold">local_shipping</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-code-spec text-[10px] uppercase tracking-wider text-amber-bright font-bold">Step 03 // Live Status</span>
+<span class="font-title-md text-sm text-titanium-highlight font-bold truncate">Dispatch &amp; Review</span>
+</div>
+<span class="ml-auto inline-flex items-center px-space-xs py-0.5 rounded-sm bg-amber-primary text-carbon-deep border border-amber-bright font-code-spec text-[11px] font-bold">Active</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Main Grid: Left Flow / Right Order Financials -->
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-space-xl items-start">
+<!-- Left Column (7 cols on desktop) -->
+<div class="xl:col-span-7 flex flex-col gap-space-xl">
+<!-- Celebratory Order Confirmation Hero -->
+<div class="relative overflow-hidden rounded-sm bg-surface-slate-dim border border-border-subtle p-space-xl shadow-2xl">
+<!-- Ambient Glow Orb Behind -->
+<div class="absolute -right-16 -top-16 w-64 h-64 rounded-full bg-amber-primary/10 blur-3xl pointer-events-none"></div>
+<div class="absolute -left-16 -bottom-16 w-64 h-64 rounded-full bg-surface-slate-bright/40 blur-3xl pointer-events-none"></div>
+<div class="relative z-10 flex flex-col gap-space-md">
+<div class="flex flex-wrap items-center justify-between gap-space-sm">
+<div class="inline-flex items-center gap-space-xs px-space-sm py-1 rounded-sm bg-amber-primary/10 text-amber-bright border border-amber-primary/40">
+<span class="w-2.5 h-2.5 rounded-full bg-amber-primary animate-ping"></span>
+<span class="font-label-md text-xs font-semibold">Order Confirmed &amp; Payment Authorized</span>
+</div>
+<span class="font-code-spec text-xs text-titanium-muted">Auth Ref: <span class="text-amber-bright">0x948210_SEC</span></span>
+</div>
+<div class="flex flex-col gap-space-2xs">
+<div class="flex flex-wrap items-baseline gap-space-sm">
+<h1 class="font-headline-lg text-3xl md:text-4xl text-titanium-highlight font-bold tracking-tight">Order <span class="font-code-spec text-amber-primary">#NXS-948210</span></h1>
+<span class="font-code-spec text-xs text-amber-bright bg-amber-primary/10 border border-amber-primary/30 px-space-xs py-0.5 rounded-sm font-semibold">PRIORITY COURIER</span>
+</div>
+<p class="font-body-md text-sm text-titanium-muted">
+                Confirmed on <span class="font-code-spec text-titanium-highlight font-medium">October 24, 2025 · 14:32 EST</span> for 
+                <span class="text-amber-bright font-medium">Alex Rivera</span> (alex.rivera@techcorp.io)
+              </p>
+</div>
+<!-- Fast Action Row -->
+<div class="flex flex-wrap items-center gap-space-sm pt-space-xs">
+<button class="inline-flex items-center gap-space-xs px-space-md py-space-xs bg-amber-primary text-carbon-deep rounded-sm font-label-lg text-sm font-bold hover:bg-amber-bright transition-all shadow-[0_0_20px_rgba(245,158,11,0.35)] active:scale-95">
+<span class="material-symbols-outlined text-lg">download</span>
+<span>Download PDF Invoice</span>
+</button>
+<button class="inline-flex items-center gap-space-xs px-space-md py-space-xs bg-surface-slate text-titanium-light rounded-sm font-label-lg text-sm font-medium hover:bg-surface-slate-bright border border-border-subtle hover:border-border-elevated transition-colors">
+<span class="material-symbols-outlined text-lg text-amber-bright">support_agent</span>
+<span>Support Concierge</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Real-Time Order Progression Dashboard -->
+<div class="rounded-sm bg-surface-slate-dim border border-border-subtle p-space-xl shadow-xl flex flex-col gap-space-lg">
+<div class="flex flex-wrap items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-amber-bright text-2xl">radar</span>
+<h2 class="font-headline-sm text-xl text-titanium-highlight font-semibold">Live Transit Pipeline</h2>
+</div>
+<div class="flex items-center gap-space-xs font-code-spec text-xs text-amber-bright bg-amber-primary/10 border border-amber-primary/30 px-space-sm py-1 rounded-sm">
+<span class="w-2 h-2 rounded-full bg-amber-bright animate-pulse"></span>
+<span>Telemetry Connected</span>
+</div>
+</div>
+<!-- Multi-Node Timeline -->
+<div class="relative py-space-xs">
+<!-- Progress Line Bar -->
+<div class="hidden md:block absolute top-6 left-8 right-8 h-1 bg-surface-slate-bright rounded-full z-0">
+<div class="h-full bg-gradient-to-r from-amber-deep via-amber-primary to-amber-bright rounded-full shadow-[0_0_12px_rgba(245,158,11,0.5)]" style="width: 70%;"></div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-space-md relative z-10">
+<!-- Node 1 -->
+<div class="flex md:flex-col items-start gap-space-sm">
+<div class="flex items-center justify-center w-12 h-12 rounded-sm bg-carbon-deep border border-amber-primary/40 text-amber-bright shadow-[0_0_14px_rgba(245,158,11,0.2)] shrink-0">
+<span class="material-symbols-outlined text-xl">inventory_2</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-xs font-semibold text-titanium-highlight">Order Received</span>
+<span class="font-code-spec text-[11px] text-titanium-muted">Oct 24, 14:32</span>
+<span class="font-code-spec text-xs text-hardware-emerald font-medium">Verified ✓</span>
+</div>
+</div>
+<!-- Node 2 -->
+<div class="flex md:flex-col items-start gap-space-sm">
+<div class="flex items-center justify-center w-12 h-12 rounded-sm bg-carbon-deep border border-amber-primary/40 text-amber-bright shadow-[0_0_14px_rgba(245,158,11,0.2)] shrink-0">
+<span class="material-symbols-outlined text-xl">verified</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-xs font-semibold text-titanium-highlight">Quality Tested</span>
+<span class="font-code-spec text-[11px] text-titanium-muted">Oct 24, 16:15</span>
+<span class="font-code-spec text-xs text-hardware-emerald font-medium">Passed Spec ✓</span>
+</div>
+</div>
+<!-- Node 3 (Active) -->
+<div class="flex md:flex-col items-start gap-space-sm">
+<div class="flex items-center justify-center w-12 h-12 rounded-sm bg-amber-primary text-carbon-deep shadow-[0_0_24px_rgba(245,158,11,0.6)] shrink-0 animate-bounce">
+<span class="material-symbols-outlined text-xl font-bold">flight_takeoff</span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-1">
+<span class="font-label-md text-xs font-bold text-amber-bright">FedEx Priority</span>
+<span class="w-2 h-2 rounded-full bg-amber-bright animate-ping"></span>
+</div>
+<span class="font-code-spec text-[11px] text-titanium-highlight font-semibold">In Transit</span>
+<span class="font-code-spec text-xs text-amber-primary font-medium">Est. Oct 25, 10:30 AM</span>
+</div>
+</div>
+<!-- Node 4 (Upcoming) -->
+<div class="flex md:flex-col items-start gap-space-sm opacity-50">
+<div class="flex items-center justify-center w-12 h-12 rounded-sm bg-surface-slate text-titanium-dark border border-border-subtle shrink-0">
+<span class="material-symbols-outlined text-xl">home_pin</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-xs font-semibold text-titanium-muted">Delivered &amp; Signed</span>
+<span class="font-code-spec text-[11px] text-titanium-dark">Terminal Stop</span>
+<span class="font-body-sm text-xs text-titanium-dark">Pending Delivery</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Tracking Logistics Details Bar -->
+<div class="bg-surface-slate rounded-sm p-space-md border border-border-subtle flex flex-col md:flex-row md:items-center justify-between gap-space-md">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-sm bg-surface-slate-dim border border-border-subtle flex items-center justify-center text-amber-bright">
+<span class="material-symbols-outlined">local_shipping</span>
+</div>
+<div class="flex flex-col">
+<span class="font-code-spec text-[10px] text-titanium-muted uppercase tracking-wider font-semibold">Tracking Reference</span>
+<span class="font-code-spec text-sm text-amber-bright font-bold">FDX-8839201948</span>
+</div>
+</div>
+<div class="flex items-center gap-space-xs">
+<button class="px-space-sm py-1.5 rounded-sm bg-surface-slate-bright hover:bg-surface-slate font-label-md text-xs text-titanium-light border border-border-subtle transition-colors">
+                Carrier Portal
+              </button>
+<button class="px-space-sm py-1.5 rounded-sm bg-amber-primary/15 hover:bg-amber-primary/25 border border-amber-primary/40 font-label-md text-xs text-amber-bright font-semibold transition-colors">
+                Subscribe SMS Updates
+              </button>
+</div>
+</div>
+<!-- Dynamic Live Map Visualizer -->
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-xs text-titanium-muted flex items-center gap-1">
+<span class="material-symbols-outlined text-sm text-amber-bright">location_on</span>
+                Real-Time Route Map: Seattle Hub Distribution Center
+              </span>
+<span class="font-code-spec text-xs text-amber-bright">GPS Node Sync: Active</span>
+</div>
+<div class="w-full h-48 bg-carbon-deep rounded-sm bg-cover bg-center overflow-hidden relative shadow-inner border border-border-subtle" data-location="Seattle, WA" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBgu3qwt4UsSHnEaWZ3fc8dUNMwWl754vdR8ljuqX0rx-xQht5vGKB7E9DjxyVHh59HBOUF9CNcURqeeAtEgeEiv9G8RbpZYQAfUskIiqRuUwAU0zXi_aa2GNTLjQjKK5RdWqTgR6Kz1cvnOb5lzqOMMLXVlIQFoxvdMkZufu4aH34Fw5_XFcAmmr6mBjcQaKZGPW2WeTlazopih6dwjhLKUj-7tS4f9xM-g6VQGqpJDAB8rMOcuYs1rg')">
+<div class="absolute inset-0 bg-gradient-to-t from-carbon-deep via-transparent to-transparent opacity-85"></div>
+<div class="absolute bottom-3 left-3 bg-carbon-deep/90 border border-amber-primary/40 backdrop-blur-md px-space-sm py-space-2xs rounded-sm flex items-center gap-space-xs">
+<span class="w-2.5 h-2.5 rounded-full bg-amber-bright animate-ping"></span>
+<span class="font-code-spec text-xs text-titanium-highlight">Courier Speed: <span class="text-amber-bright font-semibold">54 mph</span> // Heading North-West</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Split Cards: Destination Details & Payment Authorized Info -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
+<!-- Delivery Address Block -->
+<div class="bg-surface-slate-dim border border-border-subtle rounded-sm p-space-lg shadow-md flex flex-col justify-between gap-space-md">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-code-spec text-[10px] uppercase tracking-wider text-amber-bright font-bold">Delivery Address</span>
+<span class="material-symbols-outlined text-titanium-dark text-lg">pin_drop</span>
+</div>
+<p class="font-title-md text-base text-titanium-highlight font-semibold">Alex Rivera</p>
+<p class="font-body-md text-sm text-titanium-muted leading-relaxed">
+                742 Evergreen Terrace, Suite 4B<br/>
+                Seattle, WA 98101<br/>
+                United States
+              </p>
+<p class="font-code-spec text-xs text-amber-bright pt-1 font-medium">+1 (555) 382-9102</p>
+</div>
+<div class="pt-space-xs bg-surface-slate border border-border-subtle p-space-sm rounded-sm">
+<span class="font-code-spec text-[10px] text-titanium-dark uppercase block font-semibold">Shipping Method</span>
+<span class="font-body-sm text-xs text-titanium-light font-medium">Overnight Guaranteed Priority (Next Morning Delivery)</span>
+</div>
+</div>
+<!-- Payment Security & Transaction Block -->
+<div class="bg-surface-slate-dim border border-border-subtle rounded-sm p-space-lg shadow-md flex flex-col justify-between gap-space-md">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-code-spec text-[10px] uppercase tracking-wider text-amber-bright font-bold">Authorized Payment</span>
+<span class="material-symbols-outlined text-amber-bright text-lg">verified_user</span>
+</div>
+<div class="flex items-center gap-space-sm py-space-xs">
+<div class="w-12 h-8 rounded-sm bg-surface-slate border border-border-subtle flex items-center justify-center text-titanium-highlight font-code-spec text-xs font-bold tracking-widest">
+                  MC
+                </div>
+<div class="flex flex-col">
+<span class="font-title-md text-sm text-titanium-highlight font-semibold">Mastercard •••• 4092</span>
+<span class="font-code-spec text-xs text-titanium-dark">Auth Token: auth_8920a4b</span>
+</div>
+</div>
+<div class="flex flex-col gap-1 text-titanium-muted font-body-sm text-xs">
+<div class="flex items-center justify-between">
+<span>Billing Descriptor:</span>
+<span class="font-code-spec text-xs text-titanium-light">NEXIS*TECH_STORE</span>
+</div>
+<div class="flex items-center justify-between">
+<span>Transaction Security:</span>
+<span class="font-code-spec text-xs text-amber-bright font-medium">3D Secure 2.2 Passed</span>
+</div>
+</div>
+</div>
+<!-- Alternative COD Option Flag -->
+<div class="pt-space-xs bg-surface-slate border border-border-subtle p-space-sm rounded-sm flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-titanium-dark text-lg">swap_horizontal_circle</span>
+<span class="font-body-sm text-xs text-titanium-muted">Payment Method Swapping</span>
+</div>
+<span class="font-code-spec text-xs text-titanium-dark uppercase font-semibold">Locked (Billed)</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Sticky Purchased Item Ledger & Breakdown (5 cols on desktop) -->
+<div class="xl:col-span-5 flex flex-col gap-space-lg xl:sticky xl:top-28">
+<div class="bg-surface-slate-dim border border-border-subtle rounded-sm p-space-xl shadow-2xl flex flex-col gap-space-lg">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-amber-bright text-2xl">receipt_long</span>
+<h2 class="font-headline-sm text-xl text-titanium-highlight font-semibold">Order Summary</h2>
+</div>
+<span class="font-code-spec text-xs bg-surface-slate text-amber-bright border border-border-subtle px-space-xs py-0.5 rounded-sm">3 Items</span>
+</div>
+<!-- Item Stack Ledger -->
+<div class="flex flex-col gap-space-md">
+<!-- Item 1 -->
+<div class="flex items-center gap-space-md p-space-sm bg-surface-slate border border-border-subtle rounded-sm hover:border-amber-primary/40 transition-all">
+<div class="w-16 h-16 rounded-sm bg-carbon-deep overflow-hidden shrink-0 flex items-center justify-center border border-border-subtle">
+<img class="w-full h-full object-cover" data-alt="Futuristic slate gray pro workstation laptop sitting open at 45 degrees angle displaying high contrast code IDE against ambient midnight blue and cyan background studio lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBleow_DzMxEcsXilBQ_nz3EBsUwEdurg_hUQmO1OJeJhPvi-K03fg3oYSC71rycs9KJjruA23ahdu1IE6BLHXsW222z-rwmAqyPwLDTTmN1tW6zTYeRfR6_eaott0aCYLfT6MTjQ8T_qeBbt20VLGBlYVbutGJ_X1XfiezcbQLQBss_ZNduSMosqVoBE4OLgOvXeyTeqRIYbAvcfHbuKCDhh-k7s8zuizE3IetYnWhNLkjbzgvJH5r4A"/>
+</div>
+<div class="flex flex-col flex-1 min-w-0">
+<div class="flex items-center justify-between gap-space-xs">
+<h3 class="font-title-md text-sm text-titanium-highlight font-semibold truncate">Nexis ProBook 16 M3 Ultra</h3>
+<span class="font-code-spec text-sm text-titanium-highlight font-bold tabular-nums">$2,499.00</span>
+</div>
+<span class="font-body-sm text-xs text-titanium-muted">64GB Unified RAM · 2TB SSD</span>
+<div class="flex items-center gap-space-xs mt-1">
+<span class="px-space-2xs py-0.5 rounded-sm bg-amber-primary/10 text-amber-bright border border-amber-primary/30 font-code-spec text-[10px]">Qty: 1</span>
+<span class="font-code-spec text-[11px] text-titanium-dark">SKU: NXS-PB16-U</span>
+</div>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="flex items-center gap-space-md p-space-sm bg-surface-slate border border-border-subtle rounded-sm hover:border-amber-primary/40 transition-all">
+<div class="w-16 h-16 rounded-sm bg-carbon-deep overflow-hidden shrink-0 flex items-center justify-center border border-border-subtle">
+<img class="w-full h-full object-cover" data-alt="High-end matte black over-ear wireless audiophile headphones with sleek titanium headband and cyan illuminated ring glowing softly against deep studio shadow" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBqum1Zet82igSKQYr7r0mAiriThK2KIxH8mofpKlmAWaLrXG0FiEaDAwEzpoBHh1wleQ-V7iOkW_8psnf7ebz_CqlXIx3x3HFjUXcJKFF7HqdZk1mgbea5yIKmeIIIKz8PD96ifo11u1Vf4SdoJO68_iaLbeOQms15tql8G2McadYlLUVRqMIEvpHGrOlWxLAA8FsF7A3ApqoWtcjm3kM1XL0otRFz_aqKeIICW5_enj5wiOnchZy3qA"/>
+</div>
+<div class="flex flex-col flex-1 min-w-0">
+<div class="flex items-center justify-between gap-space-xs">
+<h3 class="font-title-md text-sm text-titanium-highlight font-semibold truncate">AetherSonic Studio Max ANC</h3>
+<span class="font-code-spec text-sm text-titanium-highlight font-bold tabular-nums">$349.00</span>
+</div>
+<span class="font-body-sm text-xs text-titanium-muted">Space Black · Spatial Hi-Res Audio</span>
+<div class="flex items-center gap-space-xs mt-1">
+<span class="px-space-2xs py-0.5 rounded-sm bg-amber-primary/10 text-amber-bright border border-amber-primary/30 font-code-spec text-[10px]">Qty: 1</span>
+<span class="font-code-spec text-[11px] text-titanium-dark">SKU: ATH-MAX-ANC</span>
+</div>
+</div>
+</div>
+<!-- Item 3 -->
+<div class="flex items-center gap-space-md p-space-sm bg-surface-slate border border-border-subtle rounded-sm hover:border-amber-primary/40 transition-all">
+<div class="w-16 h-16 rounded-sm bg-carbon-deep overflow-hidden shrink-0 flex items-center justify-center border border-border-subtle">
+<img class="w-full h-full object-cover" data-alt="Mechanical compact 75 percent gaming keyboard with CNC machined aluminum body translucent keycaps and subtle indigo neon underglow on matte dark slate surface" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBOc-UffR8x9r1Ok8j4R0EzYYi7kIApYvn2st6ao06jYqnX8YGuUr-XFogH3Mjece3pI1CKjtWMyjp8Ms8NB2rfbqfn3IZRaebUNL2hGnUUfiZiQvMYfQSLRv4z9eZJJZhyVjWD07SRqhfsTNfO9JhvJY_LzH5-2tJqD0ajGbYx6LF1Vk25WBCem1d5S3KPI4zYk6dA2yryCP76WmbxZ9OD-sWfTjHzgzN9fXcT0HimA9HorUTKpmsaJw"/>
+</div>
+<div class="flex flex-col flex-1 min-w-0">
+<div class="flex items-center justify-between gap-space-xs">
+<h3 class="font-title-md text-sm text-titanium-highlight font-semibold truncate">QuantumKey Mechanical Board</h3>
+<span class="font-code-spec text-sm text-titanium-highlight font-bold tabular-nums">$189.00</span>
+</div>
+<span class="font-body-sm text-xs text-titanium-muted">Linear Quiet Switches · Anodized Grey</span>
+<div class="flex items-center gap-space-xs mt-1">
+<span class="px-space-2xs py-0.5 rounded-sm bg-amber-primary/10 text-amber-bright border border-amber-primary/30 font-code-spec text-[10px]">Qty: 1</span>
+<span class="font-code-spec text-[11px] text-titanium-dark">SKU: QNT-KEY-75</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Financial Calculation Breakdown -->
+<div class="bg-surface-slate border border-border-subtle rounded-sm p-space-md flex flex-col gap-space-xs">
+<div class="flex items-center justify-between font-body-md text-sm text-titanium-muted">
+<span>Items Subtotal</span>
+<span class="font-code-spec text-sm text-titanium-highlight font-semibold tabular-nums">$3,037.00</span>
+</div>
+<div class="flex items-center justify-between font-body-md text-sm text-amber-bright">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">local_offer</span>
+                Promo Code (NEXISPRO10)
+              </span>
+<span class="font-code-spec text-sm font-semibold tabular-nums">-$303.70</span>
+</div>
+<div class="flex items-center justify-between font-body-md text-sm text-titanium-muted">
+<span class="flex items-center gap-1">
+<span>FedEx Overnight Express</span>
+<span class="font-code-spec text-[11px] text-amber-bright font-semibold">(PRO MEMBER)</span>
+</span>
+<span class="font-code-spec text-sm text-amber-bright font-semibold">FREE ($0.00)</span>
+</div>
+<div class="flex items-center justify-between font-body-md text-sm text-titanium-muted">
+<span>Estimated Sales Tax (8.00%)</span>
+<span class="font-code-spec text-sm text-titanium-highlight font-semibold tabular-nums">$242.96</span>
+</div>
+<!-- Total Line -->
+<div class="pt-space-sm mt-space-2xs bg-surface-slate-bright/70 -mx-space-md px-space-md py-space-sm rounded-sm flex items-baseline justify-between border-t border-border-subtle">
+<div class="flex flex-col">
+<span class="font-headline-sm text-lg text-titanium-highlight font-bold">Total Charged</span>
+<span class="font-code-spec text-[11px] text-titanium-dark">All duties &amp; taxes included</span>
+</div>
+<div class="flex flex-col items-end">
+<span class="font-headline-lg text-3xl text-amber-primary font-bold tracking-tight tabular-nums font-code-spec">$2,976.26</span>
+<span class="font-code-spec text-xs text-amber-bright/90 font-medium">USD Verified</span>
+</div>
+</div>
+</div>
+<!-- Trust Seals & Guarantee Block -->
+<div class="grid grid-cols-3 gap-space-xs text-center pt-space-xs">
+<div class="flex flex-col items-center gap-1 p-space-xs bg-surface-slate rounded-sm border border-border-subtle">
+<span class="material-symbols-outlined text-amber-bright text-xl">lock</span>
+<span class="font-label-sm text-[11px] text-titanium-light font-semibold">256-Bit SSL</span>
+<span class="font-code-spec text-[10px] text-titanium-dark">Encrypted Pipe</span>
+</div>
+<div class="flex flex-col items-center gap-1 p-space-xs bg-surface-slate rounded-sm border border-border-subtle">
+<span class="material-symbols-outlined text-amber-bright text-xl">verified</span>
+<span class="font-label-sm text-[11px] text-titanium-light font-semibold">Stripe Certified</span>
+<span class="font-code-spec text-[10px] text-titanium-dark">PCI DSS L1</span>
+</div>
+<div class="flex flex-col items-center gap-1 p-space-xs bg-surface-slate rounded-sm border border-border-subtle">
+<span class="material-symbols-outlined text-amber-bright text-xl">eco</span>
+<span class="font-label-sm text-[11px] text-titanium-light font-semibold">Carbon Neutral</span>
+<span class="font-code-spec text-[10px] text-titanium-dark">100% Offset</span>
+</div>
+</div>
+<!-- Pro Member Loyalty Callout -->
+<div class="bg-gradient-to-r from-amber-primary/15 via-surface-slate to-amber-primary/5 rounded-sm p-space-md flex items-center justify-between gap-space-sm border border-amber-primary/30 shadow-inner">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-amber-bright text-2xl">loyalty</span>
+<div class="flex flex-col">
+<span class="font-label-md text-xs font-bold text-titanium-highlight">Pro Rewards Earned</span>
+<span class="font-code-spec text-xs text-titanium-muted">+2,976 Nexis Points credited</span>
+</div>
+</div>
+<a class="font-code-spec text-xs text-amber-bright hover:text-amber-primary transition-colors font-semibold underline underline-offset-4" data-path="catalog" href="#">View Vault</a>
+</div>
+</div>
+</div>
+</div>
+<!-- Related Upgrades or Accessories Bottom Deck -->
+<section class="mt-space-4xl flex flex-col gap-space-lg">
+<div class="flex flex-wrap items-center justify-between gap-space-sm">
+<div class="flex flex-col">
+<span class="font-code-spec text-xs uppercase tracking-wider text-amber-bright font-bold">Post-Purchase Ecosystem Addons</span>
+<h2 class="font-headline-md text-2xl text-titanium-highlight font-bold">Frequently Bundled with Your Setup</h2>
+</div>
+<a class="flex items-center gap-1 font-label-lg text-sm text-amber-bright hover:text-amber-primary transition-colors font-semibold" data-path="catalog" href="#">
+<span>Explore All Pro Gear</span>
+<span class="material-symbols-outlined text-base">arrow_forward</span>
+</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-md">
+<!-- Addon 1 -->
+<div class="bg-surface-slate-dim border border-border-subtle rounded-sm p-space-md shadow-md flex items-center gap-space-md hover:border-amber-primary/40 transition-all">
+<div class="w-20 h-20 rounded-sm bg-carbon-deep shrink-0 overflow-hidden border border-border-subtle">
+<img class="w-full h-full object-cover" data-alt="High speed braided Thunderbolt 4 pro cable coiled in front of modern metallic dock on dark technical table with subtle cyan backlighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCfNck28Ov6Xx6pSr3ePx8G_bliX4gSfcmL5cfatqwLriTxrp011cD7HV2ct9X3OnMJhMUSyXutRA2FTFMCX5bb6WYZsmqF1vRhtuUax2j7kWUUqQCP826QKDu3_eAUytgxAXz-CYrc2xSvbSMAZABA-FRxsFmmj7GeMmoxioT0YIUftU_E94BZRBoHAHiNTN-UpYvIJjDDNZPULHzs-PwT9uaxTkRmjAgDKY50Xb94rNim6Ua-Q9vt0g"/>
+</div>
+<div class="flex flex-col flex-1 min-w-0">
+<span class="font-code-spec text-xs text-amber-bright">Nexis Link Pro</span>
+<h4 class="font-title-md text-sm text-titanium-highlight font-semibold truncate">Thunderbolt 4 Cable (2m)</h4>
+<span class="font-body-sm text-xs text-titanium-muted">40Gbps · 100W PD</span>
+<div class="flex items-center justify-between mt-space-xs">
+<span class="font-code-spec text-sm text-titanium-highlight font-bold tabular-nums">$69.00</span>
+<button class="px-space-sm py-1 rounded-sm bg-amber-primary text-carbon-deep font-label-sm text-xs font-bold hover:bg-amber-bright transition-colors shadow-[0_0_12px_rgba(245,158,11,0.3)]">
+                Add to Package
+              </button>
+</div>
+</div>
+</div>
+<!-- Addon 2 -->
+<div class="bg-surface-slate-dim border border-border-subtle rounded-sm p-space-md shadow-md flex items-center gap-space-md hover:border-amber-primary/40 transition-all">
+<div class="w-20 h-20 rounded-sm bg-carbon-deep shrink-0 overflow-hidden border border-border-subtle">
+<img class="w-full h-full object-cover" data-alt="Ergonomic leather and magnetic desk pad with wireless charging pad zone on modern dark workstation with indigo glow" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB85j5VZNYLM8R667cq270rJoc2MBkyAm3D9Ds64A_ehtHxy-wXqEB2sQt1EPlQkSA4NpLAMwppV2U48uT3wbTF6M4eId6N7-5RKboPvYL9irEIgp3QGiLfoEk3fiFgLrn2hd9IV8SisTJMiBwQoNlG-jfDc8txrw3d8ySfJ1CNaoEjEd2A3GribCbB_VCYpb1vSrguK90Fvqm3xarYn-FlVqr7Qi7DNqX2t9sGG8bpOLFCt8AGHcbF8g"/>
+</div>
+<div class="flex flex-col flex-1 min-w-0">
+<span class="font-code-spec text-xs text-amber-bright">Desk Armor</span>
+<h4 class="font-title-md text-sm text-titanium-highlight font-semibold truncate">MagMat Precision Desk Pad</h4>
+<span class="font-body-sm text-xs text-titanium-muted">Micro-weave · Waterproof</span>
+<div class="flex items-center justify-between mt-space-xs">
+<span class="font-code-spec text-sm text-titanium-highlight font-bold tabular-nums">$54.00</span>
+<button class="px-space-sm py-1 rounded-sm bg-amber-primary text-carbon-deep font-label-sm text-xs font-bold hover:bg-amber-bright transition-colors shadow-[0_0_12px_rgba(245,158,11,0.3)]">
+                Add to Package
+              </button>
+</div>
+</div>
+</div>
+<!-- Addon 3 -->
+<div class="bg-surface-slate-dim border border-border-subtle rounded-sm p-space-md shadow-md flex items-center gap-space-md hover:border-amber-primary/40 transition-all">
+<div class="w-20 h-20 rounded-sm bg-carbon-deep shrink-0 overflow-hidden border border-border-subtle">
+<img class="w-full h-full object-cover" data-alt="Compact dual port 140W GaN fast charger with folding prongs glowing with a subtle teal status led light against deep grey studio backdrop" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBzYeaXucrBQ9AaXjbRzpnTp6eABUIwG9fQhAP8ivy2QOJ5uimllMBG21VX_tCRQlkilWd8S0Y5aGuLQNTyLqEevfRIq0MTcjn9mS2OKEAjoCA-Dde9LBRpxTNCBCpw6JwZoCp4bxxCdfOZfMfccEt4FpU227wT1KUTIB0NNCXxRXwbs8ZTrBLzyDZmFZyt6ery6K41UNW-wQ7wjdS7OGbm4trYXvVGH7mvWd6BiUtnPLjamSDJp-hlqg"/>
+</div>
+<div class="flex flex-col flex-1 min-w-0">
+<span class="font-code-spec text-xs text-amber-bright">GaN Architecture</span>
+<h4 class="font-title-md text-sm text-titanium-highlight font-semibold truncate">Nexis PowerCore 140W</h4>
+<span class="font-body-sm text-xs text-titanium-muted">Dual USB-C · GaNFast III</span>
+<div class="flex items-center justify-between mt-space-xs">
+<span class="font-code-spec text-sm text-titanium-highlight font-bold tabular-nums">$89.00</span>
+<button class="px-space-sm py-1 rounded-sm bg-amber-primary text-carbon-deep font-label-sm text-xs font-bold hover:bg-amber-bright transition-colors shadow-[0_0_12px_rgba(245,158,11,0.3)]">
+                Add to Package
+              </button>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+</div></main><footer class="w-full bg-carbon-deep border-t border-border-subtle mt-space-4xl"><div class="max-w-container-max mx-auto px-gutter-desktop py-space-3xl"><div class="grid grid-cols-1 md:grid-cols-4 gap-space-xl mb-space-2xl"><div class="space-y-space-sm"><div class="flex items-center gap-space-sm"><img alt="NexisStore Precision Hardware Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1ULvr2UnPIoOEGsOVl_INMNsL5BJKoUwFPiJFK-5T7YrKJCrsqGFBFaVq6LMQrR3HutzpLOrwCbzgs4IKPPSsF_Dxzjsg0vix8Gk3ULUmk_Pfgs2QSxdSp37jeflBs4ZD0dxEzRwteFoF1TM_0HiJIL6j2A2rVTBVwNmYH5_HqS5u2wVU0QEs2GlTDJhFXiL5KDfl17fjzSUx1qx10mvxtsI1PwxnaJCNkjHmnUBFWXrwcV-O14TD4HI0VV"/></div><p class="font-body-sm text-xs text-titanium-muted leading-relaxed">Architectural hardware and consumer technology curated for high-velocity engineers and precision creators.</p><div class="flex items-center gap-space-xs font-code-spec text-xs text-amber-bright"><span class="w-2 h-2 rounded-full bg-amber-bright"></span><span>API 99.98% Online</span></div></div><div class="space-y-space-sm"><h4 class="font-headline-sm text-xs text-titanium-highlight font-semibold uppercase tracking-wider">MERN Stack Core</h4><ul class="space-y-space-xs font-code-spec text-xs text-titanium-muted"><li>MongoDB Atlas / Vector Search</li><li>Express REST Engine + Auth</li><li>React 18 Architecture + Tailwind</li><li>Node.js High-Throughput Cluster</li></ul></div><div class="space-y-space-sm"><h4 class="font-headline-sm text-xs text-titanium-highlight font-semibold uppercase tracking-wider">Customer Protocol</h4><ul class="space-y-space-xs font-body-sm text-xs text-titanium-muted"><li><a class="hover:text-amber-bright transition-colors" href="#">Real-Time Order Tracking</a></li><li><a class="hover:text-amber-bright transition-colors" href="#">Global Express Logistics</a></li><li><a class="hover:text-amber-bright transition-colors" href="#">Hardware Warranty &amp; RMA</a></li><li><a class="hover:text-amber-bright transition-colors" href="#">Developer API Access</a></li></ul></div><div class="space-y-space-sm"><h4 class="font-headline-sm text-xs text-titanium-highlight font-semibold uppercase tracking-wider">Encrypted Checkout</h4><p class="font-body-sm text-xs text-titanium-muted">End-to-end multi-currency payment nodes verified via PCI DSS Level 1.</p><div class="flex flex-wrap gap-space-xs pt-space-xs"><span class="px-space-sm py-1 rounded-sm bg-surface-slate border border-border-subtle font-code-spec text-xs text-titanium-light">Stripe 256-bit</span><span class="px-space-sm py-1 rounded-sm bg-surface-slate border border-border-subtle font-code-spec text-xs text-titanium-light">PayPal Vault</span><span class="px-space-sm py-1 rounded-sm bg-surface-slate border border-border-subtle font-code-spec text-xs text-titanium-light">Apple Pay</span></div></div></div><div class="flex flex-col sm:flex-row items-center justify-between pt-space-xl text-titanium-muted font-body-sm text-xs border-t border-border-subtle gap-space-md"><p class="font-code-spec text-xs">© 2025 NexisStore E-Commerce Systems. Built with MERN Stack Architecture.</p><p class="font-code-spec text-xs text-titanium-dark">Node: us-east-1 // Prod Cluster</p></div></div></footer></body></html>

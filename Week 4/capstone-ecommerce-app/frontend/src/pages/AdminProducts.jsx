@@ -13,6 +13,8 @@ import {
   CheckCircle,
   AlertCircle,
   ArrowLeft,
+  Cpu,
+  Layers,
 } from 'lucide-react';
 
 export const AdminProducts = () => {
@@ -27,8 +29,8 @@ export const AdminProducts = () => {
     name: '',
     description: '',
     price: '',
-    category: 'Electronics',
-    brand: 'SkillNexis Essentials',
+    category: 'Workstations',
+    brand: 'NexisStore Precision Labs',
     countInStock: '',
     imageUrl: '',
     isFeatured: false,
@@ -59,8 +61,8 @@ export const AdminProducts = () => {
       name: '',
       description: '',
       price: '',
-      category: 'Electronics',
-      brand: 'SkillNexis Essentials',
+      category: 'Workstations',
+      brand: 'NexisStore Precision Labs',
       countInStock: '',
       imageUrl: '',
       isFeatured: false,
@@ -101,7 +103,6 @@ export const AdminProducts = () => {
     setMessage({ type: '', text: '' });
 
     try {
-      // Create FormData to handle Multer multipart file upload
       const dataPayload = new FormData();
       dataPayload.append('name', formData.name);
       dataPayload.append('description', formData.description);
@@ -116,17 +117,17 @@ export const AdminProducts = () => {
       } else if (formData.imageUrl) {
         dataPayload.append('imageUrl', formData.imageUrl);
       } else {
-        throw new Error('Please select an image file or enter an image URL');
+        throw new Error('Please select an image file (Multer) or provide a remote image URL');
       }
 
       const headers = { 'Content-Type': 'multipart/form-data' };
 
       if (editingProduct) {
         await API.put(`/products/${editingProduct._id}`, dataPayload, { headers });
-        setMessage({ type: 'success', text: 'Product successfully updated!' });
+        setMessage({ type: 'success', text: 'Product updated successfully!' });
       } else {
         await API.post('/products', dataPayload, { headers });
-        setMessage({ type: 'success', text: 'Product created successfully!' });
+        setMessage({ type: 'success', text: 'New product added successfully!' });
       }
 
       await fetchProducts();
@@ -141,7 +142,7 @@ export const AdminProducts = () => {
   };
 
   const handleDelete = async (id, name) => {
-    if (window.confirm(`Are you sure you want to permanently delete "${name}"?`)) {
+    if (window.confirm(`Are you sure you want to delete "${name}"?`)) {
       try {
         await API.delete(`/products/${id}`);
         setProducts((prev) => prev.filter((p) => p._id !== id));
@@ -168,8 +169,8 @@ export const AdminProducts = () => {
 
   return (
     <div>
-      <Link to="/admin/dashboard" className="btn btn-outline btn-sm" style={{ marginBottom: '1.5rem' }}>
-        <ArrowLeft size={16} /> Back to Dashboard
+      <Link to="/admin/dashboard" className="btn btn-secondary btn-sm" style={{ marginBottom: '1.5rem' }}>
+        <ArrowLeft size={14} /> Back to Dashboard
       </Link>
 
       <div
@@ -183,25 +184,33 @@ export const AdminProducts = () => {
         }}
       >
         <div>
-          <h1 style={{ fontSize: '2.2rem' }}>Product Inventory Control</h1>
-          <p style={{ color: 'var(--text-secondary)' }}>
-            Add new catalog items with image upload, update stock levels, or retire items
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '0.3rem' }}>
+            <span className="spec-chip">ADMIN // PRODUCTS</span>
+            <span style={{ fontSize: '0.72rem', fontFamily: 'var(--font-mono)', color: 'var(--text-muted)' }}>
+              {products.length} TOTAL PRODUCTS
+            </span>
+          </div>
+          <h1 style={{ fontSize: '2.1rem', textTransform: 'uppercase', letterSpacing: '-0.02em' }}>
+            Product Management
+          </h1>
+          <p style={{ color: 'var(--text-secondary)', fontSize: '0.92rem' }}>
+            Add new products, manage stock quantities, upload images, or edit specifications.
           </p>
         </div>
 
-        <button className="btn btn-primary" onClick={openCreateModal}>
-          <Plus size={18} /> Add New Product
+        <button className="btn btn-primary" onClick={openCreateModal} style={{ textTransform: 'uppercase' }}>
+          <Plus size={16} /> Add New Product
         </button>
       </div>
 
       {/* Filter and Search */}
-      <div style={{ marginBottom: '1.5rem', maxWidth: '400px', position: 'relative' }}>
-        <Search size={18} style={{ position: 'absolute', left: '12px', top: '12px', color: 'var(--text-muted)' }} />
+      <div style={{ marginBottom: '1.5rem', maxWidth: '420px', position: 'relative' }}>
+        <Search size={16} style={{ position: 'absolute', left: '12px', top: '12px', color: 'var(--text-muted)' }} />
         <input
           type="text"
           className="form-control"
-          style={{ paddingLeft: '2.5rem' }}
-          placeholder="Filter products by name or category..."
+          style={{ paddingLeft: '2.4rem', fontFamily: 'var(--font-mono)', fontSize: '0.85rem' }}
+          placeholder="Search by product name or category..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
@@ -210,18 +219,19 @@ export const AdminProducts = () => {
       {/* Products Table */}
       {loading ? (
         <div style={{ textAlign: 'center', padding: '5rem 0', color: 'var(--text-muted)' }}>
-          Loading products...
+          <div className="status-ping" style={{ width: '12px', height: '12px', margin: '0 auto 1rem' }}></div>
+          <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.92rem' }}>Loading products...</p>
         </div>
       ) : (
         <div className="table-container">
           <table className="custom-table">
             <thead>
               <tr>
-                <th>Product</th>
-                <th>Category</th>
-                <th>Price</th>
-                <th>Stock</th>
-                <th>Actions</th>
+                <th>PRODUCT</th>
+                <th>CATEGORY</th>
+                <th>PRICE</th>
+                <th>STOCK</th>
+                <th>ACTIONS</th>
               </tr>
             </thead>
             <tbody>
@@ -232,47 +242,49 @@ export const AdminProducts = () => {
                       <img
                         src={getImageUrl(product.imageUrl)}
                         alt={product.name}
-                        style={{ width: '48px', height: '48px', borderRadius: '8px', objectFit: 'cover' }}
+                        style={{ width: '44px', height: '44px', borderRadius: 'var(--radius-xs)', objectFit: 'cover', background: '#090a0f', border: '1px solid var(--border-subtle)' }}
                       />
                       <div>
                         <div style={{ fontWeight: 600 }}>{product.name}</div>
-                        <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>
-                          Brand: {product.brand}
+                        <div style={{ fontSize: '0.72rem', fontFamily: 'var(--font-mono)', color: 'var(--text-muted)' }}>
+                          ID-{product._id.slice(-6).toUpperCase()} • {product.brand}
                         </div>
                       </div>
                     </div>
                   </td>
                   <td>
-                    <span className="badge badge-category">{product.category}</span>
+                    <span className="spec-chip">{product.category}</span>
                   </td>
-                  <td style={{ fontWeight: 700 }}>{formatPrice(product.price)}</td>
+                  <td style={{ fontWeight: 700, fontFamily: 'var(--font-heading)' }}>{formatPrice(product.price)}</td>
                   <td>
                     <span
                       style={{
-                        color: product.countInStock <= 5 ? '#fbbf24' : '#10b981',
+                        fontFamily: 'var(--font-mono)',
+                        fontSize: '0.78rem',
                         fontWeight: 600,
+                        color: product.countInStock <= 0 ? 'var(--danger)' : product.countInStock <= 5 ? 'var(--warning)' : 'var(--success)',
                       }}
                     >
-                      {product.countInStock} units
+                      {product.countInStock <= 0 ? '● Out of Stock' : product.countInStock <= 5 ? `● Low Stock: ${product.countInStock}` : `● In Stock: ${product.countInStock}`}
                     </span>
                   </td>
                   <td>
-                    <div style={{ display: 'flex', gap: '0.5rem' }}>
+                    <div style={{ display: 'flex', gap: '0.45rem' }}>
                       <button
                         className="btn btn-secondary btn-sm"
                         onClick={() => openEditModal(product)}
                         title="Edit Product"
-                        style={{ padding: '0.35rem 0.6rem' }}
+                        style={{ padding: '0.35rem 0.55rem' }}
                       >
-                        <Edit2 size={15} />
+                        <Edit2 size={14} />
                       </button>
                       <button
                         className="btn btn-danger btn-sm"
                         onClick={() => handleDelete(product._id, product.name)}
                         title="Delete Product"
-                        style={{ padding: '0.35rem 0.6rem' }}
+                        style={{ padding: '0.35rem 0.55rem' }}
                       >
-                        <Trash2 size={15} />
+                        <Trash2 size={14} />
                       </button>
                     </div>
                   </td>
@@ -287,12 +299,17 @@ export const AdminProducts = () => {
       {modalOpen && (
         <div className="modal-backdrop">
           <div className="modal-content">
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
-              <h2 style={{ fontSize: '1.5rem' }}>
-                {editingProduct ? 'Edit Product' : 'Add New Product'}
-              </h2>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem', borderBottom: '1px solid var(--border-subtle)', paddingBottom: '0.75rem' }}>
+              <div>
+                <span className="spec-chip" style={{ marginBottom: '0.2rem' }}>
+                  {editingProduct ? `EDIT PRODUCT // #${editingProduct._id.slice(-6).toUpperCase()}` : 'NEW PRODUCT'}
+                </span>
+                <h2 style={{ fontSize: '1.35rem', textTransform: 'uppercase' }}>
+                  {editingProduct ? 'Edit Product Details' : 'Add New Product'}
+                </h2>
+              </div>
               <button onClick={() => setModalOpen(false)} style={{ color: 'var(--text-muted)' }}>
-                <X size={22} />
+                <X size={20} />
               </button>
             </div>
 
@@ -300,12 +317,13 @@ export const AdminProducts = () => {
               <div
                 style={{
                   padding: '0.75rem 1rem',
-                  borderRadius: 'var(--radius-md)',
+                  borderRadius: 'var(--radius-sm)',
                   marginBottom: '1.25rem',
                   background: message.type === 'success' ? 'var(--success-bg)' : 'var(--danger-bg)',
                   border: `1px solid ${message.type === 'success' ? '#10b981' : '#ef4444'}`,
                   color: message.type === 'success' ? '#a7f3d0' : '#fecaca',
-                  fontSize: '0.9rem',
+                  fontSize: '0.85rem',
+                  fontFamily: 'var(--font-mono)',
                 }}
               >
                 {message.text}
@@ -341,7 +359,7 @@ export const AdminProducts = () => {
                 </div>
 
                 <div className="form-group">
-                  <label className="form-label">Units in Stock</label>
+                  <label className="form-label">Stock Quantity</label>
                   <input
                     type="number"
                     name="countInStock"
@@ -363,10 +381,10 @@ export const AdminProducts = () => {
                     value={formData.category}
                     onChange={handleFormChange}
                   >
+                    <option value="Workstations">Workstations</option>
                     <option value="Electronics">Electronics</option>
-                    <option value="Fashion">Fashion</option>
-                    <option value="Home & Living">Home & Living</option>
-                    <option value="Fitness">Fitness</option>
+                    <option value="Compute Enclosures">Compute Enclosures</option>
+                    <option value="Avionics">Avionics</option>
                     <option value="Accessories">Accessories</option>
                   </select>
                 </div>
@@ -394,16 +412,16 @@ export const AdminProducts = () => {
                 />
               </div>
 
-              {/* Image Upload (Multer) or Image URL */}
-              <div className="card" style={{ padding: '1rem', background: 'var(--bg-surface-elevated)', marginBottom: '1.25rem' }}>
-                <label className="form-label" style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                  <Upload size={16} /> Upload Image (Multer) or External URL
+              {/* Multer Multipart Image Upload */}
+              <div className="card" style={{ padding: '0.9rem', background: 'var(--bg-surface-dim)', marginBottom: '1.25rem', border: '1px solid var(--border-subtle)' }}>
+                <label className="form-label" style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: 'var(--text-amber)' }}>
+                  <Upload size={15} /> Upload Product Image or Provide Image URL
                 </label>
                 <input
                   type="file"
                   accept="image/*"
                   className="form-control"
-                  style={{ marginBottom: '0.75rem' }}
+                  style={{ marginBottom: '0.65rem' }}
                   onChange={(e) => setImageFile(e.target.files[0])}
                 />
                 <input
@@ -416,7 +434,7 @@ export const AdminProducts = () => {
                 />
               </div>
 
-              <div className="form-group" style={{ flexDirection: 'row', alignItems: 'center', gap: '0.75rem' }}>
+              <div className="form-group" style={{ flexDirection: 'row', alignItems: 'center', gap: '0.6rem' }}>
                 <input
                   type="checkbox"
                   id="isFeatured"
@@ -424,12 +442,12 @@ export const AdminProducts = () => {
                   checked={formData.isFeatured}
                   onChange={handleFormChange}
                 />
-                <label htmlFor="isFeatured" style={{ cursor: 'pointer', fontSize: '0.9rem' }}>
-                  Highlight on Home Page as Featured Product
+                <label htmlFor="isFeatured" style={{ cursor: 'pointer', fontSize: '0.86rem', color: 'var(--text-secondary)' }}>
+                  Feature this product on homepage
                 </label>
               </div>
 
-              <div style={{ display: 'flex', gap: '1rem', justifyContent: 'flex-end', marginTop: '1.5rem' }}>
+              <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'flex-end', marginTop: '1.5rem' }}>
                 <button
                   type="button"
                   className="btn btn-secondary"
@@ -437,8 +455,8 @@ export const AdminProducts = () => {
                 >
                   Cancel
                 </button>
-                <button type="submit" className="btn btn-primary" disabled={submitting}>
-                  {submitting ? 'Saving...' : editingProduct ? 'Update Product' : 'Create Product'}
+                <button type="submit" className="btn btn-primary" disabled={submitting} style={{ textTransform: 'uppercase' }}>
+                  {submitting ? 'Saving...' : editingProduct ? 'Save Changes' : 'Add Product'}
                 </button>
               </div>
             </form>

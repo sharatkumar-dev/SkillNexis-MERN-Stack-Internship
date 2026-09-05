@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 48" fill="none">
+  <defs>
+    <linearGradient id="amber-prec-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FBBF24"/>
+      <stop offset="50%" stop-color="#F59E0B"/>
+      <stop offset="100%" stop-color="#D97706"/>
+    </linearGradient>
+  </defs>
+  <!-- Technical Chamfered Enclosure Icon -->
+  <rect x="2" y="6" width="36" height="36" rx="4" fill="#0D0E13" stroke="rgba(245, 158, 11, 0.4)" stroke-width="1.2"/>
+  <path d="M12 32V16L20 27V16H28V32L20 21V32H12Z" fill="url(#amber-prec-grad)"/>
+  <rect x="26" y="14" width="4" height="4" rx="1" fill="#FBBF24"/>
+  <!-- Crosshair tick marks -->
+  <line x1="2" y1="24" x2="6" y2="24" stroke="#F59E0B" stroke-width="1.5"/>
+  <line x1="34" y1="24" x2="38" y2="24" stroke="#F59E0B" stroke-width="1.5"/>
+  <!-- Brand Wordmark -->
+  <text x="48" y="29" font-family="'Space Grotesk', sans-serif" font-weight="700" font-size="20" fill="#F8FAFC" letter-spacing="-0.5">NEXIS<tspan fill="#F59E0B">STORE</tspan></text>
+  <rect x="172" y="16" width="34" height="14" rx="2" fill="#F59E0B" fill-opacity="0.15" stroke="#F59E0B" stroke-width="0.8"/>
+  <text x="176" y="26.5" font-family="'JetBrains Mono', monospace" font-weight="700" font-size="8" fill="#FBBF24" letter-spacing="0.5">LABS</text>
+</svg>

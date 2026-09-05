@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import API from '../api/axios';
 import { formatPrice } from '../utils/currency';
-import { Package, Calendar, ArrowRight, Eye, ShoppingBag } from 'lucide-react';
+import { Package, Calendar, ArrowRight, Eye, ShoppingBag, Terminal } from 'lucide-react';
 
 export const OrderHistory = () => {
   const [orders, setOrders] = useState([]);
@@ -25,8 +25,11 @@ export const OrderHistory = () => {
 
   if (loading) {
     return (
-      <div style={{ textAlign: 'center', padding: '5rem 0', color: 'var(--text-muted)' }}>
-        Loading your order history...
+      <div style={{ textAlign: 'center', padding: '6rem 0', color: 'var(--text-muted)' }}>
+        <div className="status-ping" style={{ width: '12px', height: '12px', margin: '0 auto 1rem' }}></div>
+        <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.92rem' }}>
+          Loading your orders...
+        </p>
       </div>
     );
   }
@@ -34,26 +37,36 @@ export const OrderHistory = () => {
   return (
     <div>
       <div style={{ marginBottom: '2rem' }}>
-        <h1 style={{ fontSize: '2.2rem' }}>My Orders</h1>
-        <p style={{ color: 'var(--text-secondary)' }}>Track and manage your order deliveries and purchase receipts</p>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.3rem' }}>
+          <span className="spec-chip">ACCOUNT // ORDERS</span>
+          <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.75rem', color: 'var(--text-muted)' }}>
+            {orders.length} TOTAL ORDERS
+          </span>
+        </div>
+        <h1 style={{ fontSize: '2.1rem', letterSpacing: '-0.02em', textTransform: 'uppercase' }}>
+          My Order History
+        </h1>
+        <p style={{ color: 'var(--text-secondary)', fontSize: '0.92rem' }}>
+          Track past orders, view invoices, and monitor live delivery updates.
+        </p>
       </div>
 
       {orders.length === 0 ? (
         <div
           className="card"
-          style={{ textAlign: 'center', padding: '4rem 2rem', maxWidth: '500px', margin: '2rem auto' }}
+          style={{ textAlign: 'center', padding: '4rem 2rem', maxWidth: '520px', margin: '2rem auto' }}
         >
-          <Package size={52} color="#6366f1" style={{ margin: '0 auto 1.5rem', opacity: 0.8 }} />
-          <h3 style={{ marginBottom: '0.6rem' }}>No Orders Yet</h3>
-          <p style={{ color: 'var(--text-secondary)', marginBottom: '1.5rem' }}>
-            You haven't placed any orders yet. Check out our store and explore current offers!
+          <Package size={48} color="var(--color-primary)" style={{ margin: '0 auto 1.25rem', opacity: 0.8 }} />
+          <h3 style={{ marginBottom: '0.5rem', textTransform: 'uppercase' }}>No Orders Yet</h3>
+          <p style={{ color: 'var(--text-secondary)', marginBottom: '1.5rem', fontSize: '0.9rem' }}>
+            You haven't placed any orders yet. Discover our precision hardware catalog.
           </p>
           <Link to="/" className="btn btn-primary">
-            Start Shopping
+            Explore Catalog
           </Link>
         </div>
       ) : (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
           {orders.map((order) => (
             <div key={order._id} className="card">
               <div
@@ -62,18 +75,18 @@ export const OrderHistory = () => {
                   justifyContent: 'space-between',
                   alignItems: 'center',
                   borderBottom: '1px solid var(--border-subtle)',
-                  paddingBottom: '1rem',
-                  marginBottom: '1rem',
+                  paddingBottom: '0.85rem',
+                  marginBottom: '0.85rem',
                   flexWrap: 'wrap',
                   gap: '1rem',
                 }}
               >
                 <div>
-                  <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)', textTransform: 'uppercase' }}>
-                    Order Placed
+                  <span style={{ fontSize: '0.72rem', fontFamily: 'var(--font-mono)', color: 'var(--text-muted)', textTransform: 'uppercase' }}>
+                    DATE PLACED
                   </span>
-                  <p style={{ fontWeight: 600, display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                    <Calendar size={14} color="#818cf8" />
+                  <p style={{ fontWeight: 600, display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.9rem' }}>
+                    <Calendar size={14} color="var(--text-amber)" />
                     {new Date(order.createdAt).toLocaleDateString(undefined, {
                       year: 'numeric',
                       month: 'short',
@@ -83,19 +96,19 @@ export const OrderHistory = () => {
                 </div>
 
                 <div>
-                  <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)', textTransform: 'uppercase' }}>
-                    Order Reference
+                  <span style={{ fontSize: '0.72rem', fontFamily: 'var(--font-mono)', color: 'var(--text-muted)', textTransform: 'uppercase' }}>
+                    ORDER ID
                   </span>
-                  <p style={{ fontWeight: 600, fontFamily: 'monospace', color: 'var(--text-secondary)' }}>
-                    #{order._id}
+                  <p style={{ fontWeight: 600, fontFamily: 'var(--font-mono)', color: 'var(--text-amber)', fontSize: '0.88rem' }}>
+                    #{order._id.slice(-8).toUpperCase()}
                   </p>
                 </div>
 
                 <div>
-                  <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)', textTransform: 'uppercase' }}>
-                    Total Amount
+                  <span style={{ fontSize: '0.72rem', fontFamily: 'var(--font-mono)', color: 'var(--text-muted)', textTransform: 'uppercase' }}>
+                    TOTAL AMOUNT
                   </span>
-                  <p style={{ fontWeight: 800, color: '#818cf8' }}>
+                  <p style={{ fontWeight: 700, fontFamily: 'var(--font-heading)', fontSize: '1.05rem', color: '#ffffff' }}>
                     {formatPrice(order.totalPrice)}
                   </p>
                 </div>
@@ -108,7 +121,7 @@ export const OrderHistory = () => {
               </div>
 
               {/* Order Items Preview */}
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', marginBottom: '1rem' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', marginBottom: '0.85rem' }}>
                 {order.orderItems.map((item, idx) => (
                   <div
                     key={idx}
@@ -116,13 +129,14 @@ export const OrderHistory = () => {
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'space-between',
-                      fontSize: '0.92rem',
+                      fontSize: '0.88rem',
                     }}
                   >
                     <span style={{ color: 'var(--text-secondary)' }}>
-                      {item.qty}x {item.name}
+                      <span className="spec-chip" style={{ marginRight: '0.5rem', fontSize: '0.65rem' }}>{item.qty}x</span>
+                      {item.name}
                     </span>
-                    <span style={{ fontWeight: 600 }}>
+                    <span style={{ fontWeight: 600, fontFamily: 'var(--font-mono)' }}>
                       {formatPrice(item.price * item.qty)}
                     </span>
                   </div>
@@ -135,17 +149,21 @@ export const OrderHistory = () => {
                   justifyContent: 'space-between',
                   alignItems: 'center',
                   borderTop: '1px solid var(--border-subtle)',
-                  paddingTop: '0.85rem',
+                  paddingTop: '0.75rem',
                   flexWrap: 'wrap',
                   gap: '0.5rem',
                 }}
               >
-                <span style={{ fontSize: '0.85rem', color: order.isPaid ? '#34d399' : '#fbbf24' }}>
-                  {order.isPaid ? '✓ Payment Complete' : '⏳ Payment on Delivery'}
-                </span>
+                <div style={{ fontSize: '0.78rem', fontFamily: 'var(--font-mono)', color: 'var(--text-muted)' }}>
+                  PAYMENT: <strong style={{ color: order.isPaid ? 'var(--success)' : 'var(--text-amber)' }}>{order.isPaid ? 'PAID' : 'COD'}</strong>
+                </div>
 
-                <Link to={`/order-success/${order._id}`} className="btn btn-secondary btn-sm">
-                  <Eye size={16} /> View Order Receipt
+                <Link
+                  to={`/order-success/${order._id}`}
+                  className="btn btn-secondary btn-sm"
+                  style={{ gap: '0.4rem', fontSize: '0.8rem' }}
+                >
+                  <Eye size={14} /> View Order Details
                 </Link>
               </div>
             </div>

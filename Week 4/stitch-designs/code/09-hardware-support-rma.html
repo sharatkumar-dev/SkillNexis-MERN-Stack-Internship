@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+          "inverse-surface": "#e3e1e9",
+          "surface-tint": "#ffb95f",
+          "on-background": "#e3e1e9",
+          "on-tertiary-container": "#004e34",
+          "on-error": "#690005",
+          "on-primary": "#472a00",
+          "on-secondary-container": "#4a1c00",
+          "on-primary-fixed-variant": "#653e00",
+          "surface-container": "#1e1f25",
+          "secondary": "#ffb690",
+          "primary-fixed": "#ffddb8",
+          "on-surface": "#e3e1e9",
+          "primary-container": "#f59e0b",
+          "on-secondary-fixed-variant": "#783200",
+          "surface": "#121318",
+          "tertiary": "#56e5a9",
+          "secondary-container": "#ec6a06",
+          "on-error-container": "#ffdad6",
+          "on-secondary": "#552100",
+          "surface-container-high": "#292a2f",
+          "surface-dim": "#121318",
+          "inverse-on-surface": "#2f3036",
+          "tertiary-container": "#30c88f",
+          "surface-container-highest": "#34343a",
+          "on-secondary-fixed": "#341100",
+          "primary-fixed-dim": "#ffb95f",
+          "on-surface-variant": "#d8c3ad",
+          "inverse-primary": "#855300",
+          "on-tertiary-fixed-variant": "#005236",
+          "surface-container-low": "#1a1b21",
+          "outline": "#a08e7a",
+          "error-container": "#93000a",
+          "on-tertiary": "#003824",
+          "secondary-fixed": "#ffdbca",
+          "primary": "#ffc174",
+          "tertiary-fixed-dim": "#4edea3",
+          "tertiary-fixed": "#6ffbbe",
+          "surface-bright": "#38393f",
+          "on-primary-fixed": "#2a1700",
+          "secondary-fixed-dim": "#ffb690",
+          "on-primary-container": "#613b00",
+          "outline-variant": "#534434",
+          "on-tertiary-fixed": "#002113",
+          "error": "#ffb4ab",
+          "surface-variant": "#34343a",
+          "surface-container-lowest": "#0d0e13",
+          "background": "#121318"
+        },
+        "borderRadius": {
+          "DEFAULT": "0.125rem",
+          "lg": "0.25rem",
+          "xl": "0.5rem",
+          "full": "0.75rem"
+        },
+        "spacing": {
+          "gutter-xs": "4px",
+          "gutter-sm": "8px",
+          "density-relaxed": "20px",
+          "margin-desktop": "32px",
+          "grid-unit": "4px",
+          "density-standard": "12px",
+          "density-compact": "6px",
+          "gutter-md": "16px",
+          "margin-mobile": "16px",
+          "gutter-lg": "24px",
+          "margin-tablet": "24px"
+        },
+        "fontFamily": {
+          "body-sm": [
+            "Inter"
+          ],
+          "label-code": [
+            "JetBrains Mono"
+          ],
+          "display-lg-mobile": [
+            "Space Grotesk"
+          ],
+          "body-md": [
+            "Inter"
+          ],
+          "display-lg": [
+            "Space Grotesk"
+          ],
+          "headline-md": [
+            "Space Grotesk"
+          ],
+          "label-caps": [
+            "JetBrains Mono"
+          ],
+          "headline-lg": [
+            "Space Grotesk"
+          ],
+          "body-lg": [
+            "Inter"
+          ],
+          "headline-xl": [
+            "Space Grotesk"
+          ],
+          "mono-metric-lg": [
+            "JetBrains Mono"
+          ],
+          "mono-metric-md": [
+            "JetBrains Mono"
+          ]
+        },
+        "fontSize": {
+          "body-sm": [
+            "12px",
+            {
+              "lineHeight": "16px",
+              "letterSpacing": "0.01em",
+              "fontWeight": "400"
+            }
+          ],
+          "label-code": [
+            "11px",
+            {
+              "lineHeight": "14px",
+              "letterSpacing": "0.06em",
+              "fontWeight": "500"
+            }
+          ],
+          "display-lg-mobile": [
+            "32px",
+            {
+              "lineHeight": "36px",
+              "letterSpacing": "-0.02em",
+              "fontWeight": "700"
+            }
+          ],
+          "body-md": [
+            "14px",
+            {
+              "lineHeight": "20px",
+              "letterSpacing": "0em",
+              "fontWeight": "400"
+            }
+          ],
+          "display-lg": [
+            "48px",
+            {
+              "lineHeight": "52px",
+              "letterSpacing": "-0.03em",
+              "fontWeight": "700"
+            }
+          ],
+          "headline-md": [
+            "20px",
+            {
+              "lineHeight": "26px",
+              "letterSpacing": "-0.015em",
+              "fontWeight": "500"
+            }
+          ],
+          "label-caps": [
+            "10px",
+            {
+              "lineHeight": "12px",
+              "letterSpacing": "0.12em",
+              "fontWeight": "600"
+            }
+          ],
+          "headline-lg": [
+            "24px",
+            {
+              "lineHeight": "30px",
+              "letterSpacing": "-0.02em",
+              "fontWeight": "600"
+            }
+          ],
+          "body-lg": [
+            "16px",
+            {
+              "lineHeight": "24px",
+              "letterSpacing": "-0.01em",
+              "fontWeight": "400"
+            }
+          ],
+          "headline-xl": [
+            "32px",
+            {
+              "lineHeight": "38px",
+              "letterSpacing": "-0.025em",
+              "fontWeight": "600"
+            }
+          ],
+          "mono-metric-lg": [
+            "28px",
+            {
+              "lineHeight": "32px",
+              "letterSpacing": "-0.02em",
+              "fontWeight": "600"
+            }
+          ],
+          "mono-metric-md": [
+            "18px",
+            {
+              "lineHeight": "24px",
+              "letterSpacing": "-0.01em",
+              "fontWeight": "500"
+            }
+          ]
+        }
+      },
+    },
+  }</script></head><body class="bg-background font-body-md text-body-md text-on-surface antialiased selection:bg-primary-container selection:text-on-primary-container"><header class="fixed top-0 left-0 right-0 z-50 bg-surface-container-lowest/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.5)]"><div class="h-16 w-full px-margin-desktop flex items-center justify-between gap-gutter-md"><div class="flex items-center gap-gutter-lg shrink-0"><a class="flex items-center gap-gutter-sm group" data-path="catalog" href="#"><img alt="Brand logo. - Primary color: #f59e0b - Font: spaceGrotesk - Mode: dark - Roundness: rounded-sm" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1ULvr2UnPIoOEGsOVl_INMNsL5BJKoUwFPiJFK-5T7YrKJCrsqGFBFaVq6LMQrR3HutzpLOrwCbzgs4IKPPSsF_Dxzjsg0vix8Gk3ULUmk_Pfgs2QSxdSp37jeflBs4ZD0dxEzRwteFoF1TM_0HiJIL6j2A2rVTBVwNmYH5_HqS5u2wVU0QEs2GlTDJhFXiL5KDfl17fjzSUx1qx10mvxtsI1PwxnaJCNkjHmnUBFWXrwcV-O14TD4HI0VV"/><div class="flex flex-col"><span class="font-headline-md text-headline-md tracking-tight uppercase text-on-surface group-hover:text-primary transition-colors">NEXIS<span class="text-primary-container">STORE</span></span><span class="font-label-caps text-label-caps text-on-surface-variant tracking-widest uppercase">HARDWARE_CHASSIS_V2</span></div></a><nav class="hidden lg:flex items-center gap-gutter-xs" data-active-classes="bg-primary-container text-on-primary-container font-label-caps text-label-caps font-semibold rounded"><a class="px-density-standard py-density-compact rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface font-label-caps text-label-caps tracking-wider uppercase transition-colors" data-path="catalog" href="#">Catalog</a><a class="px-density-standard py-density-compact rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface font-label-caps text-label-caps tracking-wider uppercase transition-colors" data-path="hardware-vault" href="#">Hardware Vault</a><a class="px-density-standard py-density-compact rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface font-label-caps text-label-caps tracking-wider uppercase transition-colors" data-path="orders" href="#">Orders</a><a class="px-density-standard py-density-compact rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface font-label-caps text-label-caps tracking-wider uppercase transition-colors" data-path="warranty-rma" href="#">Warranty &amp; RMA</a><a class="px-density-standard py-density-compact rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface font-label-caps text-label-caps tracking-wider uppercase transition-colors" data-path="admin-ops" href="#">Admin Ops</a></nav></div><div class="flex-1 max-w-md mx-gutter-md hidden md:block"><div class="relative flex items-center w-full bg-surface-container-lowest rounded px-density-standard py-density-compact shadow-[0_0_0_1px_rgba(255,255,255,0.08)] focus-within:shadow-[0_0_0_1px_#f59e0b,0_0_12px_-2px_rgba(245,158,11,0.35)] transition-all"><span class="material-symbols-outlined text-on-surface-variant text-base mr-density-compact select-none">terminal</span><input class="w-full bg-transparent font-label-code text-label-code text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none" placeholder="Query architectural gear, PN, or specs..." type="text"/><kbd class="font-label-caps text-label-caps bg-surface-container-high text-on-surface-variant px-1.5 py-0.5 rounded shadow-[0_0_0_1px_rgba(255,255,255,0.06)] select-none shrink-0">⌘K</kbd></div></div><div class="flex items-center gap-gutter-md shrink-0"><button aria-label="Telemetry Diagnostics" class="p-density-compact rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors"><span class="material-symbols-outlined">tune</span></button><button aria-label="Notifications" class="relative p-density-compact rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors"><span class="material-symbols-outlined">notifications</span><span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-primary-container shadow-[0_0_8px_#f59e0b]"></span></button><a aria-label="Cart" class="relative flex items-center gap-density-compact px-density-standard py-density-compact rounded bg-surface-container-low hover:bg-surface-container-high text-on-surface transition-colors shadow-[0_0_0_1px_rgba(255,255,255,0.08)]" data-path="cart" href="#"><span class="material-symbols-outlined text-base">shopping_cart</span><span class="font-label-code text-label-code text-primary-container font-semibold">3_NODES</span></a><div class="h-6 w-px bg-surface-container-high mx-gutter-xs hidden sm:block"></div><div class="flex items-center gap-density-compact pl-density-compact"><div class="relative"><img alt="Profile" class="w-8 h-8 rounded-full object-cover shadow-[0_0_0_1px_rgba(245,158,11,0.4)]" src="https://lh3.googleusercontent.com/aida/AEtjO1UsTmmnMIiBZlsmWJRMcJ-NvfDT4mU5rw1c0yq7ZzDSr3cabDM5EJzrg94174LucHzSeTzC4mSdYN5TgvBlbmnoDuWIxPhLCEO8TnMaxE6YWYpaP-WzFNz0Y2OceS07wrdL2jD2ZV7aLdyzsltVm8j5lM0FYbRGFQQhhDQOGr5RdvptQy73Kv88Xh_4w30aEKejmspP2FfJQfCQa-BK1zqM1fSA1rKN0K9cSASbWsNIAdptzSQ0kKYI0WB_"/><span class="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-tertiary shadow-[0_0_6px_#56e5a9]"></span></div><div class="hidden xl:flex flex-col"><span class="font-label-code text-label-code text-on-surface leading-tight">DEV_ARCH_0x71</span><span class="font-label-caps text-label-caps text-tertiary uppercase flex items-center gap-0.5"><span class="material-symbols-outlined text-[10px]">verified</span>VERIFIED_OPS</span></div></div></div></div></header><main class="w-full pt-16 bg-surface"><div class="flex flex-col w-full">
+<!-- Telemetry Operational Ticker -->
+<section class="w-full bg-surface-container-lowest px-margin-mobile md:px-margin-desktop py-density-compact shadow-sm">
+<div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-gutter-sm">
+<div class="flex items-center gap-gutter-sm">
+<span class="flex h-2 w-2 relative">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-tertiary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-tertiary"></span>
+</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">RMA PROTOCOL RUNTIME: ACTIVE</span>
+<span class="text-surface-bright font-label-code text-label-code hidden sm:inline">|</span>
+<span class="font-label-code text-label-code text-tertiary hidden sm:inline">BENCHMARK: 48H LAB TURNAROUND</span>
+</div>
+<div class="flex items-center gap-gutter-md font-label-code text-label-code text-on-surface-variant">
+<span>FIRST_PASS_REPAIR: <span class="text-primary-container font-semibold">99.42%</span></span>
+<span class="hidden md:inline">ESD_CHAMBER: <span class="text-on-surface">NOMINAL (0.01V)</span></span>
+<span class="px-density-compact py-0.5 rounded bg-surface-container-high text-primary font-label-caps text-label-caps">STATION #LAB-09</span>
+</div>
+</div>
+</section>
+<!-- Section 1: Hero Protocol Banner -->
+<section class="w-full px-margin-mobile md:px-margin-desktop py-gutter-lg">
+<div class="max-w-7xl mx-auto">
+<div class="relative bg-surface-container-low p-gutter-lg md:p-10 rounded-lg shadow-xl overflow-hidden">
+<!-- Ambient Aerospace Grid Glow -->
+<div class="absolute -right-24 -top-24 w-96 h-96 rounded-full bg-gradient-to-br from-primary-container/10 via-transparent to-transparent blur-3xl pointer-events-none"></div>
+<div class="absolute right-6 bottom-6 opacity-10 pointer-events-none select-none hidden lg:block">
+<span class="font-display-lg text-display-lg font-bold tracking-tighter text-on-surface">RMA//SYS-2025</span>
+</div>
+<div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-gutter-lg items-center">
+<div class="lg:col-span-8 space-y-density-relaxed">
+<div class="inline-flex items-center gap-gutter-xs px-density-standard py-1 rounded bg-surface-container font-label-caps text-label-caps text-primary shadow-sm">
+<span class="material-symbols-outlined text-xs">shield</span>
+<span>MIL-STD COMPREHENSIVE WARRANTY ESCORT</span>
+</div>
+<div class="space-y-gutter-xs">
+<h1 class="font-display-lg text-display-lg tracking-tight text-on-surface uppercase">
+                Hardware Reliability Protocol &amp; <span class="text-primary-container">RMA Portal</span>
+</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">
+                Zero-friction modular hardware returns, 24-hour turnaround motherboard repairs, and direct terminal sync with tier-1 systems architects.
+              </p>
+</div>
+<div class="grid grid-cols-2 sm:grid-cols-3 gap-gutter-md pt-gutter-xs">
+<div class="bg-surface-container p-density-standard rounded shadow-sm">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase block">Dispatch Standard</span>
+<span class="font-mono-metric-md text-mono-metric-md text-on-surface font-semibold">&lt; 24h Advance</span>
+<span class="font-body-sm text-body-sm text-tertiary block">Overnight Air Cargo</span>
+</div>
+<div class="bg-surface-container p-density-standard rounded shadow-sm">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase block">Yield Verification</span>
+<span class="font-mono-metric-md text-mono-metric-md text-primary-container font-semibold">99.4% FPY</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant block">IPC-A-610 Class 3</span>
+</div>
+<div class="col-span-2 sm:col-span-1 bg-surface-container p-density-standard rounded shadow-sm">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase block">Direct Guild</span>
+<span class="font-mono-metric-md text-mono-metric-md text-tertiary font-semibold">4-Min Sync</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant block">Realtime Discord API</span>
+</div>
+</div>
+</div>
+<div class="lg:col-span-4 flex flex-col gap-gutter-md">
+<div class="bg-surface-container-lowest p-gutter-md rounded-lg shadow-md space-y-gutter-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-primary-container uppercase">Live Diagnostic Queue</span>
+<span class="font-label-code text-label-code text-on-surface-variant">NODE_VAULT: 0x4B</span>
+</div>
+<!-- Sparkline SVG telemetry representation -->
+<div class="p-density-compact bg-surface rounded">
+<div class="flex justify-between font-label-code text-label-code text-on-surface-variant mb-1">
+<span>STRESS_INTEGRITY_AVG</span>
+<span class="text-tertiary font-bold">98.9%</span>
+</div>
+<svg class="w-full h-12 text-primary-container" fill="none" viewbox="0 0 200 40" xmlns="http://www.w3.org/2000/svg">
+<path d="M0 32 L20 28 L40 35 L60 22 L80 26 L100 12 L120 18 L140 8 L160 14 L180 5 L200 10" stroke="currentColor" stroke-linecap="round" stroke-width="1.8"></path>
+<path d="M0 32 L20 28 L40 35 L60 22 L80 26 L100 12 L120 18 L140 8 L160 14 L180 5 L200 10 L200 40 L0 40 Z" fill="currentColor" fill-opacity="0.08"></path>
+</svg>
+</div>
+<div class="flex justify-between items-center text-body-sm text-on-surface-variant pt-density-compact">
+<span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-tertiary"></span>Calibration Labs: Active</span>
+<span class="font-label-code text-label-code text-primary">MIL-STD-810H</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 2: Interactive Hardware Warranty Lookup -->
+<section class="w-full px-margin-mobile md:px-margin-desktop py-gutter-md">
+<div class="max-w-7xl mx-auto space-y-gutter-md">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-gutter-sm">
+<div>
+<span class="font-label-caps text-label-caps text-primary-container tracking-widest uppercase">SYS_TELEMETRY // CHECK_WARRANTY</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface uppercase">Instant Serial Registry Lookup</h2>
+</div>
+<div class="font-label-code text-label-code text-on-surface-variant flex items-center gap-2">
+<span class="material-symbols-outlined text-sm text-tertiary">lock_reset</span>
+          CRYPTOGRAPHIC HARDWARE REGISTRY
+        </div>
+</div>
+<!-- Search Input Container -->
+<div class="bg-surface-container-low p-gutter-md rounded-lg shadow-md">
+<div class="flex flex-col sm:flex-row gap-gutter-sm">
+<div class="relative flex-1 bg-surface-container-lowest rounded px-density-standard py-density-standard flex items-center shadow-inner">
+<span class="material-symbols-outlined text-primary-container text-xl mr-density-standard">qr_code_scanner</span>
+<input class="w-full bg-transparent font-label-code text-body-md text-on-surface placeholder:text-on-surface-variant/40 focus:outline-none" id="snInput" placeholder="Enter Serial Number (e.g. SN-NXS-882190-M3) or Order Reference..." type="text" value="SN-NXS-882190-M3"/>
+<button class="hidden sm:inline-flex px-density-compact py-0.5 rounded bg-surface-container-high hover:bg-surface-bright text-on-surface font-label-caps text-label-caps uppercase transition-colors" onclick="document.getElementById('snInput').value='SN-NXS-882190-M3'; triggerLookup();">
+              Autofill Sample
+            </button>
+</div>
+<button class="bg-primary-container hover:bg-surface-tint active:scale-[0.99] text-on-primary-container font-headline-md text-headline-md uppercase px-8 py-density-standard rounded flex items-center justify-center gap-2 transition-all shadow-md" id="lookupBtn" onclick="triggerLookup()">
+<span class="material-symbols-outlined">search</span>
+<span>Query Specs</span>
+</button>
+</div>
+<!-- Dynamic Output Result: Hardware Verification Card -->
+<div class="mt-gutter-md bg-surface-container rounded-lg p-gutter-lg shadow-xl transition-all" id="lookupCard">
+<div class="flex flex-col lg:flex-row gap-gutter-lg justify-between">
+<!-- Left Chassis Detail -->
+<div class="flex-1 space-y-gutter-sm">
+<div class="flex flex-wrap items-center gap-gutter-sm">
+<span class="px-density-standard py-0.5 rounded bg-tertiary-container/30 text-tertiary font-label-caps text-label-caps uppercase flex items-center gap-1.5 shadow-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary animate-pulse"></span>
+                  Active Warranty Shield
+                </span>
+<span class="font-label-code text-label-code text-on-surface-variant">SERIAL: <strong class="text-on-surface">SN-NXS-882190-M3</strong></span>
+<span class="font-label-code text-label-code text-on-surface-variant">OWNER: <strong class="text-on-surface">Alex Rivera [Tier-1 Eng]</strong></span>
+</div>
+<div class="flex items-baseline gap-gutter-md">
+<h3 class="font-headline-xl text-headline-xl text-on-surface uppercase tracking-tight">Nexis ProBook 16 M3 Ultra</h3>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-2xl">
+                Custom CNC 6061-T6 Aerospace Aluminum unibody architecture. Integrated 12-core high-IPC computational matrix with twin liquid-metal copper vapor channels.
+              </p>
+<!-- Coverage Pills -->
+<div class="pt-density-standard">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase block mb-gutter-xs">Covered Subsystems</span>
+<div class="flex flex-wrap gap-gutter-xs">
+<span class="px-density-compact py-1 rounded bg-surface-container-high text-on-surface font-label-code text-label-code">Motherboard Logic VRM</span>
+<span class="px-density-compact py-1 rounded bg-surface-container-high text-on-surface font-label-code text-label-code">Retina IPS 165Hz Display</span>
+<span class="px-density-compact py-1 rounded bg-surface-container-high text-on-surface font-label-code text-label-code">Thermal Vapor Chamber</span>
+<span class="px-density-compact py-1 rounded bg-surface-container-high text-on-surface font-label-code text-label-code">Battery Subsystem (&lt;80% capacity)</span>
+<span class="px-density-compact py-1 rounded bg-surface-container-high text-on-surface font-label-code text-label-code">Haptic Trackpad &amp; Sensors</span>
+</div>
+</div>
+</div>
+<!-- Right Telemetry Diagnostics Box -->
+<div class="w-full lg:w-80 flex flex-col justify-between bg-surface-container-lowest p-gutter-md rounded-lg shadow-sm">
+<div class="space-y-gutter-xs">
+<div class="flex justify-between items-center">
+<span class="font-label-caps text-label-caps text-primary-container uppercase">Warranty Tier</span>
+<span class="font-label-caps text-label-caps text-tertiary">2-YEAR ENTERPRISE</span>
+</div>
+<div class="font-mono-metric-lg text-mono-metric-lg text-on-surface font-bold">729 <span class="font-body-sm text-body-sm text-on-surface-variant font-normal">DAYS REMAINING</span></div>
+<div class="w-full bg-surface-container-high h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary-container h-full w-[78%] rounded-full"></div>
+</div>
+<div class="flex justify-between font-label-code text-label-code text-on-surface-variant pt-1">
+<span>PROVISIONED: Oct 2025</span>
+<span>EXP: Oct 24, 2027</span>
+</div>
+</div>
+<div class="pt-gutter-sm space-y-density-compact">
+<div class="flex items-center justify-between font-label-code text-label-code text-on-surface-variant">
+<span>ACCIDENTAL DAMAGE</span>
+<span class="text-tertiary font-semibold">INCLUDED (0 DEDUCTIBLE)</span>
+</div>
+<div class="flex items-center justify-between font-label-code text-label-code text-on-surface-variant">
+<span>FIRMWARE AUDIT</span>
+<span class="text-on-surface">BIOS v4.19 (LATEST)</span>
+</div>
+<a class="mt-2 block w-full py-density-standard text-center rounded bg-surface-container-high hover:bg-surface-bright text-primary font-headline-md text-headline-md uppercase transition-colors" href="#claim-stepper">
+                  File Claim For This Machine ↓
+                </a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 3: Step-by-Step RMA & Claim Dispatch Stepper -->
+<section class="w-full px-margin-mobile md:px-margin-desktop py-gutter-lg" id="claim-stepper">
+<div class="max-w-7xl mx-auto space-y-gutter-lg">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-gutter-sm">
+<div>
+<span class="font-label-caps text-label-caps text-primary-container tracking-widest uppercase">DISPATCH_PROTOCOL // STEPPER_ENGINE</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface uppercase">RMA Claim Configuration Bay</h2>
+</div>
+<div class="flex items-center gap-gutter-sm">
+<span class="font-label-caps text-label-caps px-density-standard py-0.5 rounded bg-surface-container-high text-on-surface">
+            TARGET: <span class="text-primary font-semibold">SN-NXS-882190-M3</span>
+</span>
+<span class="font-label-code text-label-code text-tertiary">STAGE 1 OF 3</span>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter-lg">
+<!-- Main Form Stream (8 Cols) -->
+<div class="lg:col-span-8 space-y-gutter-lg">
+<!-- Step 1: Issue Classification -->
+<div class="bg-surface-container-low p-gutter-lg rounded-lg shadow-md space-y-gutter-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-gutter-sm">
+<span class="w-6 h-6 rounded-full bg-primary-container text-on-primary-container font-label-caps text-label-caps flex items-center justify-center font-bold">01</span>
+<span class="font-headline-md text-headline-md text-on-surface uppercase">Telemetry &amp; Symptom Classification</span>
+</div>
+<span class="font-label-caps text-label-caps text-on-surface-variant">REQ // HARDWARE_DIAG</span>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-gutter-sm" id="symptomGrid">
+<!-- Radio Card 1 -->
+<label class="cursor-pointer bg-surface-container p-gutter-md rounded-lg shadow-sm hover:bg-surface-container-high transition-all flex flex-col justify-between group">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-2">
+<input checked="" class="accent-primary-container text-primary-container w-4 h-4" name="issue_type" type="radio" value="component_failure"/>
+<span class="font-headline-md text-headline-md text-on-surface group-hover:text-primary transition-colors">Component Failure</span>
+</div>
+<span class="material-symbols-outlined text-primary-container">memory</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-density-compact">
+                  No power, unprovoked kernel panic, GPU artifacting, or RAM parity check failure.
+                </p>
+</label>
+<!-- Radio Card 2 -->
+<label class="cursor-pointer bg-surface-container p-gutter-md rounded-lg shadow-sm hover:bg-surface-container-high transition-all flex flex-col justify-between group">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-2">
+<input class="accent-primary-container text-primary-container w-4 h-4" name="issue_type" type="radio" value="thermal_throttling"/>
+<span class="font-headline-md text-headline-md text-on-surface group-hover:text-primary transition-colors">Thermal Throttle / Noise</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant">mode_fan</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-density-compact">
+                  Acoustic coil whine, bearing friction, or junction temps sustaining &gt; 98°C.
+                </p>
+</label>
+<!-- Radio Card 3 -->
+<label class="cursor-pointer bg-surface-container p-gutter-md rounded-lg shadow-sm hover:bg-surface-container-high transition-all flex flex-col justify-between group">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-2">
+<input class="accent-primary-container text-primary-container w-4 h-4" name="issue_type" type="radio" value="transit_damage"/>
+<span class="font-headline-md text-headline-md text-on-surface group-hover:text-primary transition-colors">Physical Transit Damage</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant">package_2</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-density-compact">
+                  Impact dents, cracked chassis hinge, cracked display panel, or courier mishandling.
+                </p>
+</label>
+<!-- Radio Card 4 -->
+<label class="cursor-pointer bg-surface-container p-gutter-md rounded-lg shadow-sm hover:bg-surface-container-high transition-all flex flex-col justify-between group">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-2">
+<input class="accent-primary-container text-primary-container w-4 h-4" name="issue_type" type="radio" value="bios_anomaly"/>
+<span class="font-headline-md text-headline-md text-on-surface group-hover:text-primary transition-colors">Firmware / BIOS Anomaly</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant">terminal</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-density-compact">
+                  Corrupted UEFI NVRAM, failed flashing lock, or TPM 2.0 cryptographic handshake stall.
+                </p>
+</label>
+</div>
+<!-- Notes textarea -->
+<div class="space-y-density-compact pt-gutter-xs">
+<label class="font-label-caps text-label-caps text-on-surface-variant uppercase">Operator Observational Log</label>
+<textarea class="w-full bg-surface-container-lowest p-gutter-sm rounded font-label-code text-body-sm text-on-surface placeholder:text-on-surface-variant/40 focus:outline-none focus:ring-1 focus:ring-primary-container" placeholder="Describe exact operational state during failure (load percentage, ambient temp, BIOS version)..." rows="3">Vapor chamber exhibits high acoustic oscillation under 40W sustained CPU compile workloads. Temperatures jump from 42C idle to 101C in &lt;1.8 seconds.</textarea>
+</div>
+</div>
+<!-- Step 2: Diagnostic Telemetry Upload & WebGPU Check -->
+<div class="bg-surface-container-low p-gutter-lg rounded-lg shadow-md space-y-gutter-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-gutter-sm">
+<span class="w-6 h-6 rounded-full bg-primary-container text-on-primary-container font-label-caps text-label-caps flex items-center justify-center font-bold">02</span>
+<span class="font-headline-md text-headline-md text-on-surface uppercase">Telemetry Verification Payload</span>
+</div>
+<span class="font-label-caps text-label-caps text-tertiary">SELF-TEST READY</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter-md">
+<!-- File Drag-Drop Area -->
+<div class="bg-surface-container-lowest p-gutter-md rounded-lg flex flex-col items-center justify-center text-center group cursor-pointer hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-primary-container text-3xl mb-density-compact">upload_file</span>
+<span class="font-headline-md text-headline-md text-on-surface">Upload Hardware Crash Dump</span>
+<span class="font-label-code text-label-code text-on-surface-variant mt-1">.dmp, .log, .tar.gz (Max 250MB)</span>
+<span class="mt-density-standard px-density-standard py-1 rounded bg-surface-container text-primary font-label-caps text-label-caps uppercase">
+                  DROP SYSTEM SYSLOG HERE
+                </span>
+</div>
+<!-- Browser WebGPU Stress Audit Simulator -->
+<div class="bg-surface-container p-gutter-md rounded-lg flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-density-compact">
+<span class="font-label-caps text-label-caps text-tertiary uppercase flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">bolt</span>
+                      In-Browser Hardware Profiler
+                    </span>
+<span class="font-label-code text-label-code text-on-surface-variant" id="gpuStatusTag">READY</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                    Execute a client-side WebGPU compute shader loop to test local logic board memory buses and core thermals.
+                  </p>
+</div>
+<div class="pt-density-standard">
+<div class="hidden mb-density-compact space-y-1" id="stressBarWrapper">
+<div class="flex justify-between font-label-code text-label-code">
+<span class="text-on-surface-variant">CORE_PIPELINE_LOAD</span>
+<span class="text-primary-container" id="stressPercent">0%</span>
+</div>
+<div class="w-full bg-surface-container-lowest h-2 rounded-full overflow-hidden">
+<div class="h-full bg-primary-container w-0 transition-all duration-300" id="stressBar"></div>
+</div>
+</div>
+<button class="w-full py-density-standard rounded bg-surface-container-high hover:bg-surface-bright text-on-surface font-label-caps text-label-caps uppercase flex items-center justify-center gap-2 transition-colors" id="runAuditBtn" onclick="simulateDiagnosticAudit()" type="button">
+<span class="material-symbols-outlined text-sm">play_arrow</span>
+                    Execute 5-Second Diagnostics
+                  </button>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-gutter-sm p-density-standard rounded bg-surface-container text-body-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-primary-container text-lg">info</span>
+<span>All automated crash dump payloads are scrubbed of personal PII per ISO-27001 standard before laboratory ingestion.</span>
+</div>
+</div>
+<!-- Step 3: Resolution Protocol -->
+<div class="bg-surface-container-low p-gutter-lg rounded-lg shadow-md space-y-gutter-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-gutter-sm">
+<span class="w-6 h-6 rounded-full bg-primary-container text-on-primary-container font-label-caps text-label-caps flex items-center justify-center font-bold">03</span>
+<span class="font-headline-md text-headline-md text-on-surface uppercase">Resolution Protocol &amp; Fulfillment</span>
+</div>
+<span class="font-label-caps text-label-caps text-primary">SELECT FULFILLMENT</span>
+</div>
+<div class="space-y-gutter-sm">
+<!-- Advance replacement -->
+<label class="cursor-pointer bg-surface-container p-gutter-md rounded-lg flex items-center justify-between group hover:bg-surface-container-high transition-colors">
+<div class="flex items-center gap-gutter-md">
+<input checked="" class="accent-primary-container w-4 h-4" name="resolution" type="radio" value="advance_replace"/>
+<div>
+<div class="flex items-center gap-2">
+<span class="font-headline-md text-headline-md text-on-surface group-hover:text-primary transition-colors">Advance Replacement (Overnight Air Cargo)</span>
+<span class="px-1.5 py-0.5 rounded bg-tertiary-container/30 text-tertiary font-label-caps text-label-caps">RECOMMENDED</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                      We ship a pre-calibrated replacement chassis immediately. You return the defective unit in the reusable Pelican flight case.
+                    </p>
+</div>
+</div>
+<span class="font-mono-metric-md text-mono-metric-md text-tertiary font-bold shrink-0 hidden md:block">0.00 USD</span>
+</label>
+<!-- Lab repair -->
+<label class="cursor-pointer bg-surface-container p-gutter-md rounded-lg flex items-center justify-between group hover:bg-surface-container-high transition-colors">
+<div class="flex items-center gap-gutter-md">
+<input class="accent-primary-container w-4 h-4" name="resolution" type="radio" value="lab_repair"/>
+<div>
+<span class="font-headline-md text-headline-md text-on-surface group-hover:text-primary transition-colors">Direct Lab Repair &amp; Micro-Soldering</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                      Retain your serial chassis and SSD encryption enclave. Our Austin lab replaces the daughterboard and tests thermals within 24 hours.
+                    </p>
+</div>
+</div>
+<span class="font-mono-metric-md text-mono-metric-md text-on-surface font-bold shrink-0 hidden md:block">0.00 USD</span>
+</label>
+<!-- Full refund -->
+<label class="cursor-pointer bg-surface-container p-gutter-md rounded-lg flex items-center justify-between group hover:bg-surface-container-high transition-colors">
+<div class="flex items-center gap-gutter-md">
+<input class="accent-primary-container w-4 h-4" name="resolution" type="radio" value="refund"/>
+<div>
+<span class="font-headline-md text-headline-md text-on-surface group-hover:text-primary transition-colors">Full Institutional Credit / Refund</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                      100% reimbursement to corporate card or store hardware vault credit within 48h of intake scan.
+                    </p>
+</div>
+</div>
+<span class="font-mono-metric-md text-mono-metric-md text-on-surface-variant font-bold shrink-0 hidden md:block">CREDIT</span>
+</label>
+</div>
+</div>
+</div>
+<!-- Sidebar Summary & Action Panel (4 Cols) -->
+<div class="lg:col-span-4 space-y-gutter-md">
+<div class="bg-surface-container-low p-gutter-lg rounded-lg shadow-xl sticky top-20 space-y-gutter-md">
+<div class="flex items-center justify-between pb-gutter-xs">
+<span class="font-label-caps text-label-caps text-primary-container uppercase tracking-wider">RMA SUMMARY MANIFEST</span>
+<span class="material-symbols-outlined text-on-surface-variant text-base">verified</span>
+</div>
+<div class="space-y-density-standard font-label-code text-label-code">
+<div class="flex justify-between">
+<span class="text-on-surface-variant">ASSET:</span>
+<span class="text-on-surface font-semibold">ProBook 16 M3 Ultra</span>
+</div>
+<div class="flex justify-between">
+<span class="text-on-surface-variant">TIER:</span>
+<span class="text-tertiary">Enterprise Shield</span>
+</div>
+<div class="flex justify-between">
+<span class="text-on-surface-variant">SUB_FEE:</span>
+<span class="text-on-surface">$0.00 (Covered)</span>
+</div>
+<div class="flex justify-between">
+<span class="text-on-surface-variant">COURIER:</span>
+<span class="text-on-surface">FedEx Priority Overweight</span>
+</div>
+<div class="flex justify-between">
+<span class="text-on-surface-variant">PACKAGING:</span>
+<span class="text-tertiary">Foam ESD Flight Case Incl.</span>
+</div>
+</div>
+<div class="pt-density-compact">
+<div class="bg-surface-container-lowest p-gutter-sm rounded space-y-1">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Ship-to Address</span>
+<p class="font-body-sm text-body-sm text-on-surface">
+                  Nexis Systems Architecture Lab<br/>
+                  701 Brazos St, Suite 1200<br/>
+                  Austin, TX 78701 (Dock B-4)
+                </p>
+</div>
+</div>
+<button class="w-full py-gutter-md bg-primary-container hover:bg-surface-tint active:scale-[0.98] text-on-primary-container font-headline-md text-headline-md uppercase rounded shadow-lg flex items-center justify-center gap-gutter-sm transition-all" id="submitClaimBtn" onclick="handleSubmitClaim()">
+<span class="material-symbols-outlined">bolt</span>
+<span>Authorize RMA &amp; Waybill</span>
+</button>
+<!-- Success Notification (Hidden initially) -->
+<div class="hidden p-gutter-sm rounded bg-tertiary-container/30 text-tertiary space-y-1" id="claimSuccessBox">
+<div class="flex items-center gap-1.5 font-label-caps text-label-caps font-bold">
+<span class="material-symbols-outlined text-sm">check_circle</span>
+                RMA CREATED: #RMA-2025-119
+              </div>
+<p class="font-body-sm text-body-sm">
+                Prepaid shipping waybill dispatched to operator email. Courier pickup window configured for tomorrow 09:00 CST.
+              </p>
+</div>
+<div class="text-center font-label-caps text-label-caps text-on-surface-variant">
+              MIL-STD-810H CERTIFIED FAST-TRACK ESCORT
+            </div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 4: Active Claims Tracking Ledger -->
+<section class="w-full px-margin-mobile md:px-margin-desktop py-gutter-lg">
+<div class="max-w-7xl mx-auto space-y-gutter-md">
+<div class="flex flex-col sm:flex-row sm:items-end justify-between gap-gutter-sm">
+<div>
+<span class="font-label-caps text-label-caps text-primary-container tracking-widest uppercase">AUDIT_TRAIL // ARCHIVED_CLAIMS</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface uppercase">Active Claims Tracking Ledger</h2>
+</div>
+<div class="font-label-code text-label-code text-on-surface-variant">
+          SHOWING 1 ACTIVE RECORD FOR ACCOUNT
+        </div>
+</div>
+<div class="bg-surface-container-low rounded-lg p-gutter-lg shadow-md overflow-hidden">
+<div class="flex flex-col lg:flex-row gap-gutter-lg justify-between items-start lg:items-center">
+<div class="space-y-density-compact">
+<div class="flex items-center gap-gutter-sm">
+<span class="font-mono-metric-md text-mono-metric-md text-primary font-bold">#RMA-2025-084</span>
+<span class="px-density-standard py-0.5 rounded bg-tertiary-container/30 text-tertiary font-label-caps text-label-caps">
+                REPLACED &amp; DELIVERED
+              </span>
+</div>
+<div class="font-headline-md text-headline-md text-on-surface">QuantumKey 65 Switch Module</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+              Replaced hall-effect magnetic sensor cluster. Shipped via FedEx Priority Overnight.
+            </p>
+</div>
+<div class="flex flex-wrap items-center gap-gutter-md font-label-code text-label-code">
+<div class="bg-surface-container p-density-standard rounded">
+<span class="text-on-surface-variant block font-label-caps text-label-caps">WAYBILL</span>
+<span class="text-on-surface font-semibold">FDX-992014-US</span>
+</div>
+<div class="bg-surface-container p-density-standard rounded">
+<span class="text-on-surface-variant block font-label-caps text-label-caps">CLOSED AT</span>
+<span class="text-on-surface">24h 12m Benchmark</span>
+</div>
+<a class="px-density-standard py-density-standard rounded bg-surface-container-high hover:bg-surface-bright text-on-surface flex items-center gap-1 font-label-caps text-label-caps transition-colors" href="#">
+<span class="material-symbols-outlined text-sm">receipt_long</span>
+              Lab Report
+            </a>
+</div>
+</div>
+<!-- Tracking Visualizer Bar -->
+<div class="mt-gutter-md pt-gutter-md">
+<div class="grid grid-cols-4 gap-2 text-center font-label-code text-label-code">
+<div class="space-y-1">
+<div class="h-1.5 w-full bg-tertiary rounded-full"></div>
+<span class="text-tertiary font-semibold block">1. Claim Lodged</span>
+<span class="text-on-surface-variant text-body-sm block">Oct 12, 10:14</span>
+</div>
+<div class="space-y-1">
+<div class="h-1.5 w-full bg-tertiary rounded-full"></div>
+<span class="text-tertiary font-semibold block">2. In-Lab Triage</span>
+<span class="text-on-surface-variant text-body-sm block">Oct 13, 08:30</span>
+</div>
+<div class="space-y-1">
+<div class="h-1.5 w-full bg-tertiary rounded-full"></div>
+<span class="text-tertiary font-semibold block">3. Passed QC Calib</span>
+<span class="text-on-surface-variant text-body-sm block">Oct 13, 14:22</span>
+</div>
+<div class="space-y-1">
+<div class="h-1.5 w-full bg-tertiary rounded-full"></div>
+<span class="text-tertiary font-semibold block">4. Final Hand-off</span>
+<span class="text-on-surface-variant text-body-sm block">Oct 14, 09:15</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 5: Direct Engineering Support Channels (Bento Layout) -->
+<section class="w-full px-margin-mobile md:px-margin-desktop py-gutter-lg mb-gutter-lg">
+<div class="max-w-7xl mx-auto space-y-gutter-md">
+<div class="flex flex-col sm:flex-row sm:items-end justify-between gap-gutter-sm">
+<div>
+<span class="font-label-caps text-label-caps text-primary-container tracking-widest uppercase">DIRECT_LINE // ARCHITECT_COMM</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface uppercase">Direct Engineering Support Channels</h2>
+</div>
+<span class="font-label-code text-label-code text-tertiary">3 LIVE CHANNELS OPEN</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter-md">
+<!-- Channel 1: Discord Sync -->
+<div class="bg-surface-container-low p-gutter-lg rounded-lg shadow-md flex flex-col justify-between group hover:bg-surface-container transition-all">
+<div class="space-y-gutter-sm">
+<div class="flex items-center justify-between">
+<div class="w-10 h-10 rounded bg-primary-container/20 text-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-2xl">forum</span>
+</div>
+<span class="font-label-caps text-label-caps px-density-standard py-0.5 rounded bg-tertiary-container/30 text-tertiary">
+                4 MIN RESPONSE
+              </span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface uppercase group-hover:text-primary transition-colors">
+              24/7 Priority Discord Sync
+            </h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+              Bypass generic customer tickets. Connect directly with systems engineers, PCB layout designers, and thermal lab leads in private hardware war rooms.
+            </p>
+</div>
+<div class="pt-gutter-md">
+<button class="w-full py-density-standard rounded bg-surface-container-high hover:bg-surface-bright text-on-surface font-headline-md text-headline-md uppercase flex items-center justify-center gap-2 transition-colors">
+<span>Open Discord Guild</span>
+<span class="material-symbols-outlined text-sm">north_east</span>
+</button>
+</div>
+</div>
+<!-- Channel 2: Schematics & Boardview Repository -->
+<div class="bg-surface-container-low p-gutter-lg rounded-lg shadow-md flex flex-col justify-between group hover:bg-surface-container transition-all">
+<div class="space-y-gutter-sm">
+<div class="flex items-center justify-between">
+<div class="w-10 h-10 rounded bg-tertiary-container/20 text-tertiary flex items-center justify-center">
+<span class="material-symbols-outlined text-2xl">account_tree</span>
+</div>
+<span class="font-label-caps text-label-caps px-density-standard py-0.5 rounded bg-surface-container-high text-on-surface-variant">
+                v2025.4 REPO
+              </span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface uppercase group-hover:text-primary transition-colors">
+              Schematics &amp; Boardview
+            </h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+              Download native KiCad/Altium schematics, high-res interactive vector boardviews (.cad/.fz), and official test-point voltage manuals for self-repair.
+            </p>
+</div>
+<div class="pt-gutter-md">
+<button class="w-full py-density-standard rounded bg-surface-container-high hover:bg-surface-bright text-on-surface font-headline-md text-headline-md uppercase flex items-center justify-center gap-2 transition-colors">
+<span>Access CAD Vault</span>
+<span class="material-symbols-outlined text-sm">download</span>
+</button>
+</div>
+</div>
+<!-- Channel 3: White-Glove Video Concierge -->
+<div class="bg-surface-container-low p-gutter-lg rounded-lg shadow-md flex flex-col justify-between group hover:bg-surface-container transition-all">
+<div class="space-y-gutter-sm">
+<div class="flex items-center justify-between">
+<div class="w-10 h-10 rounded bg-secondary-container/20 text-secondary-fixed flex items-center justify-center">
+<span class="material-symbols-outlined text-2xl">video_camera_front</span>
+</div>
+<span class="font-label-caps text-label-caps px-density-standard py-0.5 rounded bg-surface-container-high text-on-surface-variant">
+                15-MIN SESSION
+              </span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface uppercase group-hover:text-primary transition-colors">
+              White-Glove Video Call
+            </h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+              Schedule a live micro-probe diagnosis over Google Meet with a calibrated scope feed. Perfect for complex multi-drop bus troubleshooting.
+            </p>
+</div>
+<div class="pt-gutter-md">
+<button class="w-full py-density-standard rounded bg-surface-container-high hover:bg-surface-bright text-on-surface font-headline-md text-headline-md uppercase flex items-center justify-center gap-2 transition-colors">
+<span>Book Tele-Diagnostic</span>
+<span class="material-symbols-outlined text-sm">calendar_month</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Interactive JavaScript Logic -->
+<script>
+    function triggerLookup() {
+      const card = document.getElementById('lookupCard');
+      card.classList.add('opacity-40');
+      setTimeout(() => {
+        card.classList.remove('opacity-40');
+      }, 250);
+    }
+
+    function simulateDiagnosticAudit() {
+      const btn = document.getElementById('runAuditBtn');
+      const wrapper = document.getElementById('stressBarWrapper');
+      const bar = document.getElementById('stressBar');
+      const percent = document.getElementById('stressPercent');
+      const statusTag = document.getElementById('gpuStatusTag');
+
+      btn.disabled = true;
+      wrapper.classList.remove('hidden');
+      statusTag.innerText = 'PROFILING...';
+      statusTag.className = 'font-label-code text-label-code text-primary-container animate-pulse';
+
+      let progress = 0;
+      const interval = setInterval(() => {
+        progress += 20;
+        bar.style.width = progress + '%';
+        percent.innerText = progress + '%';
+
+        if (progress >= 100) {
+          clearInterval(interval);
+          statusTag.innerText = 'LOG COLLECTED (PASS)';
+          statusTag.className = 'font-label-code text-label-code text-tertiary';
+          btn.innerHTML = '<span class="material-symbols-outlined text-sm text-tertiary">check</span> Diagnostics Attached to Claim';
+        }
+      }, 400);
+    }
+
+    function handleSubmitClaim() {
+      const btn = document.getElementById('submitClaimBtn');
+      const successBox = document.getElementById('claimSuccessBox');
+      
+      btn.innerHTML = '<span class="material-symbols-outlined animate-spin text-sm">sync</span> Generating Manifest...';
+      btn.disabled = true;
+
+      setTimeout(() => {
+        btn.classList.add('hidden');
+        successBox.classList.remove('hidden');
+      }, 900);
+    }
+  </script>
+</div></main><footer class="w-full bg-surface-container-lowest shadow-[0_-1px_0_rgba(255,255,255,0.04)]"><div class="w-full px-margin-desktop py-gutter-lg"><div class="grid grid-cols-1 md:grid-cols-4 gap-gutter-lg mb-gutter-lg"><div class="space-y-density-compact"><div class="flex items-center gap-gutter-sm"><span class="font-headline-md text-headline-md tracking-tight uppercase text-on-surface">NEXIS<span class="text-primary-container">STORE</span></span></div><p class="font-body-sm text-body-sm text-on-surface-variant max-w-xs">Precision avionics, enterprise compute clusters, and extreme mechanical tolerance instrumentation built for hardware architects.</p><div class="flex items-center gap-gutter-sm pt-density-compact"><span class="flex items-center gap-1.5 px-density-standard py-0.5 rounded bg-surface-container font-label-caps text-label-caps text-tertiary shadow-[0_0_0_1px_rgba(86,229,169,0.3)]"><span class="w-1.5 h-1.5 rounded-full bg-tertiary animate-pulse"></span>API_STATUS: 99.98% ONLINE</span></div></div><div class="space-y-density-compact"><div class="font-label-caps text-label-caps text-primary-container tracking-widest uppercase">Customer Protocols</div><ul class="space-y-1 font-label-code text-label-code text-on-surface-variant"><li><a class="hover:text-primary transition-colors" data-path="warranty-rma" href="#">[01] Hardware RMA Protocol</a></li><li><a class="hover:text-primary transition-colors" data-path="catalog" href="#">[02] Calibrated Spec Sheets</a></li><li><a class="hover:text-primary transition-colors" href="#">[03] ESD Shielding Standards</a></li><li><a class="hover:text-primary transition-colors" href="#">[04] Gov/DoD Procurement</a></li></ul></div><div class="space-y-density-compact"><div class="font-label-caps text-label-caps text-primary-container tracking-widest uppercase">Verification &amp; Security</div><div class="space-y-2 font-label-code text-label-code text-on-surface-variant"><div class="flex items-center gap-density-compact p-density-compact bg-surface-container-low rounded shadow-[0_0_0_1px_rgba(255,255,255,0.06)]"><span class="material-symbols-outlined text-primary-container text-sm">lock</span><span>256-BIT QUANTUM VAULT</span></div><div class="flex items-center gap-density-compact p-density-compact bg-surface-container-low rounded shadow-[0_0_0_1px_rgba(255,255,255,0.06)]"><span class="material-symbols-outlined text-tertiary text-sm">security</span><span>FIPS 140-3 COMPLIANT COLD-CHAIN</span></div></div></div><div class="space-y-density-compact"><div class="font-label-caps text-label-caps text-primary-container tracking-widest uppercase">Stack Infrastructure</div><div class="p-density-standard bg-surface-container-low rounded space-y-1.5 shadow-[0_0_0_1px_rgba(255,255,255,0.06)]"><div class="flex justify-between font-label-code text-label-code"><span class="text-on-surface-variant">STACK_ID</span><span class="text-on-surface font-semibold">MERN_EDGE_04</span></div><div class="flex justify-between font-label-code text-label-code"><span class="text-on-surface-variant">NODE_LOC</span><span class="text-on-surface font-semibold">US-EAST-VA</span></div><div class="flex justify-between font-label-code text-label-code"><span class="text-on-surface-variant">LATENCY</span><span class="text-tertiary font-semibold">8.42ms</span></div></div></div></div><div class="pt-gutter-md border-t border-surface-container-high/60 flex flex-col sm:flex-row justify-between items-center gap-gutter-sm font-label-code text-label-code text-on-surface-variant"><p>© 2025 NEXIS ENGINEERING CORP. MIL-STD INDUSTRIAL CERTIFIED. ALL RIGHTS RESERVED.</p><div class="flex items-center gap-gutter-md"><span class="text-on-surface-variant/70">HASH: 8f9b..c204</span><span class="text-on-surface-variant/70">REV: 2.4.11-PROD</span></div></div></div></footer></body></html>
