@@ -85,7 +85,7 @@ export const INITIAL_PRODUCTS = [
     category: 'Home & Living',
     brand: 'ErgoPro',
     countInStock: 6,
-    imageUrl: 'https://images.unsplash.com/photo-1580481077195-c3a824552965?auto=format&fit=crop&w=800&q=80',
+    imageUrl: 'https://images.unsplash.com/photo-1505797149-43b0069ec26b?auto=format&fit=crop&w=800&q=80',
     rating: 4.9,
     numReviews: 67,
     isFeatured: true,

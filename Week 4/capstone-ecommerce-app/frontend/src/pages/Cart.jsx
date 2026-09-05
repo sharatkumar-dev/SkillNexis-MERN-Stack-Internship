@@ -104,6 +104,10 @@ export const Cart = () => {
                   border: '1px solid var(--border-subtle)',
                   background: '#0c0e14',
                 }}
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src = 'https://images.unsplash.com/photo-1505797149-43b0069ec26b?auto=format&fit=crop&w=800&q=80';
+                }}
               />
 
               <div style={{ flex: 1, minWidth: '180px' }}>

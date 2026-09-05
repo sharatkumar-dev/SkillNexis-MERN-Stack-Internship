@@ -132,6 +132,10 @@ export const ProductDetail = () => {
             src={getImageUrl(product.imageUrl)}
             alt={product.name}
             style={{ width: '100%', height: 'auto', maxHeight: '500px', objectFit: 'cover', display: 'block', background: '#090a0f' }}
+            onError={(e) => {
+              e.target.onerror = null;
+              e.target.src = 'https://images.unsplash.com/photo-1505797149-43b0069ec26b?auto=format&fit=crop&w=800&q=80';
+            }}
           />
 
           <div

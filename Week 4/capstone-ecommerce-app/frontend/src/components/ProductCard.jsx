@@ -30,6 +30,10 @@ export const ProductCard = ({ product }) => {
           alt={product.name}
           className="product-image"
           loading="lazy"
+          onError={(e) => {
+            e.target.onerror = null;
+            e.target.src = 'https://images.unsplash.com/photo-1505797149-43b0069ec26b?auto=format&fit=crop&w=800&q=80';
+          }}
         />
         {product.isFeatured && (
           <span className="product-featured-badge">FEATURED</span>
