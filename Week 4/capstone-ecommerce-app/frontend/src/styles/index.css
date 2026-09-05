@@ -73,6 +73,7 @@ button {
   cursor: pointer;
   border: none;
   background: none;
+  color: inherit;
 }
 
 input, select, textarea {
@@ -431,10 +432,12 @@ textarea.form-control {
   border-radius: var(--radius-full);
   cursor: pointer;
   transition: var(--transition);
+  color: var(--text-primary);
 }
 
 .user-menu-btn:hover {
   border-color: var(--border-medium);
+  background: rgba(255, 255, 255, 0.08);
 }
 
 .user-avatar {

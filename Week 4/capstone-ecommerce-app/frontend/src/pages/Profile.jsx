@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import API from '../api/axios';
-import { User, Mail, Shield, Save, CheckCircle } from 'lucide-react';
+import { User, Mail, Shield, Save, CheckCircle, ArrowLeft, X, Home, LayoutDashboard } from 'lucide-react';
 
 export const Profile = () => {
   const { user, updateUser } = useAuth();
+  const navigate = useNavigate();
+
   const [name, setName] = useState(user?.name || '');
   const [email, setEmail] = useState(user?.email || '');
   const [avatar, setAvatar] = useState(user?.avatar || '');
@@ -32,9 +35,60 @@ export const Profile = () => {
     }
   };
 
+  const handleClose = () => {
+    // If there is history, go back; otherwise go to appropriate landing page
+    if (window.history.length > 1) {
+      navigate(-1);
+    } else if (user?.role === 'admin') {
+      navigate('/admin/dashboard');
+    } else {
+      navigate('/');
+    }
+  };
+
   return (
-    <div style={{ maxWidth: '600px', margin: '2rem auto' }}>
-      <div className="card" style={{ padding: '2.5rem' }}>
+    <div style={{ maxWidth: '640px', margin: '2rem auto' }}>
+      {/* Top Navigation / Breadcrumb Row */}
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          marginBottom: '1.25rem',
+        }}
+      >
+        <button
+          onClick={handleClose}
+          className="btn btn-outline btn-sm"
+          title="Return to previous page"
+        >
+          <ArrowLeft size={16} /> Back
+        </button>
+
+        <div style={{ display: 'flex', gap: '0.5rem' }}>
+          {user?.role === 'admin' ? (
+            <Link to="/admin/dashboard" className="btn btn-secondary btn-sm">
+              <LayoutDashboard size={15} /> Admin Dashboard
+            </Link>
+          ) : (
+            <Link to="/" className="btn btn-secondary btn-sm">
+              <Home size={15} /> Browse Store
+            </Link>
+          )}
+
+          <button
+            onClick={handleClose}
+            className="btn btn-secondary btn-sm"
+            style={{ padding: '0.4rem 0.6rem', color: 'var(--text-muted)' }}
+            title="Close Settings"
+          >
+            <X size={18} />
+          </button>
+        </div>
+      </div>
+
+      <div className="card" style={{ padding: '2.5rem', position: 'relative' }}>
+        {/* User Identity Header */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem', marginBottom: '2rem' }}>
           <img
             src={avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80'}
@@ -113,15 +167,35 @@ export const Profile = () => {
             />
           </div>
 
-          <button
-            type="submit"
-            className="btn btn-primary btn-lg"
-            style={{ width: '100%', marginTop: '0.5rem' }}
-            disabled={saving}
+          {/* Action Buttons: Save and Close / Cancel */}
+          <div
+            style={{
+              display: 'flex',
+              gap: '1rem',
+              marginTop: '1.75rem',
+              paddingTop: '1rem',
+              borderTop: '1px solid var(--border-subtle)',
+            }}
           >
-            <Save size={18} />
-            {saving ? 'Saving Changes...' : 'Save Profile Changes'}
-          </button>
+            <button
+              type="button"
+              onClick={handleClose}
+              className="btn btn-secondary btn-lg"
+              style={{ flex: 1 }}
+            >
+              <X size={18} /> Close & Return
+            </button>
+
+            <button
+              type="submit"
+              className="btn btn-primary btn-lg"
+              style={{ flex: 2 }}
+              disabled={saving}
+            >
+              <Save size={18} />
+              {saving ? 'Saving...' : 'Save Profile Changes'}
+            </button>
+          </div>
         </form>
       </div>
     </div>

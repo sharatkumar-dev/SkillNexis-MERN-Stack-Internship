@@ -68,7 +68,7 @@ export const Navbar = () => {
                   alt={user.name}
                   className="user-avatar"
                 />
-                <span style={{ fontSize: '0.88rem', fontWeight: 600 }}>
+                <span style={{ fontSize: '0.88rem', fontWeight: 600, color: '#f8fafc' }}>
                   {user.name.split(' ')[0]}
                 </span>
                 {isAdmin && (
