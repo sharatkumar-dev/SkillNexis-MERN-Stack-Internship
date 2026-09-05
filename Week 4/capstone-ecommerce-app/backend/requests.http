@@ -1,0 +1,258 @@
+### ==============================================================================
+### SkillNexis Capstone Project: E-Commerce REST API Test Suite
+### Compatible with VS Code "REST Client" Extension
+### ==============================================================================
+
+@baseUrl = http://localhost:5000/api
+@contentType = application/json
+
+### ------------------------------------------------------------------------------
+### 1. HEALTH & SYSTEM CHECKS
+### ------------------------------------------------------------------------------
+
+# @name healthCheck
+GET {{baseUrl}}/health
+Content-Type: {{contentType}}
+
+###
+
+# @name rootEndpoint
+GET http://localhost:5000/
+
+### ------------------------------------------------------------------------------
+### 2. AUTHENTICATION & USERS
+### ------------------------------------------------------------------------------
+
+# @name registerCustomer
+POST {{baseUrl}}/auth/register
+Content-Type: {{contentType}}
+
+{
+  "name": "Alex Smith",
+  "email": "alex.test@skillnexis.com",
+  "password": "Password123!"
+}
+
+###
+
+# @name loginCustomer
+POST {{baseUrl}}/auth/login
+Content-Type: {{contentType}}
+
+{
+  "email": "customer@skillnexis.com",
+  "password": "customer123"
+}
+
+### Store Customer JWT Token from Login Response
+@customerToken = {{loginCustomer.response.body.data.token}}
+
+###
+
+# @name loginAdmin
+POST {{baseUrl}}/auth/login
+Content-Type: {{contentType}}
+
+{
+  "email": "admin@skillnexis.com",
+  "password": "admin123"
+}
+
+### Store Admin JWT Token from Login Response
+@adminToken = {{loginAdmin.response.body.data.token}}
+
+###
+
+# @name getCustomerProfile
+GET {{baseUrl}}/auth/profile
+Authorization: Bearer {{customerToken}}
+Content-Type: {{contentType}}
+
+###
+
+# @name updateCustomerProfile
+PUT {{baseUrl}}/auth/profile
+Authorization: Bearer {{customerToken}}
+Content-Type: {{contentType}}
+
+{
+  "name": "Jane Doe Updated"
+}
+
+### ------------------------------------------------------------------------------
+### 3. PRODUCTS & CATALOG
+### ------------------------------------------------------------------------------
+
+# @name listAllProducts
+GET {{baseUrl}}/products?page=1&limit=8
+Content-Type: {{contentType}}
+
+###
+
+# @name searchProducts
+GET {{baseUrl}}/products?search=Keyboard
+Content-Type: {{contentType}}
+
+###
+
+# @name filterProductsByCategory
+GET {{baseUrl}}/products?category=Electronics
+Content-Type: {{contentType}}
+
+###
+
+# @name sortProductsByPriceAsc
+GET {{baseUrl}}/products?sort=price_asc
+Content-Type: {{contentType}}
+
+###
+
+# @name getCategoriesList
+GET {{baseUrl}}/products/categories
+Content-Type: {{contentType}}
+
+###
+
+# @name getSingleProduct
+# Replace the ID below with a real product ID from database or seeding
+GET {{baseUrl}}/products/67b937000000000000000001
+Content-Type: {{contentType}}
+
+###
+
+# @name adminCreateProduct
+POST {{baseUrl}}/products
+Authorization: Bearer {{adminToken}}
+Content-Type: {{contentType}}
+
+{
+  "name": "NovaStudio 4K USB-C Webcam",
+  "description": "Ultra high-definition streaming camera with dual stereo microphones and physical privacy shutter.",
+  "price": 89.99,
+  "category": "Electronics",
+  "brand": "NovaStudio",
+  "countInStock": 15,
+  "imageUrl": "https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?auto=format&fit=crop&w=800&q=80",
+  "isFeatured": true
+}
+
+### Store Created Product ID
+@createdProductId = {{adminCreateProduct.response.body.data._id}}
+
+###
+
+# @name adminUpdateProduct
+PUT {{baseUrl}}/products/{{createdProductId}}
+Authorization: Bearer {{adminToken}}
+Content-Type: {{contentType}}
+
+{
+  "price": 84.99,
+  "countInStock": 20
+}
+
+###
+
+# @name adminDeleteProduct
+DELETE {{baseUrl}}/products/{{createdProductId}}
+Authorization: Bearer {{adminToken}}
+
+### ------------------------------------------------------------------------------
+### 4. ORDERS & CHECKOUT FLOW
+### ------------------------------------------------------------------------------
+
+# @name createCustomerOrder
+POST {{baseUrl}}/orders
+Authorization: Bearer {{customerToken}}
+Content-Type: {{contentType}}
+
+{
+  "orderItems": [
+    {
+      "product": "67b937000000000000000001",
+      "name": "AeroSound Pro Wireless ANC Headphones",
+      "qty": 1,
+      "price": 199.99,
+      "imageUrl": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=80"
+    }
+  ],
+  "shippingAddress": {
+    "fullName": "Jane Customer",
+    "address": "456 Innovation Parkway",
+    "city": "San Francisco",
+    "postalCode": "94107",
+    "country": "United States",
+    "phone": "+1 (555) 234-5678"
+  },
+  "paymentMethod": "CashOnDelivery",
+  "itemsPrice": 199.99,
+  "taxPrice": 16.00,
+  "shippingPrice": 0.00,
+  "totalPrice": 215.99
+}
+
+### Store Placed Order ID
+@placedOrderId = {{createCustomerOrder.response.body.data._id}}
+
+###
+
+# @name getCustomerOrders
+GET {{baseUrl}}/orders/my-orders
+Authorization: Bearer {{customerToken}}
+Content-Type: {{contentType}}
+
+###
+
+# @name getOrderDetails
+GET {{baseUrl}}/orders/{{placedOrderId}}
+Authorization: Bearer {{customerToken}}
+Content-Type: {{contentType}}
+
+###
+
+# @name adminGetAllOrders
+GET {{baseUrl}}/orders
+Authorization: Bearer {{adminToken}}
+Content-Type: {{contentType}}
+
+###
+
+# @name adminUpdateOrderStatusProcessing
+PUT {{baseUrl}}/orders/{{placedOrderId}}/status
+Authorization: Bearer {{adminToken}}
+Content-Type: {{contentType}}
+
+{
+  "status": "Processing"
+}
+
+###
+
+# @name adminUpdateOrderStatusShipped
+PUT {{baseUrl}}/orders/{{placedOrderId}}/status
+Authorization: Bearer {{adminToken}}
+Content-Type: {{contentType}}
+
+{
+  "status": "Shipped"
+}
+
+###
+
+# @name adminUpdateOrderStatusDelivered
+PUT {{baseUrl}}/orders/{{placedOrderId}}/status
+Authorization: Bearer {{adminToken}}
+Content-Type: {{contentType}}
+
+{
+  "status": "Delivered"
+}
+
+### ------------------------------------------------------------------------------
+### 5. ADMIN ANALYTICS & DASHBOARD
+### ------------------------------------------------------------------------------
+
+# @name getAdminDashboardStats
+GET {{baseUrl}}/admin/stats
+Authorization: Bearer {{adminToken}}
+Content-Type: {{contentType}}

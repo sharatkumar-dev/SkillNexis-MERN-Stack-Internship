@@ -1,0 +1,11 @@
+# Week 4 Assignment & Curriculum PDFs
+week 4.pdf
+practice set.pdf
+*.pdf
+
+# Dependencies, Environment & Build Artifacts
+node_modules/
+.env
+dist/
+build/
+*.log
