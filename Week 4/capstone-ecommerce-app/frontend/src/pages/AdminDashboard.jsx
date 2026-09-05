@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import API from '../api/axios';
+import { formatPrice } from '../utils/currency';
 import {
   DollarSign,
   ShoppingBag,
@@ -85,7 +86,7 @@ export const AdminDashboard = () => {
           <div>
             <span style={{ fontSize: '0.85rem', color: 'var(--text-muted)', fontWeight: 500 }}>Total Revenue</span>
             <div style={{ fontSize: '1.75rem', fontWeight: 800, fontFamily: 'var(--font-heading)', color: '#ffffff' }}>
-              ${stats?.totalRevenue ? Number(stats.totalRevenue).toFixed(2) : '0.00'}
+              {formatPrice(stats?.totalRevenue || 0)}
             </div>
           </div>
         </div>
@@ -181,7 +182,7 @@ export const AdminDashboard = () => {
                         </span>
                       </td>
                       <td style={{ fontWeight: 700, color: '#818cf8' }}>
-                        ${ord.totalPrice.toFixed(2)}
+                        {formatPrice(ord.totalPrice)}
                       </td>
                     </tr>
                   ))}

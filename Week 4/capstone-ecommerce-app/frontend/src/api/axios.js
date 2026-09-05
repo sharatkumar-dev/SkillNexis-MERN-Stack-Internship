@@ -9,7 +9,7 @@ const API = axios.create({
 // In-memory / LocalStorage cache for offline fallback
 const getCachedProducts = () => {
   try {
-    const data = localStorage.getItem('nexis_demo_products');
+    const data = localStorage.getItem('nexis_demo_products_inr');
     return data ? JSON.parse(data) : INITIAL_PRODUCTS;
   } catch {
     return INITIAL_PRODUCTS;
@@ -17,11 +17,11 @@ const getCachedProducts = () => {
 };
 
 const saveCachedProducts = (prods) => {
-  localStorage.setItem('nexis_demo_products', JSON.stringify(prods));
+  localStorage.setItem('nexis_demo_products_inr', JSON.stringify(prods));
 };
 
 // Initialize cache if empty
-if (!localStorage.getItem('nexis_demo_products')) {
+if (!localStorage.getItem('nexis_demo_products_inr')) {
   saveCachedProducts(INITIAL_PRODUCTS);
 }
 
@@ -171,8 +171,8 @@ API.interceptors.response.use(
           data: {
             success: true,
             data: {
-              totalRevenue: totalRevenue > 0 ? totalRevenue : 3249.5,
-              totalOrders: orders.length > 0 ? orders.length : 14,
+              totalRevenue: totalRevenue > 0 ? totalRevenue : 84950.0,
+              totalOrders: orders.length > 0 ? orders.length : 18,
               totalProducts: products.length,
               totalUsers: 8,
               lowStockProducts: products.filter((p) => p.countInStock <= 5).length,

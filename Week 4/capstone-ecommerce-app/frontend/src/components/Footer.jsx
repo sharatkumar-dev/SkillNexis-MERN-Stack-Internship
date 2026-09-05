@@ -21,7 +21,7 @@ export const Footer = () => {
             </div>
             <div>
               <h4 style={{ fontSize: '0.95rem', fontWeight: 600 }}>Free Express Delivery</h4>
-              <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>On all continental orders over $100</p>
+              <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>On all orders across India over ₹999</p>
             </div>
           </div>
 

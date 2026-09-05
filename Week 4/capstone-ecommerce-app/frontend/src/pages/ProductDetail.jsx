@@ -3,6 +3,7 @@ import { useParams, useNavigate, Link } from 'react-router-dom';
 import API from '../api/axios';
 import Rating from '../components/Rating';
 import { useCart } from '../context/CartContext';
+import { formatPrice } from '../utils/currency';
 import { ArrowLeft, ShoppingBag, Truck, ShieldCheck, Check, AlertCircle } from 'lucide-react';
 
 export const ProductDetail = () => {
@@ -131,7 +132,7 @@ export const ProductDetail = () => {
               color: '#ffffff',
             }}
           >
-            ${Number(product.price).toFixed(2)}
+            {formatPrice(product.price)}
           </div>
 
           <p style={{ color: 'var(--text-secondary)', fontSize: '1.05rem', lineHeight: '1.7' }}>
@@ -192,7 +193,7 @@ export const ProductDetail = () => {
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
               <Truck size={18} color="#818cf8" />
-              <span>Complimentary insured express delivery on orders over $100</span>
+              <span>Complimentary insured express delivery on orders over ₹999</span>
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
               <ShieldCheck size={18} color="#34d399" />

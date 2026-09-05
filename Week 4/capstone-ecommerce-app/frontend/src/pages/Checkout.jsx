@@ -3,6 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import API from '../api/axios';
 import { useAuth } from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
+import { formatPrice } from '../utils/currency';
 import { ShieldCheck, Truck, CreditCard, Banknote, ArrowLeft } from 'lucide-react';
 
 export const Checkout = () => {
@@ -283,7 +284,7 @@ export const Checkout = () => {
                   <span style={{ color: 'var(--text-secondary)' }}>
                     {item.qty}x {item.name}
                   </span>
-                  <span style={{ fontWeight: 600 }}>${(item.price * item.qty).toFixed(2)}</span>
+                  <span style={{ fontWeight: 600 }}>{formatPrice(item.price * item.qty)}</span>
                 </div>
               ))}
             </div>
@@ -291,15 +292,15 @@ export const Checkout = () => {
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', marginBottom: '1.5rem', borderTop: '1px solid var(--border-subtle)', paddingTop: '1rem' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.9rem' }}>
                 <span style={{ color: 'var(--text-secondary)' }}>Subtotal</span>
-                <span>${itemsPrice.toFixed(2)}</span>
+                <span>{formatPrice(itemsPrice)}</span>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.9rem' }}>
                 <span style={{ color: 'var(--text-secondary)' }}>Shipping</span>
-                <span>{shippingPrice === 0 ? <span style={{ color: '#34d399' }}>FREE</span> : `$${shippingPrice.toFixed(2)}`}</span>
+                <span>{shippingPrice === 0 ? <span style={{ color: '#34d399' }}>FREE</span> : formatPrice(shippingPrice)}</span>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.9rem' }}>
-                <span style={{ color: 'var(--text-secondary)' }}>Estimated Tax</span>
-                <span>${taxPrice.toFixed(2)}</span>
+                <span style={{ color: 'var(--text-secondary)' }}>Estimated GST (18%)</span>
+                <span>{formatPrice(taxPrice)}</span>
               </div>
               <div
                 style={{
@@ -313,7 +314,7 @@ export const Checkout = () => {
                 }}
               >
                 <span>Total</span>
-                <span style={{ color: '#818cf8' }}>${totalPrice.toFixed(2)}</span>
+                <span style={{ color: '#818cf8' }}>{formatPrice(totalPrice)}</span>
               </div>
             </div>
 
@@ -324,7 +325,7 @@ export const Checkout = () => {
               disabled={submitting}
             >
               <ShieldCheck size={20} />
-              {submitting ? 'Placing Order...' : `Authorize & Place Order ($${totalPrice.toFixed(2)})`}
+              {submitting ? 'Placing Order...' : `Authorize & Place Order (${formatPrice(totalPrice)})`}
             </button>
           </div>
         </div>

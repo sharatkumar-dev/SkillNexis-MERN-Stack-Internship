@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import API from '../api/axios';
+import { formatPrice } from '../utils/currency';
 import { Package, Calendar, ArrowRight, Eye, ShoppingBag } from 'lucide-react';
 
 export const OrderHistory = () => {
@@ -95,7 +96,7 @@ export const OrderHistory = () => {
                     Total Amount
                   </span>
                   <p style={{ fontWeight: 800, color: '#818cf8' }}>
-                    ${order.totalPrice.toFixed(2)}
+                    {formatPrice(order.totalPrice)}
                   </p>
                 </div>
 
@@ -122,7 +123,7 @@ export const OrderHistory = () => {
                       {item.qty}x {item.name}
                     </span>
                     <span style={{ fontWeight: 600 }}>
-                      ${(item.price * item.qty).toFixed(2)}
+                      {formatPrice(item.price * item.qty)}
                     </span>
                   </div>
                 ))}

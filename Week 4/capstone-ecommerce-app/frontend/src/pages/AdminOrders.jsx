@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import API from '../api/axios';
+import { formatPrice } from '../utils/currency';
 import { ShoppingBag, ArrowLeft, CheckCircle2, Truck, Eye, X } from 'lucide-react';
 
 export const AdminOrders = () => {
@@ -104,7 +105,7 @@ export const AdminOrders = () => {
                     {order.orderItems?.reduce((acc, i) => acc + i.qty, 0)} items
                   </td>
                   <td style={{ fontWeight: 800, color: '#818cf8' }}>
-                    ${order.totalPrice.toFixed(2)}
+                    {formatPrice(order.totalPrice)}
                   </td>
                   <td>
                     <span style={{ fontSize: '0.8rem', color: order.isPaid ? '#34d399' : '#fbbf24', fontWeight: 600 }}>
@@ -171,7 +172,7 @@ export const AdminOrders = () => {
                   <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', textTransform: 'uppercase' }}>Financials</p>
                   <p style={{ fontSize: '0.9rem' }}>Method: <strong>{selectedOrder.paymentMethod}</strong></p>
                   <p style={{ fontSize: '0.9rem' }}>Paid: <strong>{selectedOrder.isPaid ? 'Yes' : 'Pending'}</strong></p>
-                  <p style={{ fontSize: '0.9rem' }}>Total: <strong style={{ color: '#818cf8', fontSize: '1.1rem' }}>${selectedOrder.totalPrice.toFixed(2)}</strong></p>
+                  <p style={{ fontSize: '0.9rem' }}>Total: <strong style={{ color: '#818cf8', fontSize: '1.1rem' }}>{formatPrice(selectedOrder.totalPrice)}</strong></p>
                 </div>
               </div>
 
@@ -181,7 +182,7 @@ export const AdminOrders = () => {
                   {selectedOrder.orderItems.map((item, idx) => (
                     <div key={idx} style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.88rem' }}>
                       <span>{item.qty}x {item.name}</span>
-                      <span style={{ fontWeight: 600 }}>${(item.price * item.qty).toFixed(2)}</span>
+                      <span style={{ fontWeight: 600 }}>{formatPrice(item.price * item.qty)}</span>
                     </div>
                   ))}
                 </div>

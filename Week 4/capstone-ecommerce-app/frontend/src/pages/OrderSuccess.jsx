@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import API from '../api/axios';
+import { formatPrice } from '../utils/currency';
 import { CheckCircle2, Package, ArrowRight, Home } from 'lucide-react';
 
 export const OrderSuccess = () => {
@@ -117,7 +118,7 @@ export const OrderSuccess = () => {
                 <span style={{ color: 'var(--text-secondary)' }}>
                   {item.qty}x {item.name}
                 </span>
-                <span style={{ fontWeight: 600 }}>${(item.price * item.qty).toFixed(2)}</span>
+                <span style={{ fontWeight: 600 }}>{formatPrice(item.price * item.qty)}</span>
               </div>
             ))}
           </div>
@@ -135,7 +136,7 @@ export const OrderSuccess = () => {
             }}
           >
             <span>Total Amount</span>
-            <span style={{ color: '#818cf8' }}>${order.totalPrice.toFixed(2)}</span>
+            <span style={{ color: '#818cf8' }}>{formatPrice(order.totalPrice)}</span>
           </div>
         </div>
       )}

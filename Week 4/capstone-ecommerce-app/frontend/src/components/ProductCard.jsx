@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { ShoppingBag, Eye } from 'lucide-react';
 import Rating from './Rating';
 import { useCart } from '../context/CartContext';
+import { formatPrice } from '../utils/currency';
 
 export const ProductCard = ({ product }) => {
   const { addToCart } = useCart();
@@ -50,7 +51,7 @@ export const ProductCard = ({ product }) => {
         </div>
 
         <div className="product-card-footer">
-          <span className="product-price">${Number(product.price).toFixed(2)}</span>
+          <span className="product-price">{formatPrice(product.price)}</span>
           <div style={{ display: 'flex', gap: '0.5rem' }}>
             <Link
               to={`/product/${product._id}`}

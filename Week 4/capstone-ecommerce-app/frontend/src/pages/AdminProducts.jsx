@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import API from '../api/axios';
+import { formatPrice } from '../utils/currency';
 import {
   Plus,
   Edit2,
@@ -244,7 +245,7 @@ export const AdminProducts = () => {
                   <td>
                     <span className="badge badge-category">{product.category}</span>
                   </td>
-                  <td style={{ fontWeight: 700 }}>${Number(product.price).toFixed(2)}</td>
+                  <td style={{ fontWeight: 700 }}>{formatPrice(product.price)}</td>
                   <td>
                     <span
                       style={{
@@ -326,10 +327,10 @@ export const AdminProducts = () => {
 
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
                 <div className="form-group">
-                  <label className="form-label">Price ($)</label>
+                  <label className="form-label">Price (₹)</label>
                   <input
                     type="number"
-                    step="0.01"
+                    step="1"
                     name="price"
                     required
                     min="0"

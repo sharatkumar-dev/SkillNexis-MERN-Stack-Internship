@@ -5,7 +5,7 @@ const CartContext = createContext(null);
 export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState(() => {
     try {
-      const savedCart = localStorage.getItem('nexis_cart_items');
+      const savedCart = localStorage.getItem('nexis_cart_items_inr');
       return savedCart ? JSON.parse(savedCart) : [];
     } catch {
       return [];
@@ -15,7 +15,7 @@ export const CartProvider = ({ children }) => {
   const [toast, setToast] = useState(null);
 
   useEffect(() => {
-    localStorage.setItem('nexis_cart_items', JSON.stringify(cartItems));
+    localStorage.setItem('nexis_cart_items_inr', JSON.stringify(cartItems));
   }, [cartItems]);
 
   const showToast = (message, type = 'success') => {
@@ -87,7 +87,7 @@ export const CartProvider = ({ children }) => {
 
   const clearCart = () => {
     setCartItems([]);
-    localStorage.removeItem('nexis_cart_items');
+    localStorage.removeItem('nexis_cart_items_inr');
   };
 
   // Calculations
@@ -97,8 +97,8 @@ export const CartProvider = ({ children }) => {
     cartItems.reduce((acc, item) => acc + item.price * item.qty, 0).toFixed(2)
   );
 
-  const shippingPrice = itemsPrice > 100 || itemsPrice === 0 ? 0 : 9.99;
-  const taxPrice = Number((0.08 * itemsPrice).toFixed(2));
+  const shippingPrice = itemsPrice > 999 || itemsPrice === 0 ? 0 : 99.0;
+  const taxPrice = Number((0.18 * itemsPrice).toFixed(2));
   const totalPrice = Number((itemsPrice + shippingPrice + taxPrice).toFixed(2));
 
   return (

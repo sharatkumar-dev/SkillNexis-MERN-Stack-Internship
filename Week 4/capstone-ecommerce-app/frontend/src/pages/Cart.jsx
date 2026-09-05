@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
+import { formatPrice } from '../utils/currency';
 import { Trash2, ShoppingBag, ArrowRight, ArrowLeft } from 'lucide-react';
 
 export const Cart = () => {
@@ -101,7 +102,7 @@ export const Cart = () => {
                   {item.name}
                 </Link>
                 <span style={{ color: '#818cf8', fontWeight: 700 }}>
-                  ${Number(item.price).toFixed(2)} each
+                  {formatPrice(item.price)} each
                 </span>
               </div>
 
@@ -124,7 +125,7 @@ export const Cart = () => {
 
               {/* Line Subtotal */}
               <div style={{ minWidth: '90px', textAlign: 'right', fontWeight: 700, fontSize: '1.1rem' }}>
-                ${(item.price * item.qty).toFixed(2)}
+                {formatPrice(item.price * item.qty)}
               </div>
 
               {/* Remove button */}
@@ -165,17 +166,17 @@ export const Cart = () => {
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem', marginBottom: '1.5rem', fontSize: '0.95rem' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
               <span style={{ color: 'var(--text-secondary)' }}>Items Subtotal</span>
-              <span>${itemsPrice.toFixed(2)}</span>
+              <span>{formatPrice(itemsPrice)}</span>
             </div>
 
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
               <span style={{ color: 'var(--text-secondary)' }}>Estimated Shipping</span>
-              <span>{shippingPrice === 0 ? <span style={{ color: '#34d399' }}>FREE</span> : `$${shippingPrice.toFixed(2)}`}</span>
+              <span>{shippingPrice === 0 ? <span style={{ color: '#34d399' }}>FREE</span> : formatPrice(shippingPrice)}</span>
             </div>
 
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-              <span style={{ color: 'var(--text-secondary)' }}>Estimated Sales Tax (8%)</span>
-              <span>${taxPrice.toFixed(2)}</span>
+              <span style={{ color: 'var(--text-secondary)' }}>Estimated GST (18%)</span>
+              <span>{formatPrice(taxPrice)}</span>
             </div>
 
             <div
@@ -190,7 +191,7 @@ export const Cart = () => {
               }}
             >
               <span>Total</span>
-              <span style={{ color: '#818cf8' }}>${totalPrice.toFixed(2)}</span>
+              <span style={{ color: '#818cf8' }}>{formatPrice(totalPrice)}</span>
             </div>
           </div>
 
