@@ -80,17 +80,24 @@ export const Home = () => {
         }
 
         const { data } = await API.get('/products', { params });
-        if (data?.data?.products && data.data.products.length > 0) {
+        if (data?.data?.products && Array.isArray(data.data.products)) {
           setProducts(data.data.products);
           setTotalPages(data.data.pages || 1);
-          setTotalCount(data.data.totalProducts || data.data.products.length);
+          setTotalCount(data.data.totalProducts ?? data.data.products.length);
         } else {
           let fallback = [...INITIAL_PRODUCTS];
           if (search) {
-            const s = search.toLowerCase();
-            fallback = fallback.filter(
-              (p) => p.name.toLowerCase().includes(s) || p.description.toLowerCase().includes(s)
-            );
+            const s = search.toLowerCase().trim();
+            const words = s
+              .replace(/[&/\\#,+()$~%.'":*?<>{}]/g, ' ')
+              .split(/\s+/)
+              .filter((w) => w.length >= 2 && !['and', 'the', 'for', 'with', 'in', 'all'].includes(w));
+
+            fallback = fallback.filter((p) => {
+              const fullText = `${p.name} ${p.description} ${p.category} ${p.brand}`.toLowerCase();
+              if (fullText.includes(s)) return true;
+              return words.some((w) => fullText.includes(w));
+            });
           }
           if (selectedCategory && selectedCategory !== 'All') {
             fallback = fallback.filter((p) => p.category === selectedCategory);
@@ -102,6 +109,19 @@ export const Home = () => {
       } catch (err) {
         console.error('Error fetching products:', err);
         let fallback = [...INITIAL_PRODUCTS];
+        if (search) {
+          const s = search.toLowerCase().trim();
+          const words = s
+            .replace(/[&/\\#,+()$~%.'":*?<>{}]/g, ' ')
+            .split(/\s+/)
+            .filter((w) => w.length >= 2 && !['and', 'the', 'for', 'with', 'in', 'all'].includes(w));
+
+          fallback = fallback.filter((p) => {
+            const fullText = `${p.name} ${p.description} ${p.category} ${p.brand}`.toLowerCase();
+            if (fullText.includes(s)) return true;
+            return words.some((w) => fullText.includes(w));
+          });
+        }
         if (selectedCategory && selectedCategory !== 'All') {
           fallback = fallback.filter((p) => p.category === selectedCategory);
         }
@@ -115,6 +135,16 @@ export const Home = () => {
 
     fetchProducts();
   }, [search, selectedCategory, sortBy, page]);
+
+  // Smooth scroll to catalog when search parameter is applied
+  useEffect(() => {
+    if (search) {
+      setTimeout(() => {
+        const el = document.getElementById('catalog');
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    }
+  }, [search]);
 
   const handleCategoryClick = (cat) => {
     setSelectedCategory(cat);

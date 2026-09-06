@@ -85,8 +85,17 @@ API.interceptors.response.use(
         const params = config.params || {};
 
         if (params.search) {
-          const s = params.search.toLowerCase();
-          list = list.filter((p) => p.name.toLowerCase().includes(s) || p.description.toLowerCase().includes(s));
+          const s = params.search.toLowerCase().trim();
+          const words = s
+            .replace(/[&/\\#,+()$~%.'":*?<>{}]/g, ' ')
+            .split(/\s+/)
+            .filter((w) => w.length >= 2 && !['and', 'the', 'for', 'with', 'in', 'all'].includes(w));
+
+          list = list.filter((p) => {
+            const fullText = `${p.name} ${p.description} ${p.category} ${p.brand}`.toLowerCase();
+            if (fullText.includes(s)) return true;
+            return words.some((w) => fullText.includes(w));
+          });
         }
 
         if (params.category && params.category !== 'All') {
