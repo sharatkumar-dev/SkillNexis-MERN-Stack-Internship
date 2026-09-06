@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
 import API from '../api/axios';
+import { INITIAL_PRODUCTS } from '../api/mockData';
 import ProductCard from '../components/ProductCard';
 import {
   Sparkles,
@@ -79,12 +80,34 @@ export const Home = () => {
         }
 
         const { data } = await API.get('/products', { params });
-        setProducts(data.data.products || []);
-        setTotalPages(data.data.pages || 1);
-        setTotalCount(data.data.totalProducts || 0);
+        if (data?.data?.products && data.data.products.length > 0) {
+          setProducts(data.data.products);
+          setTotalPages(data.data.pages || 1);
+          setTotalCount(data.data.totalProducts || data.data.products.length);
+        } else {
+          let fallback = [...INITIAL_PRODUCTS];
+          if (search) {
+            const s = search.toLowerCase();
+            fallback = fallback.filter(
+              (p) => p.name.toLowerCase().includes(s) || p.description.toLowerCase().includes(s)
+            );
+          }
+          if (selectedCategory && selectedCategory !== 'All') {
+            fallback = fallback.filter((p) => p.category === selectedCategory);
+          }
+          setProducts(fallback);
+          setTotalPages(1);
+          setTotalCount(fallback.length);
+        }
       } catch (err) {
         console.error('Error fetching products:', err);
-        setProducts([]);
+        let fallback = [...INITIAL_PRODUCTS];
+        if (selectedCategory && selectedCategory !== 'All') {
+          fallback = fallback.filter((p) => p.category === selectedCategory);
+        }
+        setProducts(fallback);
+        setTotalPages(1);
+        setTotalCount(fallback.length);
       } finally {
         setLoading(false);
       }

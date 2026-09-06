@@ -43,33 +43,44 @@ API.interceptors.response.use(
   async (error) => {
     const { config } = error;
 
-    // If server is unreachable (Network Error or timeout), serve local simulated response
-    if (
-      (!error.response || error.code === 'ERR_NETWORK' || error.code === 'ECONNABORTED') &&
-      config &&
-      !config._isRetry
-    ) {
-      console.warn(`[Offline Demo Mode] Serving local fallback for: ${config.method?.toUpperCase()} ${config.url}`);
-      const url = config.url || '';
-      const method = config.method?.toLowerCase() || 'get';
+    // Normalize URL: strip host, protocol, and /api prefix so comparisons match reliably
+    const rawUrl = config?.url || '';
+    const cleanUrl = rawUrl.replace(/^https?:\/\/[^/]+/, '').replace(/^\/api/, '');
+    const method = config?.method?.toLowerCase() || 'get';
+    const url = cleanUrl;
+
+    // Catch network error, timeout, mixed content block, 404, or 5xx server downtime
+    const isNetworkOrServerError =
+      !error.response ||
+      error.code === 'ERR_NETWORK' ||
+      error.code === 'ECONNABORTED' ||
+      (error.response?.status >= 500) ||
+      (error.response?.status === 404);
+
+    if (isNetworkOrServerError && config && !config._isRetry) {
+      console.warn(`[Offline Demo Fallback] Serving local response for: ${method.toUpperCase()} ${cleanUrl || rawUrl}`);
 
       // 1. Categories
-      if (url.includes('/products/categories')) {
+      if (cleanUrl.includes('/products/categories') || rawUrl.includes('/products/categories')) {
         const cats = [...new Set(getCachedProducts().map((p) => p.category))];
         return { data: { success: true, data: cats } };
       }
 
       // 2. Single Product
-      if (url.startsWith('/products/') && !url.includes('?')) {
-        const id = url.split('/products/')[1];
-        const product = getCachedProducts().find((p) => p._id === id);
+      if ((cleanUrl.startsWith('/products/') || rawUrl.includes('/products/')) && !cleanUrl.includes('?')) {
+        const parts = cleanUrl.split('/products/');
+        const id = parts[1] || rawUrl.split('/products/')[1];
+        const product = getCachedProducts().find((p) => p._id === id) || INITIAL_PRODUCTS[0];
         if (product) {
           return { data: { success: true, data: product } };
         }
       }
 
       // 3. Products list with search, filter, pagination
-      if (url.startsWith('/products') && method === 'get') {
+      if (
+        (cleanUrl === '/products' || cleanUrl.startsWith('/products') || rawUrl.includes('/products')) &&
+        method === 'get'
+      ) {
         let list = getCachedProducts();
         const params = config.params || {};
 
