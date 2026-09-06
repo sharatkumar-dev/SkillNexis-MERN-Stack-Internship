@@ -136,13 +136,10 @@ export const Home = () => {
     fetchProducts();
   }, [search, selectedCategory, sortBy, page]);
 
-  // Smooth scroll to catalog when search parameter is applied
+  // Scroll to top when search query changes so search results appear immediately
   useEffect(() => {
     if (search) {
-      setTimeout(() => {
-        const el = document.getElementById('catalog');
-        if (el) el.scrollIntoView({ behavior: 'smooth' });
-      }, 100);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   }, [search]);
 
@@ -250,13 +247,18 @@ export const Home = () => {
   }));
 
   // Pick top 3 featured products for the spotlight
-  const featuredProducts = products.filter((p) => p.isFeatured).slice(0, 3);
-  const showcaseProducts = featuredProducts.length > 0 ? featuredProducts : products.slice(0, 3);
+  const featuredProducts = (products.length > 0 && !search ? products : INITIAL_PRODUCTS)
+    .filter((p) => p.isFeatured)
+    .slice(0, 3);
+  const showcaseProducts = featuredProducts.length > 0 ? featuredProducts : INITIAL_PRODUCTS.slice(0, 3);
 
   return (
     <div>
-      {/* 1. STUNNING HERO SECTION (SPLIT LAYOUT) */}
-      <div className="hero-banner" style={{ marginBottom: '3.5rem' }}>
+      {/* 1-5. HOMEPAGE HERO & MARKETING BANNERS (Displayed on clean homepage) */}
+      {!search && (
+        <>
+          {/* 1. STUNNING HERO SECTION (SPLIT LAYOUT) */}
+          <div className="hero-banner" style={{ marginBottom: '3.5rem' }}>
         <div className="hero-split">
           {/* Left Column: Value Prop & CTA */}
           <div>
@@ -510,25 +512,48 @@ export const Home = () => {
           </a>
         </div>
       </div>
+    </>
+  )}
 
-      {/* 6. FULL DYNAMIC PRODUCT CATALOG (WITH SEARCH & FILTERS) */}
-      <div id="catalog" style={{ paddingTop: '1.5rem', marginBottom: '3.5rem' }}>
-        <div className="section-heading-wrapper">
-          <div>
-            <span className="spec-chip" style={{ marginBottom: '0.4rem' }}>COMPLETE INVENTORY</span>
-            <h2 style={{ fontSize: '1.8rem', textTransform: 'uppercase', letterSpacing: '-0.02em' }}>
-              All Products &amp; Hardware Modules
-            </h2>
-            <p style={{ color: 'var(--text-secondary)', fontSize: '0.88rem' }}>
-              Filter by category, search by specs, or sort by pricing and ratings.
-            </p>
-          </div>
+  {/* 6. FULL DYNAMIC PRODUCT CATALOG / SEARCH RESULTS */}
+  <div id="catalog" style={{ paddingTop: search ? '1rem' : '1.5rem', marginBottom: '3.5rem' }}>
+    <div className="section-heading-wrapper">
+      <div>
+        <span className="spec-chip" style={{ marginBottom: '0.4rem' }}>
+          {search ? 'SEARCH RESULTS' : 'COMPLETE INVENTORY'}
+        </span>
+        <h2 style={{ fontSize: '1.8rem', textTransform: 'uppercase', letterSpacing: '-0.02em' }}>
+          {search ? (
+            <>
+              Results for <span style={{ color: 'var(--text-amber)' }}>"{search}"</span>
+            </>
+          ) : (
+            'All Products & Hardware Modules'
+          )}
+        </h2>
+        <p style={{ color: 'var(--text-secondary)', fontSize: '0.88rem' }}>
+          {search
+            ? `Found ${totalCount} matching product${totalCount === 1 ? '' : 's'} in catalog.`
+            : 'Filter by category, search by specs, or sort by pricing and ratings.'}
+        </p>
+      </div>
 
-          {/* Results counter */}
-          <span className="spec-chip" style={{ color: 'var(--text-amber)' }}>
-            {totalCount} ITEMS IN CATALOG
-          </span>
-        </div>
+      {/* Results counter & Return to Store button */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+        {search && (
+          <button
+            onClick={handleClearFilters}
+            className="btn btn-outline btn-sm"
+            style={{ fontSize: '0.75rem', padding: '0.35rem 0.75rem' }}
+          >
+            ← BACK TO STORE
+          </button>
+        )}
+        <span className="spec-chip" style={{ color: 'var(--text-amber)' }}>
+          {totalCount} {totalCount === 1 ? 'ITEM' : 'ITEMS'}
+        </span>
+      </div>
+    </div>
 
         {/* Filter and Control Bar */}
         <div
