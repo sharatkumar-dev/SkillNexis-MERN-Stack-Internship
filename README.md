@@ -3,7 +3,8 @@
 # 🌐 SkillNexis MERN Stack Internship
 
 [![Internship Track](https://img.shields.io/badge/Track-Full--Stack%20MERN-blue?style=for-the-badge&logo=react)](https://github.com/sharatkumar-dev/SkillNexis-MERN-Stack-Internship)
-[![Status](https://img.shields.io/badge/Status-Week%203%20Complete-brightgreen?style=for-the-badge)](https://github.com/sharatkumar-dev/SkillNexis-MERN-Stack-Internship)
+[![Live Storefront](https://img.shields.io/badge/Live%20Storefront-nexisstore.netlify.app-00C7B7?style=for-the-badge&logo=netlify&logoColor=white)](https://nexisstore.netlify.app/)
+[![Status](https://img.shields.io/badge/Status-Internship%20Complete%20%7C%20Capstone%20Deployed-brightgreen?style=for-the-badge)](https://github.com/sharatkumar-dev/SkillNexis-MERN-Stack-Internship)
 [![Node.js](https://img.shields.io/badge/Node.js-v18%2B-339933?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org/)
 [![Express.js](https://img.shields.io/badge/Express.js-v4.21-000000?style=for-the-badge&logo=express&logoColor=white)](https://expressjs.com/)
 [![React](https://img.shields.io/badge/React-v18-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev/)
@@ -60,8 +61,13 @@ SkillNexis-MERN-Stack-Internship/
 │       ├── backend/                    # Express REST API (JWT Auth, Task CRUD, Search, Stats)
 │       └── frontend/                   # React 18 + Vite (Kanban Board, Filters, Dashboard)
 │
-└── Week 4/                             # Week 4: Cloud Deployment & Capstone Project
-    └── .gitkeep
+└── Week 4/                             # Week 4: Capstone Project & Cloud Deployment
+    ├── README.md                       # Comprehensive Curriculum & Capstone Overview
+    └── capstone-ecommerce-app/         # 🛒 NexisStore — Full-Stack MERN E-Commerce App
+        ├── backend/                    # Express REST API, JWT Auth, Multer uploads, MongoDB Atlas
+        │   ├── requests.http           # Automated REST Client testing suite
+        │   └── postman_collection.json # Postman Collection v2.1
+        └── frontend/                   # React 18 + Vite SPA, Persistent Cart, High-Precision UI (Netlify)
 ```
 
 ---
@@ -73,7 +79,7 @@ SkillNexis-MERN-Stack-Internship/
 | **01** | **Frontend Foundations & React Intro** | • **Assignment 1:** Personal Developer Portfolio (HTML5/CSS3)<br>• **Assignment 2:** React Components & Dynamic State<br>• **Assignment 3:** React Tech Blog SPA UI | ✅ **Completed** | [View Week 1](./Week%201) |
 | **02** | **Backend Development (Node, Express, MongoDB)** | • **Assignment 1:** To-Do List CRUD REST API with MongoDB<br>• **Assignment 2:** User Authentication API (Bcrypt & JWT)<br>• **Mini Project:** Notes App Backend API (User Scoped CRUD) | ✅ **Completed** | [View Week 2](./Week%202) |
 | **03** | **Full-Stack MERN Integration** | • **Assignment 1:** Full Stack To-Do Application (Auth + CRUD + Settings)<br>• **Assignment 2:** Image Upload Feature (Multer + React Gallery)<br>• **Mini Project:** TaskFlow — Task Manager (Kanban + Analytics) | ✅ **Completed** | [View Week 3](./Week%203) |
-| **04** | **Capstone Deployment & Performance** | *Scheduled for Week 4* | ⏳ Upcoming | [View Week 4](./Week%204) |
+| **04** | **Capstone Project & Cloud Deployment** | • **Capstone Project:** NexisStore E-Commerce Web App<br>• **Cloud Deployments:** Netlify + Render + Atlas<br>• **Testing:** Postman Collection v2.1 & requests.http | ✅ **Completed & Deployed** | [View Week 4](./Week%204) \| [Live Demo](https://nexisstore.netlify.app/) |
 
 ---
 
@@ -161,7 +167,27 @@ npm run dev
 # App runs on http://localhost:5175 — click "Demo Login" for instant access
 ```
 
-### 5. Exploring Week 2 Backend Projects
+### 5. Running Week 4 — Capstone Project: NexisStore E-Commerce Platform
+
+> **🌐 Live Storefront Demo:** [https://nexisstore.netlify.app/](https://nexisstore.netlify.app/)
+
+#### Start the Backend REST API:
+```bash
+cd "Week 4/capstone-ecommerce-app/backend"
+npm install
+cp .env.example .env
+npm run seed     # Populate MongoDB Atlas with 10 products and admin/customer accounts
+npm start        # Runs production API on http://localhost:5000
+```
+
+#### Start the Frontend React + Vite SPA:
+```bash
+cd "Week 4/capstone-ecommerce-app/frontend"
+npm install
+npm run dev      # Runs storefront on http://localhost:5173
+```
+
+### 6. Exploring Week 2 Backend Projects
 ```bash
 cd "Week 2/01-todo-list-api"    # Assignment 1: To-Do REST API
 cd "Week 2/02-user-auth-api"    # Assignment 2: User Authentication API
