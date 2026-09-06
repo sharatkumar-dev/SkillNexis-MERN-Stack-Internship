@@ -1,9 +1,17 @@
 import mongoose from 'mongoose';
+import dns from 'dns';
 import dotenv from 'dotenv';
 import User from './models/User.js';
 import Product from './models/Product.js';
 import Order from './models/Order.js';
 import connectDB from './config/db.js';
+
+// Ensure reliable DNS resolution for MongoDB Atlas SRV records
+try {
+  dns.setServers(['8.8.8.8', '1.1.1.1']);
+} catch {
+  // Use system default if setting custom servers fails
+}
 
 dotenv.config();
 
