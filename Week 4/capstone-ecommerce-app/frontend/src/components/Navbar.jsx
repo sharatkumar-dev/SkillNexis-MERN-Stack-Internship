@@ -22,8 +22,22 @@ export const Navbar = () => {
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
-    if (searchTerm.trim()) {
-      navigate(`/?search=${encodeURIComponent(searchTerm.trim())}`);
+    const query = searchTerm.trim();
+    if (query) {
+      navigate(`/?search=${encodeURIComponent(query)}`);
+
+      const scrollToCatalog = () => {
+        const el = document.getElementById('catalog');
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth' });
+        }
+      };
+
+      // Guarantee smooth scroll after navigation and DOM update
+      scrollToCatalog();
+      setTimeout(scrollToCatalog, 80);
+      setTimeout(scrollToCatalog, 250);
+      setTimeout(scrollToCatalog, 600);
     } else {
       navigate('/');
     }

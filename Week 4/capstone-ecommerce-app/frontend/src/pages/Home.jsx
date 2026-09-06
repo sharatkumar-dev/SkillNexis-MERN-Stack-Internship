@@ -136,12 +136,26 @@ export const Home = () => {
     fetchProducts();
   }, [search, selectedCategory, sortBy, page]);
 
-  // Scroll to top when search query changes so search results appear immediately
+  // Smooth scroll to products catalogue whenever a search is performed
   useEffect(() => {
     if (search) {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      const scrollToCatalog = () => {
+        const el = document.getElementById('catalog');
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth' });
+        }
+      };
+      scrollToCatalog();
+      const t1 = setTimeout(scrollToCatalog, 120);
+      const t2 = setTimeout(scrollToCatalog, 400);
+      const t3 = setTimeout(scrollToCatalog, 800);
+      return () => {
+        clearTimeout(t1);
+        clearTimeout(t2);
+        clearTimeout(t3);
+      };
     }
-  }, [search]);
+  }, [search, loading]);
 
   const handleCategoryClick = (cat) => {
     setSelectedCategory(cat);
@@ -246,19 +260,13 @@ export const Home = () => {
     ...getCategoryDetails(catName),
   }));
 
-  // Pick top 3 featured products for the spotlight
-  const featuredProducts = (products.length > 0 && !search ? products : INITIAL_PRODUCTS)
-    .filter((p) => p.isFeatured)
-    .slice(0, 3);
-  const showcaseProducts = featuredProducts.length > 0 ? featuredProducts : INITIAL_PRODUCTS.slice(0, 3);
+  // Fixed featured products for the spotlight showcase (never overwritten by search)
+  const showcaseProducts = INITIAL_PRODUCTS.filter((p) => p.isFeatured).slice(0, 3);
 
   return (
     <div>
-      {/* 1-5. HOMEPAGE HERO & MARKETING BANNERS (Displayed on clean homepage) */}
-      {!search && (
-        <>
-          {/* 1. STUNNING HERO SECTION (SPLIT LAYOUT) */}
-          <div className="hero-banner" style={{ marginBottom: '3.5rem' }}>
+      {/* 1. STUNNING HERO SECTION (SPLIT LAYOUT) */}
+      <div className="hero-banner" style={{ marginBottom: '3.5rem' }}>
         <div className="hero-split">
           {/* Left Column: Value Prop & CTA */}
           <div>
@@ -512,8 +520,6 @@ export const Home = () => {
           </a>
         </div>
       </div>
-    </>
-  )}
 
   {/* 6. FULL DYNAMIC PRODUCT CATALOG / SEARCH RESULTS */}
   <div id="catalog" style={{ paddingTop: search ? '1rem' : '1.5rem', marginBottom: '3.5rem' }}>

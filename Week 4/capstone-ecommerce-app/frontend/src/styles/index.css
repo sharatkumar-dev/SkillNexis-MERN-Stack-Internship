@@ -92,6 +92,10 @@ a {
   text-decoration: none;
 }
 
+#catalog {
+  scroll-margin-top: 90px;
+}
+
 button {
   font-family: inherit;
   cursor: pointer;
