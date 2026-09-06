@@ -1,4 +1,4 @@
-﻿# 🚀 Week 4 — Capstone Project & Cloud Deployment
+# 🚀 Week 4 — Capstone Project & Cloud Deployment
 
 Welcome to **Week 4** of the SkillNexis MERN Stack Internship! This week represents the culmination of the internship program, focusing on building a production-grade MERN Capstone application and deploying it to the cloud.
 
@@ -7,7 +7,11 @@ Welcome to **Week 4** of the SkillNexis MERN Stack Internship! This week represe
 ## 🏆 Selected Capstone Project
 
 ### **E-Commerce Web Application (`capstone-ecommerce-app`)**
+[![Live Storefront](https://img.shields.io/badge/Live%20Storefront-nexisstore.netlify.app-00C7B7?style=for-the-badge&logo=netlify&logoColor=white)](https://nexisstore.netlify.app/)
+
 A complete full-stack e-commerce platform with customer shopping flows, persistent cart, order management, role-based access control, and an administrative back-office dashboard.
+
+- **🌐 Live URL:** [https://nexisstore.netlify.app/](https://nexisstore.netlify.app/)
 
 > **Note:** Building the comprehensive E-Commerce Web Application fulfills both the **Week 4 Practice Set** (Mini E-Commerce, Auth, Full-Stack Integration, Deployment) and the **Week 4 Major Capstone Project** requirements.
 

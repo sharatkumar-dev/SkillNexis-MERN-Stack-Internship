@@ -1,5 +1,12 @@
 # 🛒 NexisStore — Full-Stack MERN Capstone E-Commerce Application
 
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Netlify-00C7B7?style=for-the-badge&logo=netlify&logoColor=white)](https://nexisstore.netlify.app/)
+[![React](https://img.shields.io/badge/React%2018-Vite-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://reactjs.org/)
+[![Node.js](https://img.shields.io/badge/Node.js-Express-339933?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org/)
+[![MongoDB](https://img.shields.io/badge/MongoDB-Atlas-47A248?style=for-the-badge&logo=mongodb&logoColor=white)](https://www.mongodb.com/)
+
+**🌐 Live Storefront:** [https://nexisstore.netlify.app/](https://nexisstore.netlify.app/)
+
 A production-grade, full-stack MERN (MongoDB, Express, React, Node.js) E-Commerce web application featuring customer shopping workflows, shopping cart persistence, role-based access control (RBAC), administrative back-office management, multipart image uploads via Multer, automated REST Client testing suites, and one-click cloud deployment configurations.
 
 Developed for the **SkillNexis MERN Stack Internship — Week 4 Capstone Project**.
