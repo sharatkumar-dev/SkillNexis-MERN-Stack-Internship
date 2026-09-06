@@ -283,7 +283,20 @@ Open `backend/requests.http` inside VS Code with the **REST Client** extension i
 
 ---
 
+## 🔮 Future Roadmap & Production Considerations
+
+While this Capstone project fully satisfies the **Week 4 Academic & Curriculum Requirements**, enterprise commercial applications would typically scale with the following modular additions:
+
+1. **Live Payment Gateway**: Integration with **Razorpay** / **Stripe Webhooks** with server-side HMAC signature verification for automated payment settlement.
+2. **Customer Support & Ticketing System**: Live in-app customer support chat (via Socket.io or Zendesk widget) and automated return/refund ticketing.
+3. **Automated Order Communications**: Transactional order confirmation emails via **Nodemailer / SendGrid** and SMS delivery updates via **Twilio**.
+4. **Automated PDF Invoicing**: Generating server-side downloadable GST tax invoices upon delivery status.
+5. **CDN & Image Optimization**: Offloading uploaded product assets from local disk storage to **Cloudinary** or **AWS S3** with automatic WebP compression.
+
+---
+
 ## 📜 Academic Attribution
 - **Internship Program**: SkillNexis MERN Stack Internship
 - **Curriculum Segment**: Week 4 — Capstone Project & Cloud Deployment
 - **Project Designation**: Major Project Option 1 — E-Commerce Web Application
+
