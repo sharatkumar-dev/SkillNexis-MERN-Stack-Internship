@@ -11,12 +11,34 @@ export const getProducts = async (req, res, next) => {
 
     const query = {};
 
-    // Search by name / description
+    // Smart Multi-field & Tokenized Search (matches name, description, category, brand)
     if (req.query.search) {
-      query.$or = [
-        { name: { $regex: req.query.search.trim(), $options: 'i' } },
-        { description: { $regex: req.query.search.trim(), $options: 'i' } },
+      const rawSearch = req.query.search.trim();
+      const normalized = rawSearch.replace(/\band\b/gi, '(&|and|\\s)');
+
+      // Extract significant keywords
+      const words = rawSearch
+        .replace(/[&/\\#,+()$~%.'":*?<>{}]/g, ' ')
+        .split(/\s+/)
+        .filter((w) => w.length >= 2 && !['and', 'the', 'for', 'with', 'in', 'all'].includes(w.toLowerCase()));
+
+      const searchConditions = [
+        { name: { $regex: normalized, $options: 'i' } },
+        { description: { $regex: normalized, $options: 'i' } },
+        { category: { $regex: normalized, $options: 'i' } },
+        { brand: { $regex: normalized, $options: 'i' } },
       ];
+
+      for (const word of words) {
+        searchConditions.push(
+          { name: { $regex: word, $options: 'i' } },
+          { description: { $regex: word, $options: 'i' } },
+          { category: { $regex: word, $options: 'i' } },
+          { brand: { $regex: word, $options: 'i' } }
+        );
+      }
+
+      query.$or = searchConditions;
     }
 
     // Category filter
